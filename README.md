@@ -1,6 +1,6 @@
 # OpenShield
 
-OpenShield is a full stack web application for managing cyberattacks
+OpenShield is a full stack web application for managing cyberattacks. This project is part of my masters degree in Electronic & Computer Engineering from the University of Galway
 
 ## License
 
