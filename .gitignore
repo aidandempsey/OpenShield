@@ -6,7 +6,6 @@
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 .idea
 
-
 # Gradle and Maven with auto-import
 # When using Gradle or Maven with auto-import, you should exclude module files,
 # since they will be recreated, and may cause churn.  Uncomment if using
@@ -35,19 +34,12 @@ crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 
-
-
 ### Intellij Patch ###
 # Comment Reason: https://github.com/joeblau/gitignore.io/issues/186#issuecomment-215987721
 
 # *.iml
 # modules.xml
 # *.ipr
-
-
-
-
-
 
 ### Java ###
 # Compiled class file
