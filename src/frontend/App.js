@@ -1,7 +1,9 @@
+import Image from "./images/Logo.svg"
+
 function App() {
   return (
     <div className="App">
-      OpenShield
+      OpenShield <img src={Image}></img>
     </div>
   );
 }
