@@ -64,7 +64,7 @@ CREATE TABLE `task` (
   `task_name` VARCHAR(45) DEFAULT NULL,
   `incident_id` BIGINT(20) NOT NULL,
   `assigned_user_id` BIGINT(20) DEFAULT NULL,
-  `task_status` ENUM('Open', 'In Progress', 'Closed') NOT NULL,
+  `task_status` ENUM('Open', 'InProgress', 'Closed') NOT NULL,
   `creation_date` DATE DEFAULT NULL,
 
   PRIMARY KEY (task_id, incident_id),
