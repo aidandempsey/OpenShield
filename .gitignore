@@ -274,3 +274,6 @@ target/
 .settings
 .springBeans
 .sts4-cache
+
+### Okta ###
+**/src/lib/oktaConfig.js
