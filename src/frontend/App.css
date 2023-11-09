@@ -3,12 +3,10 @@
 /* variables */
 :root {
   --primary-color: #19c37d;
-  --background-color: #333;
-  --light-background-color: #555;
-  --secondDarkBgColor: #777;
-  --dark-background-color: hsl(225, 6%, 13%);
-  --text-color: #f3f3f3;
-  --secondary-text-color: #666;
+  --secondary-color: #ef6c00;
+  --dark-background-color: #1E2123;
+  --background-color: #343541;
+  --text-color: #ececf1;
 }
 
 /* base styles */
@@ -33,4 +31,12 @@ h4 {
 
 ul {
   list-style-type: none;
+}
+
+.grow {
+  transition: all .2s ease-in-out;
+}
+
+.grow:hover {
+  transform: scale(1.1);
 }

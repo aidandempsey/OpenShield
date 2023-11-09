@@ -24,7 +24,36 @@
 
 .navbar .logo img {
     filter: invert(100%) sepia(75%) saturate(716%) hue-rotate(209deg) brightness(122%) contrast(91%);
-    margin-right: 5px;
     width: 36px;
     margin-top: -8px;
+    top: 105px
+}
+
+.navbar a {
+    color: var(--text-color);
+    text-decoration: none;
+    margin-right: 20px;
+}
+
+.navbar a:hover {
+    color: var(--primary-color);
+}
+
+.shield {
+    color: var(--primary-color);
+    font-size: 1.5em;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--fontColor);
+    border-radius: 10px;
 }

@@ -37,7 +37,6 @@ export default function Dashboard() {
 
             setIncidents(loadedIncidents)
             setIsLoading(false)
-            console.log(incidents)
         }
 
         fetchIncidents().catch(error => {
