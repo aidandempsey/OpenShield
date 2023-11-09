@@ -60,15 +60,17 @@ DROP TABLE IF EXISTS `task`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `task` (
 
-  `task_id` BIGINT(20) NOT NULL AUTO_INCREMENT,
+  `task_id` BIGINT(20)  PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `task_name` VARCHAR(45) DEFAULT NULL,
   `incident_id` BIGINT(20) NOT NULL,
   `assigned_user_id` BIGINT(20) DEFAULT NULL,
+  `assignee_user_id` BIGINT(20) DEFAULT NULL,
   `task_status` ENUM('Open', 'InProgress', 'Closed') NOT NULL,
   `creation_date` DATE DEFAULT NULL,
 
-  PRIMARY KEY (task_id, incident_id),
   FOREIGN KEY (incident_id) REFERENCES incident(incident_id),
-  FOREIGN KEY (assigned_user_id) REFERENCES user(user_id)
+  FOREIGN KEY (assigned_user_id) REFERENCES user(user_id),
+  FOREIGN KEY (assignee_user_id) REFERENCES user(user_id)
+
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
