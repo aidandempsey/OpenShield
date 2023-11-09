@@ -8,7 +8,7 @@ All scripts should be executed from the root directory
 | Command             | Description                                    |
 |---------------------|------------------------------------------------|
 | `npm install`      | Install the project dependencies            |
-| `npm start`        | Initiate the React development server on port 3000        |
+| `npm run start`        | Initiate the React development server on port 3000        |
 | `mvn spring-boot:run` | Start the Spring Boot application on port 8080 |
 
 # Database Setup
