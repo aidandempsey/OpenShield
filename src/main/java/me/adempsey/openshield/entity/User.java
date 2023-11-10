@@ -10,9 +10,11 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="user_id")
-    private long id;
-    @Column(name="username")
-    private String username;
+    private long userId;
+
+    @Column(name="user_name")
+    private String userName;
+
     @Column(name="team_id")
     private long teamId;
 }
