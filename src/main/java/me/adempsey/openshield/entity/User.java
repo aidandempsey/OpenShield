@@ -2,6 +2,7 @@ package me.adempsey.openshield.entity;
 
 import lombok.Data;
 import jakarta.persistence.*;
+import me.adempsey.openshield.entity.enums.UserRole;
 
 @Entity
 @Table(name="user")
@@ -12,9 +13,13 @@ public class User {
     @Column(name="user_id")
     private long userId;
 
-    @Column(name="user_name")
-    private String userName;
+    @Column(name="display_name")
+    private String displayName;
 
     @Column(name="team_id")
     private long teamId;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name="user_role")
+    private UserRole userRole;
 }

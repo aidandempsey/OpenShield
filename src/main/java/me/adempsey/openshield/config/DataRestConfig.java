@@ -1,6 +1,6 @@
 package me.adempsey.openshield.config;
 
-import me.adempsey.openshield.entity.Incident;
+import me.adempsey.openshield.entity.*;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurer;
@@ -22,8 +22,26 @@ public class DataRestConfig implements RepositoryRestConfigurer {
         };
 
         config.exposeIdsFor(Incident.class);
+        config.exposeIdsFor(IncidentComment.class);
+        config.exposeIdsFor(IncidentWorkflow.class);
+        config.exposeIdsFor(IncidentWorkflowTask.class);
+        config.exposeIdsFor(Organization.class);
+        config.exposeIdsFor(Task.class);
+        config.exposeIdsFor(Team.class);
+        config.exposeIdsFor(User.class);
+        config.exposeIdsFor(Workflow.class);
+        config.exposeIdsFor(WorkflowTask.class);
 
         disableHttpMethods(Incident.class, config, unsupportedActions);
+        disableHttpMethods(IncidentComment.class, config, unsupportedActions);
+        disableHttpMethods(IncidentWorkflow.class, config, unsupportedActions);
+        disableHttpMethods(IncidentWorkflowTask.class, config, unsupportedActions);
+        disableHttpMethods(Organization.class, config, unsupportedActions);
+        disableHttpMethods(Task.class, config, unsupportedActions);
+        disableHttpMethods(Team.class, config, unsupportedActions);
+        disableHttpMethods(User.class, config, unsupportedActions);
+        disableHttpMethods(Workflow.class, config, unsupportedActions);
+        disableHttpMethods(WorkflowTask.class, config, unsupportedActions);
 
         /* Configure CORS Mapping*/
         cors.addMapping(config.getBasePath() + "/**")

@@ -17,4 +17,10 @@ public class IncidentWorkflowTask {
     @Enumerated(EnumType.STRING)
     @Column(name="task_status")
     private TaskStatus taskStatus;
+
+    @Column(name="assigner_user_id")
+    private long assignerUserId;
+
+    @Column(name="assigned_user_id")
+    private long assignedUserId;
 }
