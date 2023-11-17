@@ -2,14 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './frontend/App';
 import reportWebVitals from './frontend/reportWebVitals';
-import { BrowserRouter } from 'react-router-dom';
+import { AuthContextProvider } from "./context/AuthContext"
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
+    <AuthContextProvider>
       <App />
-    </BrowserRouter>
+    </AuthContextProvider>
   </React.StrictMode >
 );
 
