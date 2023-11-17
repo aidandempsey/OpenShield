@@ -87,9 +87,9 @@ DROP TABLE IF EXISTS `workflow_task`;
 CREATE TABLE `workflow_task` (
   `workflow_id` BIGINT(20) NOT NULL,
   `task_id` BIGINT(20) NOT NULL,
-  PRIMARY KEY (`workflow_id`, `task_id`),
-  FOREIGN KEY (`workflow_id`) REFERENCES `workflow`(`workflow_id`),
-  FOREIGN KEY (`task_id`) REFERENCES `task`(`task_id`)
+  PRIMARY KEY (workflow_id, task_id),
+  FOREIGN KEY (workflow_id) REFERENCES workflow(workflow_id),
+  FOREIGN KEY (task_id) REFERENCES task(task_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -100,9 +100,9 @@ DROP TABLE IF EXISTS `incident_workflow`;
 CREATE TABLE `incident_workflow` (
   `incident_id` BIGINT(20) NOT NULL,
   `workflow_id` BIGINT(20) NOT NULL,
-  PRIMARY KEY (`incident_id`, `workflow_id`),
-  FOREIGN KEY (`incident_id`) REFERENCES `incident`(`incident_id`),
-  FOREIGN KEY (`workflow_id`) REFERENCES `workflow`(`workflow_id`)
+  PRIMARY KEY (incident_id, workflow_id),
+  FOREIGN KEY (incident_id) REFERENCES incident(incident_id),
+  FOREIGN KEY (workflow_id) REFERENCES workflow(workflow_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -117,9 +117,9 @@ CREATE TABLE `incident_workflow_task` (
   `task_status` ENUM('open', 'inProgress', 'closed') NOT NULL,
   `assigner_user_id` BIGINT(20) DEFAULT NULL,
   `assigned_user_id` BIGINT(20) DEFAULT NULL,
-  PRIMARY KEY (`incident_id`, `workflow_id`, `task_id`),
-  FOREIGN KEY (`incident_id`) REFERENCES `incident`(`incident_id`),
-  FOREIGN KEY (`workflow_id`, `task_id`) REFERENCES `workflow_task`(`workflow_id`, `task_id`),
+  PRIMARY KEY (incident_id, workflow_id, task_id),
+  FOREIGN KEY (incident_id) REFERENCES incident(incident_id),
+  FOREIGN KEY (workflow_id, task_id) REFERENCES workflow_task(workflow_id, task_id),
   FOREIGN KEY (assigner_user_id) REFERENCES user(user_id), 
   FOREIGN KEY (assigned_user_id) REFERENCES user(user_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
