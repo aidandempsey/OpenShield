@@ -1,21 +1,14 @@
 import { Link } from "react-router-dom"
-import { useOktaAuth } from "@okta/okta-react"
+import { useAuthContext } from "../../../hooks/useAuthContext"
+import { useLogout } from "../../../hooks/useLogout"
 
 // styles & images
 import "./Navbar.css"
 import Shield from "../../images/shield.svg"
 
 export default function Navbar() {
-
-    const { oktaAuth, authState } = useOktaAuth()
-
-    const handleLogout = async () => oktaAuth.signOut()
-
-    if (!authState) {
-        return (
-            <p>loading</p>
-        )
-    }
+    const { user } = useAuthContext()
+    const { logout } = useLogout()
 
     return (
         <div className="navbar">
@@ -23,14 +16,12 @@ export default function Navbar() {
 
                 <li className="logo"><Link to="/"><img className="grow" src={Shield} alt="logo" /><span className="shield">OpenShield</span></Link></li>
 
-
-                {!authState.isAuthenticated ? (
+                {!user ? (
                     <>
                         <li><Link to="/login">Login</Link></li>
-                        <li><Link to="/signup">Sign up</Link></li>
                     </>
-                ) : <li><Link to="#" onClick={() => { handleLogout() }}>Logout</Link></li>
-
+                ) :
+                    <li className="logout"><Link to="#" onClick={() => { logout() }}>Logout</Link></li>
                 }
             </ul>
         </div>
