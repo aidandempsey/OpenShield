@@ -1,43 +1,27 @@
-import { Routes, Route, useNavigate } from "react-router-dom"
-
+import { Routes, Route, BrowserRouter, Navigate } from "react-router-dom"
+import { useAuthContext } from "../hooks/useAuthContext";
 // styles
 import "./App.css"
 
 // pages and components
 import Dashboard from "./pages/dashboard/Dashboard";
-import Navbar from "./components/Navbar/Navbar";
-
-// okta
-import { oktaConfig } from "../lib/oktaConfig";
-import { OktaAuth, toRelativeUrl } from "@okta/okta-auth-js"
-import { Security, LoginCallback } from "@okta/okta-react"
-import LoginWidget from "../Auth/LoginWidget";
+import Navbar from "./components/navbar/Navbar";
+import Login from "./components/login/Login";
 
 function App() {
-  const navigate = useNavigate()
-  const oktaAuth = new OktaAuth(oktaConfig)
-
-  const customAuthHandler = () => {
-    navigate("/login")
-  }
-
-  const restoreOriginalUri = async (_oktaAuth, originalUri) => {
-    navigate(toRelativeUrl(originalUri || '/', window.location.origin), { replace: true })
-  }
-
+  const { user } = useAuthContext()
   return (
     <div className="App">
-      <Security oktaAuth={oktaAuth} restoreOriginalUri={restoreOriginalUri} onAuthRequired={customAuthHandler}>
+      <BrowserRouter>
         <Navbar />
         <div className="container">
           <Routes>
             <Route path='/' element={<Dashboard />} />
-            <Route path='/login' element={<LoginWidget config={oktaConfig} />} />
-            <Route path="/login/callback" element={<LoginCallback />} />
+            <Route path='/login' element={!user ? <Login /> : <Navigate to="/" />} />
           </Routes>
         </div>
-      </Security>
-    </div>
+      </BrowserRouter>
+    </div >
   );
 }
 
