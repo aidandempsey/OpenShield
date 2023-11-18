@@ -20,5 +20,4 @@ public class Organization {
 
     @Column(name="organization_leader")
     private long organizationLeader;
-
 }
