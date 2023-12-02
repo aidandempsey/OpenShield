@@ -2,6 +2,7 @@
 import "./Dashboard.css"
 
 import { useEffect, useState } from "react"
+import { Link } from 'react-router-dom'
 
 export default function Dashboard() {
 
@@ -28,10 +29,13 @@ export default function Dashboard() {
                 loadedIncidents.push({
                     incidentId: responseData[key].incidentId,
                     incidentName: responseData[key].incidentName,
+                    incidentDescription: responseData[key].incidentDescription,
                     teamId: responseData[key].teamId,
                     severity: responseData[key].severity,
+                    incidentStartDate: responseData[key].incidentStartDate,
                     detectionDate: responseData[key].detectionDate,
-                    closureDate: responseData[key].closureDate
+                    closureDate: responseData[key].closureDate,
+                    assignerUserId: responseData[key].assignerUserId
                 })
             }
 
@@ -49,14 +53,8 @@ export default function Dashboard() {
         <div>
             {incidents.length > 0 &&
                 incidents.map(incident => (
-                    <div>
-                        <h1>{incident.incidentName}</h1>
-                        <p>incidentId: {incident.incidentId}</p>
-                        <p>teamId: {incident.teamId}</p>
-                        <p>severity: {incident.severity}</p>
-                        <p>detectionDate: {incident.detectionDate}</p>
-                        <p>closureDate: {incident.closureDate}</p>
-                        <hr></hr>
+                    <div key={incident.incidentId}>
+                        <Link to={`incident/${incident.incidentId}`}><h1>{incident.incidentName}</h1></Link>
                     </div>
                 ))
             }

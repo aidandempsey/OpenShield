@@ -58,15 +58,6 @@ CREATE TABLE `incident` (
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
-DROP TABLE IF EXISTS `workflow`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-
-CREATE TABLE `workflow` (
-  `workflow_id` BIGINT(20) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  `workflow_name` VARCHAR(45) DEFAULT NULL,
-  `workflow_description` varchar(45) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 DROP TABLE IF EXISTS `task`;
@@ -76,61 +67,24 @@ DROP TABLE IF EXISTS `task`;
 CREATE TABLE `task` (
   `task_id` BIGINT(20) PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `task_name` VARCHAR(45) DEFAULT NULL,
-  `task_description` varchar(45) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
-DROP TABLE IF EXISTS `workflow_task`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-
-CREATE TABLE `workflow_task` (
-  `workflow_id` BIGINT(20) NOT NULL,
-  `task_id` BIGINT(20) NOT NULL,
-  PRIMARY KEY (workflow_id, task_id),
-  FOREIGN KEY (workflow_id) REFERENCES workflow(workflow_id),
-  FOREIGN KEY (task_id) REFERENCES task(task_id)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
-DROP TABLE IF EXISTS `incident_workflow`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-
-CREATE TABLE `incident_workflow` (
+  `task_description` varchar(45) DEFAULT NULL,
   `incident_id` BIGINT(20) NOT NULL,
-  `workflow_id` BIGINT(20) NOT NULL,
-  PRIMARY KEY (incident_id, workflow_id),
-  FOREIGN KEY (incident_id) REFERENCES incident(incident_id),
-  FOREIGN KEY (workflow_id) REFERENCES workflow(workflow_id)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
-DROP TABLE IF EXISTS `incident_workflow_task`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-
-CREATE TABLE `incident_workflow_task` (
-  `incident_id` BIGINT(20) NOT NULL,
-  `workflow_id` BIGINT(20) NOT NULL,
-  `task_id` BIGINT(20) NOT NULL,
   `task_status` ENUM('open', 'inProgress', 'closed') NOT NULL,
   `assigner_user_id` BIGINT(20) DEFAULT NULL,
   `assigned_user_id` BIGINT(20) DEFAULT NULL,
-  PRIMARY KEY (incident_id, workflow_id, task_id),
+  `assign_date` DATE DEFAULT NULL,
   FOREIGN KEY (incident_id) REFERENCES incident(incident_id),
-  FOREIGN KEY (workflow_id, task_id) REFERENCES workflow_task(workflow_id, task_id),
   FOREIGN KEY (assigner_user_id) REFERENCES user(user_id), 
   FOREIGN KEY (assigned_user_id) REFERENCES user(user_id)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
-DROP TABLE IF EXISTS `incident_comments`;
+DROP TABLE IF EXISTS `comments`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 
-CREATE TABLE `incident_comments` (
-  `incident_comment_id` BIGINT(20) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+CREATE TABLE `comments` (
+  `comment_id` BIGINT(20) PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `incident_id` BIGINT(20) DEFAULT NULL,
   `comment` VARCHAR(45) DEFAULT NULL,
   `comment_author` BIGINT(20) DEFAULT NULL,
@@ -149,6 +103,8 @@ CREATE TABLE `user` (
   `display_name` VARCHAR(45) DEFAULT NULL,
   `team_id` BIGINT(20) DEFAULT NULL,
   `user_role` ENUM("securityAnalyst","securityEngineer","socManager","threatIntelligenceAnalyst","securityArchitect","automationEngineer","complianceAnalyst","userAndAccessManagementSpecialist","trainingAndAwarenessSpecialist","dataPrivacyOfficer","vendorManagementSpecialist","qualityAssuranceTester","projectManager","communicationsSpecialist") DEFAULT NULL,
-  FOREIGN KEY (team_id) REFERENCES team(team_id)
+  `user_manager` BIGINT(20) DEFAULT NULL,
+  FOREIGN KEY (team_id) REFERENCES team(team_id),
+  FOREIGN KEY (user_manager) REFERENCES user(user_id)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
