@@ -20,7 +20,7 @@ CREATE TABLE `organization` (
   `organization_name` VARCHAR(45) DEFAULT NULL,
   `organization_description` VARCHAR(45) DEFAULT NULL,
   `organization_leader` BIGINT(20) DEFAULT NULL,
-  FOREIGN KEY (organization_id) REFERENCES user(user_id)
+  FOREIGN KEY (organization_leader) REFERENCES user(user_id)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -106,5 +106,22 @@ CREATE TABLE `user` (
   `user_manager` BIGINT(20) DEFAULT NULL,
   FOREIGN KEY (team_id) REFERENCES team(team_id),
   FOREIGN KEY (user_manager) REFERENCES user(user_id)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+CREATE TABLE `device` (
+  `device_id` BIGINT(20) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  `device_name` VARCHAR(45) DEFAULT NULL,
+  `operating_system` VARCHAR(45) DEFAULT NULL,
+  `cpu_cores` BIGINT(20) NOT NULL,
+  `cpu_threads` BIGINT(20) NOT NULL,
+  `memory_total` BIGINT(20) NOT NULL,
+  `memory_used` BIGINT(20) NOT NULL,
+  `memory_percent` DECIMAL(4, 1) NOT NULL,
+  `disk_total` BIGINT(20) NOT NULL,
+  `disk_used` BIGINT(20) NOT NULL,
+  `disk_percent` DECIMAL(4, 1) NOT NULL,
+  `organization_id` BIGINT(20) DEFAULT NULL,
+  FOREIGN KEY (organization_id) REFERENCES organization(organization_id)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
