@@ -5,12 +5,9 @@ import "./App.css"
 
 // pages and components
 import Dashboard from "./pages/dashboard/Dashboard";
-import Organization from "./pages/organization/Organization"
 import Incident from "./pages/incident/Incident"
-import User from "./pages/user/User"
-import Team from "./pages/team/Team"
 import Navbar from "./components/navbar/Navbar";
-import Login from "./components/login/Login";
+import Login from "./pages/login/Login";
 
 function App() {
   const { user } = useAuthContext()
@@ -21,10 +18,6 @@ function App() {
         <div className="container">
           <Routes>
             <Route path='/' element={<Dashboard />} />
-            {/* <Route path='/organization/:id' element={<Organization />} /> */}
-            <Route path='/incident/:id' element={<Incident />} />
-            {/* <Route path='/team/:id' element={<Team />} />
-            <Route path='/user/:id' element={<User />} /> */}
             <Route path='/login' element={!user ? <Login /> : <Navigate to="/" />} />
           </Routes>
         </div>
