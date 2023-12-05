@@ -50,7 +50,6 @@ CREATE TABLE `incident` (
   `team_id` BIGINT(20) DEFAULT NULL,
   `incident_severity` ENUM('low', 'medium', 'high', 'critical') DEFAULT NULL,
   `incident_start_date` DATE DEFAULT NULL,
-  `incident_detection_date` DATE DEFAULT NULL,
   `incident_closure_date` DATE DEFAULT NULL,
   `assigner_user_id` BIGINT(20) DEFAULT NULL,
   FOREIGN KEY (team_id) REFERENCES team(team_id),

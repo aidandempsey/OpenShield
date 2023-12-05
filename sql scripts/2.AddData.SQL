@@ -15,9 +15,9 @@ VALUES
 -- Fake Inserts for Incident Table
 INSERT INTO `incident` (`incident_name`, `incident_description`, `team_id`, `incident_severity`, `incident_start_date`, `incident_detection_date`, `incident_closure_date`, `assigner_user_id`)
 VALUES 
-  ('Security Breach', 'Unauthorized Access', 1, 'critical', '2023-01-01', '2023-01-02', '2023-01-05', 7),
-  ('Data Leak', 'Confidential Data Exposure', 2, 'high', '2023-02-01', '2023-02-02', '2023-02-10', 8),
-  ('Software Bug', 'Critical Bug in System', 3, 'medium', '2023-03-01', '2023-03-02', '2023-03-07', 9);
+  ('Security Breach', 'Unauthorized Access', 1, 'critical', '2023-01-01','2023-01-05', 7),
+  ('Data Leak', 'Confidential Data Exposure', 2, 'high', '2023-02-01', '2023-02-10', 8),
+  ('Software Bug', 'Critical Bug in System', 3, 'medium', '2023-03-01', '2023-03-07', 9);
 
 -- Fake Inserts for Task Table
 INSERT INTO `task` (`task_name`, `task_description`, `incident_id`, `task_status`, `assigner_user_id`, `assigned_user_id`, `assign_date`)

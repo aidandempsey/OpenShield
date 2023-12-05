@@ -30,9 +30,6 @@ public class Incident {
     @Column(name="incident_start_date")
     private LocalDate  incidentStartDate;
 
-    @Column(name="incident_detection_date")
-    private LocalDate  detectionDate;
-
     @Column(name="incident_closure_date")
     private LocalDate  closureDate;
 

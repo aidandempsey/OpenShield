@@ -39,25 +39,76 @@ ul {
   display: inline-block;
 }
 
-.btn {
-  background: var(--primary-color);
-  padding: 8px 12px;
-  border-radius: 4px;
-  color: var(--text-color);
-  cursor: pointer;
-  font-size: 1em;
-  border: 1px solid var(--primary-color);
-}
-
-.btn:hover {
-  color: var(--primary-color);
-  background-color: var(--text-color);
-}
-
+/* grow icon */
 .grow {
   transition: all .2s ease-in-out;
 }
 
 .grow:hover {
   transform: scale(1.1);
+}
+
+/* error */
+.error {
+  color: red;
+  background: pink;
+  border: 1px solid red;
+  border-radius: 4px;
+  padding: 8px;
+  margin: 10px 0;
+}
+
+/* forms */
+.form-container {
+  min-width: 600px;
+  max-width: 600px;
+  margin: 75px auto;
+  border-radius: 10px;
+  background-color: var(--bgColor);
+  color: var(--fontColor);
+  height: 300px;
+  display: grid;
+  grid-template-columns: repeat(2, 50%);
+  justify-items: center;
+  align-items: center;
+  position: relative;
+}
+
+.form {
+  width: 100%;
+  justify-content: center;
+  text-align: center;
+  background-color: var(--dark-background-color);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.form input {
+  display: inline-block;
+  margin: 5px 0px 5px 0px;
+  font-size: 1.25em;
+}
+
+.form h2 {
+  display: inline-block;
+}
+
+.selector {
+  margin: 10px 0px;
+}
+
+/* button */
+.btn {
+  padding: 10px;
+  color: var(--dark-background-color);
+  background-color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+  border-radius: 10px;
+  font-size: 1em;
+}
+
+.btn:hover {
+  cursor: pointer;
+  background-color: var(--dark-background-color);
+  color: var(--primary-color);
 }

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
-import { useAuthContext } from "../../../hooks/useAuthContext"
-import { useLogout } from "../../../hooks/useLogout"
+import { useAuthContext } from "../../hooks/firebase/useAuthContext"
+import { useLogout } from "../../hooks/firebase/useLogout"
 
 // styles & images
 import "./Navbar.css"
@@ -17,11 +17,17 @@ export default function Navbar() {
                 <li className="logo"><Link to="/"><img className="grow" src={Shield} alt="logo" /><span className="shield">OpenShield</span></Link></li>
 
                 {!user ? (
-                    <>
-                        <li><Link to="/login">Login</Link></li>
-                    </>
-                ) :
-                    <li className="logout"><Link to="#" onClick={() => { logout() }}>Logout</Link></li>
+                    <li><Link to="/login">Login</Link></li>
+                ) : <>
+                    <div className="dropdown">
+                        <button className="btn">Create</button>
+                        <div className="dropdown-content">
+                            <Link to="/createIncident">Incident</Link>
+                            <Link to="/createDevice">Device</Link>
+                        </div>
+                    </div>
+                    <li><Link to="#" onClick={() => { logout() }}>Logout</Link></li>
+                </>
                 }
             </ul>
         </div>
