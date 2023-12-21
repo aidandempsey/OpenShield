@@ -1,0 +1,34 @@
+.incident-filter {
+    margin: 30px auto;
+}
+
+.incident-filter nav {
+    display: flex;
+    padding: 10px;
+    background-color: var(--dark-background-color);
+    border-radius: 4px;
+}
+
+.incident-filter p {
+    font-size: 0.9em;
+    margin-right: 10px;
+}
+
+.incident-filter button {
+    background: transparent;
+    border: 0;
+    font-family: inherit;
+    font-weight: bold;
+    color: var(--text-color);
+    cursor: pointer;
+    border-right: 1px solid var(--text-color);
+    font-size: 0.9em;
+}
+
+.incident-filter button:last-child {
+    border: 0;
+}
+
+.incident-filter button.active {
+    color: var(--secondary-color);
+}
