@@ -13,12 +13,13 @@ VALUES
   ('Data Science Team', 'Advanced Analytics', 6, 3);
 
 -- Fake Inserts for Incident Table
-INSERT INTO `incident` (`incident_name`, `incident_description`, `team_id`, `incident_severity`, `incident_start_date`, `incident_detection_date`, `incident_closure_date`, `assigner_user_id`)
+INSERT INTO `incident` (`incident_name`, `incident_description`, `team_id`, `incident_severity`, `incident_start_date`, `incident_closure_date`, `assigner_user_id`)
 VALUES 
   ('Security Breach', 'Unauthorized Access', 1, 'critical', '2023-01-01','2023-01-05', 7),
   ('Data Leak', 'Confidential Data Exposure', 2, 'high', '2023-02-01', '2023-02-10', 8),
   ('Software Bug', 'Critical Bug in System', 3, 'medium', '2023-03-01', '2023-03-07', 9);
-
+  ('ApuGate', 'An army of frogs storming the UN, they have sticks, running very fast, holding sticks by the sharp end', 1, 'critical', '2023-10-07','2023-10-08', 7)
+  
 -- Fake Inserts for Task Table
 INSERT INTO `task` (`task_name`, `task_description`, `incident_id`, `task_status`, `assigner_user_id`, `assigned_user_id`, `assign_date`)
 VALUES 
@@ -64,3 +65,4 @@ VALUES
   ('Desktop3', 'MacOS', 6, 12, 12288, 6144, 50.0, 76800, 30720, 60.0, 2),
   ('Mobile4', 'Android', 2, 4, 2048, 1024, 50.0, 20480, 10240, 50.0, 2),
   ('Server5', 'Ubuntu', 16, 32, 32768, 16384, 50.0, 204800, 102400, 70.0, 3);
+

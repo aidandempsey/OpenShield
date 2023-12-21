@@ -46,7 +46,7 @@ DROP TABLE IF EXISTS `incident`;
 CREATE TABLE `incident` (
   `incident_id` BIGINT(20) PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `incident_name` VARCHAR(45) DEFAULT NULL,
-  `incident_description` VARCHAR(45) DEFAULT NULL,
+  `incident_description` VARCHAR(300) DEFAULT NULL,
   `team_id` BIGINT(20) DEFAULT NULL,
   `incident_severity` ENUM('low', 'medium', 'high', 'critical') DEFAULT NULL,
   `incident_start_date` DATE DEFAULT NULL,
