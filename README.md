@@ -21,7 +21,7 @@ All scripts should be executed from the root directory
 
 # Firebase Authentication Setup
 
-To set up Firebase Authentication, go to the [Firebase Console](https://console.firebase.google.com/) to create and register your app.  Once your project is created, click on "Add app" and select the web platform. Copy your configuration object into the [firebase/config.js](https://github.com/aidandempsey/OpenShield/blob/main/src/firebase/config.js) file
+To set up Firebase Authentication, go to the [Firebase Console](https://console.firebase.google.com/) to create and register your app.  Once your project is created, click on "Add app" and select the web platform. Copy your configuration object into the [firebase/config.js](https://github.com/aidandempsey/OpenShield/blob/main/src/frontend/firebase/config.js) file
 
 ```javascript
      const firebaseConfig = {
