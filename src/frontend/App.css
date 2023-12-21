@@ -7,6 +7,7 @@
   --dark-background-color: #1E2123;
   --background-color: #343541;
   --text-color: #ececf1;
+  --secondary-text-color: #8e8ea0;
 }
 
 /* base styles */
@@ -16,6 +17,10 @@ body {
   font-size: 1.1em;
   background: var(--background-color);
   color: var(--text-color);
+}
+
+.container {
+  padding: 0 20px;
 }
 
 ul,
