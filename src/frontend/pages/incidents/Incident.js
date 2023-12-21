@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom"
 import { useRow } from "../../hooks/restful/useRow"
 import { useEffect, useState } from "react"
 import IncidentSummary from "./IncidentSummary"
+import IncidentComment from "./IncidentComment"
 
 export default function Incident() {
     const { id } = useParams()
@@ -12,7 +13,6 @@ export default function Incident() {
     useEffect(() => {
         if (rowData) {
             setIncident(rowData)
-            console.log(rowData)
         }
     }, [rowData])
 
@@ -26,6 +26,7 @@ export default function Incident() {
     return (
         <div className="incident-details">
             <IncidentSummary incident={incident} />
+            <IncidentComment />
         </div>
     )
 }
