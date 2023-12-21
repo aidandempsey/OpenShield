@@ -5,6 +5,7 @@ import { useLogout } from "../../hooks/firebase/useLogout"
 // styles & images
 import "./Navbar.css"
 import Shield from "../../images/shield.svg"
+import Search from "../../images/search.svg"
 
 export default function Navbar() {
     const { user } = useAuthContext()
@@ -16,9 +17,8 @@ export default function Navbar() {
 
                 <li className="logo"><Link to="/"><img className="grow" src={Shield} alt="logo" /><span className="shield">OpenShield</span></Link></li>
 
-                {!user ? (
-                    <li><Link to="/login">Login</Link></li>
-                ) : <>
+                {user && <>
+                    <li className="search"><Link to="/search"><img className="grow" src={Search} /></Link></li>
                     <div className="dropdown">
                         <button className="btn">Create</button>
                         <div className="dropdown-content">

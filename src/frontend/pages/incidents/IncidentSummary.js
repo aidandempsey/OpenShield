@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Alert from '@mui/material/Alert';
+import "./Incident.css"
 
 export default function IncidentSummary(props) {
     const { incident } = props
@@ -20,7 +21,8 @@ export default function IncidentSummary(props) {
                 <h2 className='page-title'>{incident.incidentName}</h2>
                 <p className='start-date'>Started {(new Date(incident.incidentStartDate).toDateString())}</p>
                 <p className='details'>{incident.incidentDescription}</p>
-                <Alert severity={convertSeverity(incident.severity)}>{incident.severity}</Alert>
+                <p className='details'>Assigned to {incident.teamId}</p>
+                <Alert severity={convertSeverity(incident.incidentSeverity)}>{incident.incidentSeverity}</Alert>
             </div>
         </div>
     )

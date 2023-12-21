@@ -25,7 +25,7 @@ public class Incident {
 
     @Enumerated(EnumType.STRING)
     @Column(name="incident_severity")
-    private IncidentSeverity severity;
+    private IncidentSeverity incidentSeverity;
 
     @Column(name="incident_start_date")
     private LocalDate  incidentStartDate;

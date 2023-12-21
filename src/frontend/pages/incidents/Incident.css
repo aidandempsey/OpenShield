@@ -1,0 +1,57 @@
+.incident-details {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    align-items: start;
+    grid-gap: 60px;
+}
+
+/* incident summary */
+.incident-summary {
+    background-color: var(--dark-background-color);
+    padding: 30px;
+    border-radius: 10px;
+}
+
+.incident-summary .start-date {
+    margin: 10px 0;
+    font-size: 0.9em;
+    color: var(--secondary-text-color);
+}
+
+.incident-summary .details {
+    margin: 30px 0;
+    color: var(--text-color);
+    line-height: 1.8em;
+    font-size: 0.9em;
+}
+
+.incident-summary .btn {
+    margin-top: 20px;
+}
+
+/* incident comments */
+.incident-comments {
+    background-color: var(--dark-background-color);
+    padding: 30px;
+    border-radius: 10px;
+
+}
+
+.incident-comments label {
+    margin-bottom: 0px;
+}
+
+.incident-comments textarea {
+    min-height: 40px;
+    width: 100%;
+    font-size: 1.5em;
+    resize: none;
+}
+
+.incident-comments .btn {
+    margin-top: 10px;
+}
+
+.incident-comments .add-new-comment {
+    color: var(--secondary-text-color);
+}

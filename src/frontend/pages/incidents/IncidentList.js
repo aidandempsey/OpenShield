@@ -1,13 +1,29 @@
+import { useEffect, useState } from "react"
 import "./IncidentList.css"
 import { Link } from "react-router-dom"
 
 export default function IncidentList(props) {
-    const { incidents } = props
+    const { incidents, httpError, isLoading } = props
+    const [data, setData] = useState([])
+
+    useEffect(() => { if (incidents) { setData(incidents) } }, [incidents])
+
+    if (httpError) {
+        return (
+            <p className="error">{httpError}</p>
+        )
+    }
+
+    if (isLoading) {
+        return (
+            <p>loading...</p>
+        )
+    }
 
     return (
         <div className="incident-list">
-            {(incidents || []).length == 0 && <p>No Incidents Yet!</p>}
-            {(incidents || []).map(incident => (
+            {data.length == 0 && <p>No Incidents Yet!</p>}
+            {data.length > 0 && data.map(incident => (
                 <Link to={`/incidents/${incident.incidentId}`} key={incident.incidentId}>
                     <h4>{incident.incidentName}</h4>
                     <p>Created {(new Date(incident.incidentStartDate)).toDateString()}</p>
