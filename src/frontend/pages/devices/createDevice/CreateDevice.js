@@ -83,7 +83,7 @@ export default function CreateDevice() {
 
             {isLoading && <p>Loading data...</p>}
             {httpError && <div className='error'>Error: {httpError}</div>}
-            {pairingError && <p>Error: {pairingError}</p>}
+            {pairingError && <p className='error'>Error: {pairingError}</p>}
         </>
     );
 }

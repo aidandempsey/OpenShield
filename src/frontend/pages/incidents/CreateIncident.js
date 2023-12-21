@@ -78,7 +78,7 @@ export default function CreateIncident() {
                 <Select placeholder="Select Incident Severity" options={severities} onChange={(option) => { setIncidentSeverity(option.value) }} styles={colourStyles} className="selector" />
                 <Select placeholder="Assign User" options={users} onChange={(option) => { setAssignerUserId(option.value) }} styles={colourStyles} className="selector" />
                 <label>Incident Start Date<ReactDatePicker selected={incidentStartDate} onChange={e => { setIncidentStartDate(e) }} /></label>
-                <button className="btn">Sign up</button>
+                <button className="btn">Create</button>
             </form>
         </div>
     )
