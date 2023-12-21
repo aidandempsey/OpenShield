@@ -1,21 +1,17 @@
 import "./Dashboard.css";
 import { useTable } from "../../hooks/restful/useTable";
-import { useEffect, useState } from "react";
 import IncidentList from "../incidents/IncidentList";
+import { useState } from "react";
+import IncidentFilter from "./IncidentFilter";
 
 export default function Dashboard() {
-    const { tableData, tableHttpError } = useTable("incidents")
-    const [data, setData] = useState([])
-
-    useEffect(() => {
-        if (tableData) {
-            setData(tableData.incidents)
-        }
-    }, [tableData])
+    const [search, setSearch] = useState("incidents")
+    const { tableData, tableHttpError, isTableLoading } = useTable(search)
 
     return (
         <div>
-            <IncidentList incidents={data} />
+            <IncidentFilter setSearch={setSearch} />
+            <IncidentList incidents={tableData.incidents} httpError={tableHttpError} isLoading={isTableLoading} />
         </div>
     );
 }
