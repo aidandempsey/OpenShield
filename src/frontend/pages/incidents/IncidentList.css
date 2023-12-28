@@ -19,7 +19,8 @@
     color: var(--heading-color);
 }
 
-.incident-list p {
+.incident-list p,
+.comments-list p {
     color: var(--secondary-text-color);
     font-size: 0.9em;
 }

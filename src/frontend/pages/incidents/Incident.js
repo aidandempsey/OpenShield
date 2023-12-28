@@ -26,7 +26,7 @@ export default function Incident() {
     return (
         <div className="incident-details">
             <IncidentSummary incident={incident} />
-            <IncidentComment />
+            <IncidentComment incidentId={id} />
         </div>
     )
 }

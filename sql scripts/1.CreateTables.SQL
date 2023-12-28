@@ -78,11 +78,11 @@ CREATE TABLE `task` (
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
-DROP TABLE IF EXISTS `comments`;
+DROP TABLE IF EXISTS `comment`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 
-CREATE TABLE `comments` (
+CREATE TABLE `comment` (
   `comment_id` BIGINT(20) PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `incident_id` BIGINT(20) DEFAULT NULL,
   `comment` VARCHAR(45) DEFAULT NULL,
@@ -108,6 +108,9 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
+DROP TABLE IF EXISTS `device`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `device` (
   `device_id` BIGINT(20) PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `device_name` VARCHAR(45) DEFAULT NULL,

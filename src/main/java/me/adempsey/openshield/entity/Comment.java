@@ -6,20 +6,20 @@ import lombok.Data;
 import java.time.LocalDate;
 
 @Entity
-@Table(name="comments")
+@Table(name="comment")
 @Data
 public class Comment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="comment_id")
-    private long incidentCommentId;
+    private long commentId;
 
     @Column(name="incident_id")
     private long incidentId;
 
     @Column(name="comment")
-    private long comment;
+    private String comment;
 
     @Column(name="comment_author")
     private long commentAuthor;

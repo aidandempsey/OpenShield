@@ -17,8 +17,8 @@ INSERT INTO `incident` (`incident_name`, `incident_description`, `team_id`, `inc
 VALUES 
   ('Security Breach', 'Unauthorized Access', 1, 'critical', '2023-01-01','2023-01-05', 7),
   ('Data Leak', 'Confidential Data Exposure', 2, 'high', '2023-02-01', '2023-02-10', 8),
-  ('Software Bug', 'Critical Bug in System', 3, 'medium', '2023-03-01', '2023-03-07', 9);
-  ('ApuGate', 'An army of frogs storming the UN, they have sticks, running very fast, holding sticks by the sharp end', 1, 'critical', '2023-10-07','2023-10-08', 7)
+  ('Software Bug', 'Critical Bug in System', 3, 'medium', '2023-03-01', '2023-03-07', 9),
+  ('ApuGate', 'An army of frogs storming the UN, they have sticks, running very fast, holding sticks by the sharp end', 1, 'critical', '2023-10-07','2023-10-08', 7);
   
 -- Fake Inserts for Task Table
 INSERT INTO `task` (`task_name`, `task_description`, `incident_id`, `task_status`, `assigner_user_id`, `assigned_user_id`, `assign_date`)
@@ -28,7 +28,7 @@ VALUES
   ('Code Review', 'Review and fix code', 3, 'closed', 12, 13, '2023-03-03');
 
 -- Fake Inserts for Comments Table
-INSERT INTO `comments` (`incident_id`, `comment`, `comment_author`, `comment_date`)
+INSERT INTO `comment` (`incident_id`, `comment`, `comment_author`, `comment_date`)
 VALUES 
   (1, 'Critical issue. Immediate action required.', 14, '2023-01-04'),
   (2, 'Investigating the source of the leak.', 15, '2023-02-07'),
