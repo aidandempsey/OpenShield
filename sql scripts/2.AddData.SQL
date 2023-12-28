@@ -35,24 +35,24 @@ VALUES
   (3, 'Code fix implemented successfully.', 16, '2023-03-04');
 
 -- Fake Inserts for User Table
-INSERT INTO `user` (`display_name`, `team_id`, `user_role`, `user_manager`)
+INSERT INTO `user` (`display_name`, `email_address`, `team_id`, `user_role`, `user_manager`)
 VALUES 
-  ('John Developer', 1, 'securityAnalyst', 4),
-  ('Alice Security', 2, 'securityEngineer', 5),
-  ('Bob Data Scientist', 3, 'dataPrivacyOfficer', 6),
-  ('Charlie Manager', 1, 'socManager', NULL),
-  ('Eve Security Lead', 2, 'securityArchitect', 5),
-  ('Grace Data Analyst', 3, 'threatIntelligenceAnalyst', 6),
-  ('Dave Task Assigner', 1, 'projectManager', 4),
-  ('Frank Comment Author', 2, 'communicationsSpecialist', 5),
-  ('Helen Team Leader', 3, 'automationEngineer', 6),
-  ('Isaac Quality Tester', 1, 'qualityAssuranceTester', 4),
-  ('Jill Access Specialist', 2, 'userAndAccessManagementSpecialist', 5),
-  ('Kevin Training Specialist', 3, 'trainingAndAwarenessSpecialist', 6),
-  ('Mia Compliance Analyst', 1, 'complianceAnalyst', 4),
-  ('Oscar Vendor Manager', 2, 'vendorManagementSpecialist', 5),
-  ('Pam Data Officer', 3, 'dataPrivacyOfficer', 6),
-  ('Quinn Project Manager', 1, 'projectManager', 4);
+  ('John Developer', 'john.developer@example.com', 1, 'securityAnalyst', 4),
+  ('Alice Security', 'alice.security@example.com', 2, 'securityEngineer', 5),
+  ('Bob Data Scientist', 'bob.data@example.com', 3, 'dataPrivacyOfficer', 6),
+  ('Charlie Manager', 'charlie.manager@example.com', 1, 'socManager', NULL),
+  ('Eve Security Lead', 'eve.security@example.com', 2, 'securityArchitect', 5),
+  ('Grace Data Analyst', 'grace.data@example.com', 3, 'threatIntelligenceAnalyst', 6),
+  ('Dave Task Assigner', 'dave.task@example.com', 1, 'projectManager', 4),
+  ('Frank Comment Author', 'frank.comment@example.com', 2, 'communicationsSpecialist', 5),
+  ('Helen Team Leader', 'helen.team@example.com', 3, 'automationEngineer', 6),
+  ('Isaac Quality Tester', 'isaac.quality@example.com', 1, 'qualityAssuranceTester', 4),
+  ('Jill Access Specialist', 'jill.access@example.com', 2, 'userAndAccessManagementSpecialist', 5),
+  ('Kevin Training Specialist', 'kevin.training@example.com', 3, 'trainingAndAwarenessSpecialist', 6),
+  ('Mia Compliance Analyst', 'mia.compliance@example.com', 1, 'complianceAnalyst', 4),
+  ('Oscar Vendor Manager', 'oscar.vendor@example.com', 2, 'vendorManagementSpecialist', 5),
+  ('Pam Data Officer', 'pam.data@example.com', 3, 'dataPrivacyOfficer', 6),
+  ('Quinn Project Manager', 'quinn.project@example.com', 1, 'projectManager', 4);
 
 -- Fake Inserts for Device Table
 INSERT INTO `device` 

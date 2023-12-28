@@ -16,6 +16,9 @@ public class User {
     @Column(name="display_name")
     private String displayName;
 
+    @Column(name="email_address")
+    private String emailAddress;
+
     @Column(name="team_id")
     private long teamId;
 

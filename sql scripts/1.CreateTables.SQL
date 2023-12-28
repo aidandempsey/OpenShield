@@ -100,6 +100,7 @@ DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `user_id` BIGINT(20) PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `display_name` VARCHAR(45) DEFAULT NULL,
+  `email_address` VARCHAR(45) DEFAULT NULL,
   `team_id` BIGINT(20) DEFAULT NULL,
   `user_role` ENUM("securityAnalyst","securityEngineer","socManager","threatIntelligenceAnalyst","securityArchitect","automationEngineer","complianceAnalyst","userAndAccessManagementSpecialist","trainingAndAwarenessSpecialist","dataPrivacyOfficer","vendorManagementSpecialist","qualityAssuranceTester","projectManager","communicationsSpecialist") DEFAULT NULL,
   `user_manager` BIGINT(20) DEFAULT NULL,
