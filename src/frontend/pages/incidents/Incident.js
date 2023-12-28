@@ -4,10 +4,12 @@ import { useRow } from "../../hooks/restful/useRow"
 import { useEffect, useState } from "react"
 import IncidentSummary from "./IncidentSummary"
 import IncidentComment from "./IncidentComment"
+import IncidentFilter from "./IncidentFilter"
 
 export default function Incident() {
     const { id } = useParams()
     const { rowData, rowHttpError } = useRow("incidents", id)
+    const [currentTab, setCurrentTab] = useState("overview")
     const [incident, setIncident] = useState({})
 
     useEffect(() => {
@@ -25,8 +27,9 @@ export default function Incident() {
 
     return (
         <div className="incident-details">
-            <IncidentSummary incident={incident} />
-            <IncidentComment incidentId={id} />
+            <IncidentFilter currentTab={currentTab} setCurrentTab={setCurrentTab} />
+            {currentTab === "overview" && (<IncidentSummary incident={incident} />)}
+            {currentTab === "comments" && (<IncidentComment incidentId={id} />)}
         </div>
     )
 }

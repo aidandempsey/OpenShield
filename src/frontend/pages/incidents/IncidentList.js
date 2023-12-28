@@ -22,7 +22,7 @@ export default function IncidentList(props) {
 
     return (
         <div className="incident-list">
-            {data.length == 0 && <p>No Incidents Yet!</p>}
+            {data.length === 0 && <p>No Incidents Yet!</p>}
             {data.length > 0 && data.map(incident => (
                 <Link to={`/incidents/${incident.incidentId}`} key={incident.incidentId}>
                     <h4>{incident.incidentName}</h4>
