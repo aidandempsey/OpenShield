@@ -117,3 +117,8 @@ ul {
   background-color: var(--dark-background-color);
   color: var(--primary-color);
 }
+
+.loading {
+  color: var(--secondary-text-color);
+  font-size: 0.9em;
+}

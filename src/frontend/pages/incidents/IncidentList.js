@@ -16,7 +16,7 @@ export default function IncidentList(props) {
 
     if (isLoading) {
         return (
-            <p>loading...</p>
+            <p className="loading">loading...</p>
         )
     }
 
