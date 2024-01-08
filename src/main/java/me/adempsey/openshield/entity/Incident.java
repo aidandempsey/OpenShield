@@ -2,13 +2,27 @@ package me.adempsey.openshield.entity;
 
 import lombok.Data;
 import jakarta.persistence.*;
+import lombok.NoArgsConstructor;
 import me.adempsey.openshield.entity.enums.IncidentSeverity;
+
 import java.time.LocalDate;
 
 @Entity
 @Table(name="incident")
+@NoArgsConstructor
 @Data
 public class Incident {
+
+    public Incident(String incidentName, String incidentDescription, Long teamId, IncidentSeverity incidentSeverity, LocalDate  incidentStartDate, LocalDate closureDate, Long assignerUserId){
+        this.incidentName = incidentName;
+        this.incidentDescription = incidentDescription;
+        this.teamId = teamId;
+        this.incidentSeverity = incidentSeverity;
+        this.incidentStartDate = incidentStartDate;
+        this.closureDate = closureDate;
+        this.assignerUserId = assignerUserId;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="incident_id")
