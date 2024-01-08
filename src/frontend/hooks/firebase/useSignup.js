@@ -17,6 +17,9 @@ export const useSignup = () => {
       const res = await projectAuth.createUserWithEmailAndPassword(email, password)
       await projectAuth.currentUser.sendEmailVerification()
 
+      const token = await res.user.getIdToken();
+      console.log(token)
+
       if (!res) {
         throw new Error('Could not complete signup')
       }
