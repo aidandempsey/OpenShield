@@ -11,6 +11,7 @@ import CreateIncident from "./pages/incidents/CreateIncident";
 import CreateDevice from "./pages/devices/createDevice/CreateDevice";
 import Incident from "./pages/incidents/Incident";
 import Search from "./pages/search/Search";
+import CreateOrganization from "./pages/organization/CreateOrganization";
 
 function App() {
   const { authIsReady, user } = useAuthContext()
@@ -24,10 +25,15 @@ function App() {
             <Routes>
               <Route path='/' element={!user ? <Login /> : <Dashboard />} />
               <Route path='/login' element={!user ? <Login /> : <Dashboard />} />
-              <Route path='/createIncident' element={user ? <CreateIncident /> : <Navigate to="/login" />} />
-              <Route path='/createDevice' element={user ? <CreateDevice /> : <Navigate to="/login" />} />
+
               <Route path='/incidents/:id' element={user ? <Incident /> : <Navigate to="/login" />} />
               <Route path='/search' element={user ? <Search /> : <Navigate to="/login" />} />
+
+              {/* Create */}
+              <Route path='/createIncident' element={user ? <CreateIncident /> : <Navigate to="/login" />} />
+              <Route path='/createDevice' element={user ? <CreateDevice /> : <Navigate to="/login" />} />
+              <Route path='/createOrganization' element={user ? <CreateOrganization /> : <Navigate to="/login" />} />
+
             </Routes>
           </div>
         </BrowserRouter>

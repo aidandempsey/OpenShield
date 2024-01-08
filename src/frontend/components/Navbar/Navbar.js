@@ -24,6 +24,7 @@ export default function Navbar() {
                         <div className="dropdown-content">
                             <Link to="/createIncident">Incident</Link>
                             <Link to="/createDevice">Device</Link>
+                            <Link to="/createOrganization">Organization</Link>
                         </div>
                     </div>
                     <li><Link to="#" onClick={() => { logout() }}>Logout</Link></li>
