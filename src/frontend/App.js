@@ -13,31 +13,26 @@ import Incident from "./pages/incidents/Incident";
 import Search from "./pages/search/Search";
 
 function App() {
-  const { user } = useAuthContext()
-
-  if (user === undefined) {
-    return (
-      <div className="app">
-        <p className="loading">loading...</p>
-      </div>
-    )
-  }
+  const { authIsReady, user } = useAuthContext()
 
   return (
     <div className="App">
-      <BrowserRouter>
-        <Navbar />
-        <div className="container">
-          <Routes>
-            <Route path='/' element={!user ? <Login /> : <Dashboard />} />
-            <Route path='/login' element={!user ? <Login /> : <Dashboard />} />
-            <Route path='/createIncident' element={user ? <CreateIncident /> : <Navigate to="/" />} />
-            <Route path='/createDevice' element={user ? <CreateDevice /> : <Navigate to="/" />} />
-            <Route path='/incidents/:id' element={user ? <Incident /> : <Navigate to="/" />} />
-            <Route path='/search' element={user ? <Search /> : <Navigate to="/" />} />
-          </Routes>
-        </div>
-      </BrowserRouter>
+      {authIsReady && (
+        <BrowserRouter>
+          <Navbar />
+          <div className="container">
+            <Routes>
+              <Route path='/' element={!user ? <Login /> : <Dashboard />} />
+              <Route path='/login' element={!user ? <Login /> : <Dashboard />} />
+              <Route path='/createIncident' element={user ? <CreateIncident /> : <Navigate to="/login" />} />
+              <Route path='/createDevice' element={user ? <CreateDevice /> : <Navigate to="/login" />} />
+              <Route path='/incidents/:id' element={user ? <Incident /> : <Navigate to="/login" />} />
+              <Route path='/search' element={user ? <Search /> : <Navigate to="/login" />} />
+            </Routes>
+          </div>
+        </BrowserRouter>
+      )}
+
     </div >
   );
 }
