@@ -1,6 +1,7 @@
 package me.adempsey.openshield.entity;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import me.adempsey.openshield.entity.enums.TaskStatus;
 
 import java.time.LocalDate;
@@ -8,7 +9,18 @@ import java.time.LocalDate;
 @Entity
 @Table(name="task")
 @Data
+@NoArgsConstructor
 public class Task {
+    public Task(String taskName, String taskDescription, Long incidentId, TaskStatus taskStatus, Long assignerUserId, Long assignedUserId, LocalDate assignDate){
+        this.taskName = taskName;
+        this.taskDescription = taskDescription;
+        this.incidentId = incidentId;
+        this.taskStatus = taskStatus;
+        this.assignerUserId = assignerUserId;
+        this.assignedUserId = assignedUserId;
+        this.assignDate = assignDate;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="task_id")
