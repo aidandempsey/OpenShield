@@ -2,7 +2,6 @@ package me.adempsey.openshield.controller;
 
 import me.adempsey.openshield.entity.User;
 import me.adempsey.openshield.entity.enums.UserRole;
-import me.adempsey.openshield.requestmodels.UserRequest;
 import me.adempsey.openshield.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,11 +29,4 @@ public class UserController {
 
         return userService.createUser(userId, userDisplayName, emailAddress, accountCreatedDate, teamId, userRole, userManager);
     }
-
-//    @PostMapping("/secure")
-//    public void postUser(@RequestHeader(value="Authorization")String token,
-//                         @RequestBody UserRequest userRequest) throws Exception{
-//        String userEmail = ExtractJwt
-//
-//    }
 }

@@ -1,7 +1,9 @@
 package me.adempsey.openshield.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import jakarta.persistence.*;
+import lombok.NoArgsConstructor;
 import me.adempsey.openshield.entity.enums.UserRole;
 
 import java.time.LocalDate;
@@ -9,19 +11,9 @@ import java.time.LocalDate;
 @Entity
 @Table(name="user")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
-
-    public User(){}
-
-    public User(String userId, String displayName, String emailAddress, LocalDate accountCreatedDate, Long teamId, UserRole userRole, String userManager){
-        this.userId = userId;
-        this.displayName = displayName;
-        this.emailAddress = emailAddress;
-        this.accountCreatedDate = accountCreatedDate;
-        this.teamId = teamId;
-        this.userRole = userRole;
-        this.userManager = userManager;
-    }
 
     @Id
     @Column(name="user_id")

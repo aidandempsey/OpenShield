@@ -23,7 +23,6 @@ public class UserService {
         User validateUser = userRepository.findUserByUserId(userId);
 
         if(validateUser != null){
-            System.out.println();
             throw new Exception("User has already been created" + " " + validateUser.getDisplayName());
         }
 
