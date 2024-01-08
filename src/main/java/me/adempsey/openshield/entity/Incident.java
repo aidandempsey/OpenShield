@@ -12,7 +12,7 @@ public class Incident {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="incident_id")
-    private long incidentId;
+    private Long incidentId;
 
     @Column(name="incident_name")
     private String incidentName;
@@ -21,7 +21,7 @@ public class Incident {
     private String incidentDescription;
 
     @Column(name="team_id")
-    private long teamId;
+    private Long teamId;
 
     @Enumerated(EnumType.STRING)
     @Column(name="incident_severity")
@@ -31,8 +31,8 @@ public class Incident {
     private LocalDate  incidentStartDate;
 
     @Column(name="incident_closure_date")
-    private LocalDate  closureDate;
+    private LocalDate closureDate;
 
     @Column(name="assigner_user_id")
-    private long assignerUserId;
+    private Long assignerUserId;
 }

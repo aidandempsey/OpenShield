@@ -12,7 +12,7 @@ public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="task_id")
-    private long taskId;
+    private Long taskId;
 
     @Column(name="task_name")
     private String taskName;
@@ -21,17 +21,17 @@ public class Task {
     private String taskDescription;
 
     @Column(name="incident_id")
-    private long incidentId;
+    private Long incidentId;
 
     @Enumerated(EnumType.STRING)
     @Column(name="task_status")
     private TaskStatus taskStatus;
 
     @Column(name="assigner_user_id")
-    private long assignerUserId;
+    private Long assignerUserId;
 
     @Column(name="assigned_user_id")
-    private long assignedUserId;
+    private Long assignedUserId;
 
     @Column(name="assign_date")
     private LocalDate assignDate;

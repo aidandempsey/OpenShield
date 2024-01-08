@@ -10,7 +10,7 @@ public class Device {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="device_id")
-    private long deviceId;
+    private Long deviceId;
 
     @Column(name="device_name")
     private String deviceName;
@@ -19,29 +19,29 @@ public class Device {
     private String operatingSystem;
 
     @Column(name="cpu_cores")
-    private long cpuCores;
+    private Long cpuCores;
 
     @Column(name="cpu_threads")
-    private long cpuThreads;
+    private Long cpuThreads;
 
     @Column(name="memory_total")
-    private long memoryTotal;
+    private Long memoryTotal;
 
     @Column(name="memory_used")
-    private long memoryUsed;
+    private Long memoryUsed;
 
     @Column(name="memory_percent")
     private float memoryPercent;
 
     @Column(name="disk_total")
-    private long diskTotal;
+    private Long diskTotal;
 
     @Column(name="disk_used")
-    private long diskUsed;
+    private Long diskUsed;
 
     @Column(name="disk_percent")
     private float diskPercent;
 
     @Column(name="organization_id")
-    private long organizationId;
+    private Long organizationId;
 }

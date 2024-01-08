@@ -10,7 +10,7 @@ public class Organization {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="organization_id")
-    private long organizationId;
+    private Long organizationId;
 
     @Column(name="organization_name")
     private String organizationName;
@@ -19,5 +19,5 @@ public class Organization {
     private String organizationDescription;
 
     @Column(name="organization_leader")
-    private long organizationLeader;
+    private Long organizationLeader;
 }
