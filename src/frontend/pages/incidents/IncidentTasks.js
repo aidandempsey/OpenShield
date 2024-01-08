@@ -36,6 +36,7 @@ export default function IncidentTasks(props) {
                                 <p>Description: {task.taskDescription}</p>
                                 <p>Task Name: {task.taskName}</p>
                                 <p>Task status: {task.taskStatus}</p>
+                                <button className="btn">Assign</button>
                                 <hr />
                             </div>
                         ))
