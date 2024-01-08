@@ -14,8 +14,9 @@ export default function CreateIncident() {
     const [incidentStartDate, setIncidentStartDate] = useState(new Date())
     const [assignerUserId, setAssignerUserId] = useState(0)
 
-    const handleCreateIncident = () => {
-
+    const handleCreateIncident = e => {
+        e.preventDefault()
+        console.log(e)
     }
 
     const colourStyles = {
