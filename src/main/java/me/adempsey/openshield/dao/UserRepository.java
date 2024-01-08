@@ -8,4 +8,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 public interface UserRepository extends JpaRepository<User, Long> {
     Page<User> findByTeamId(@RequestParam("team_id")Long teamId, Pageable pageable);
+
+    User findUserByUserId(String userId);
 }

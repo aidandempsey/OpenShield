@@ -19,7 +19,7 @@ CREATE TABLE `organization` (
   `organization_id` BIGINT(20) PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `organization_name` VARCHAR(45) DEFAULT NULL,
   `organization_description` VARCHAR(45) DEFAULT NULL,
-  `organization_leader` BIGINT(20) DEFAULT NULL,
+  `organization_leader` VARCHAR(255) DEFAULT NULL,
   FOREIGN KEY (organization_leader) REFERENCES user(user_id)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -32,7 +32,7 @@ CREATE TABLE `team` (
   `team_id` BIGINT(20) PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `team_name` VARCHAR(45) DEFAULT NULL,
   `team_description` varchar(45) DEFAULT NULL,
-  `team_leader` BIGINT(20) DEFAULT NULL, 
+  `team_leader` VARCHAR(255) DEFAULT NULL, 
   `organization_id` BIGINT(20) DEFAULT NULL,
   FOREIGN KEY (team_leader) REFERENCES user(user_id),
   FOREIGN KEY (organization_id) REFERENCES organization(organization_id)
@@ -51,7 +51,7 @@ CREATE TABLE `incident` (
   `incident_severity` ENUM('low', 'medium', 'high', 'critical') DEFAULT NULL,
   `incident_start_date` DATE DEFAULT NULL,
   `incident_closure_date` DATE DEFAULT NULL,
-  `assigner_user_id` BIGINT(20) DEFAULT NULL,
+  `assigner_user_id` VARCHAR(255) DEFAULT NULL,
   FOREIGN KEY (team_id) REFERENCES team(team_id),
   FOREIGN KEY (assigner_user_id) REFERENCES user(user_id)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
@@ -69,8 +69,8 @@ CREATE TABLE `task` (
   `task_description` varchar(45) DEFAULT NULL,
   `incident_id` BIGINT(20) NOT NULL,
   `task_status` ENUM('open', 'inProgress', 'closed') NOT NULL,
-  `assigner_user_id` BIGINT(20) DEFAULT NULL,
-  `assigned_user_id` BIGINT(20) DEFAULT NULL,
+  `assigner_user_id` VARCHAR(255) DEFAULT NULL,
+  `assigned_user_id` VARCHAR(255) DEFAULT NULL,
   `assign_date` DATE DEFAULT NULL,
   FOREIGN KEY (incident_id) REFERENCES incident(incident_id),
   FOREIGN KEY (assigner_user_id) REFERENCES user(user_id), 
@@ -86,7 +86,7 @@ CREATE TABLE `comment` (
   `comment_id` BIGINT(20) PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `incident_id` BIGINT(20) DEFAULT NULL,
   `comment` VARCHAR(45) DEFAULT NULL,
-  `comment_author` BIGINT(20) DEFAULT NULL,
+  `comment_author` VARCHAR(255) DEFAULT NULL,
   `comment_date` DATE DEFAULT NULL,
   FOREIGN KEY (comment_author) REFERENCES user(user_id), 
   FOREIGN KEY (incident_id) REFERENCES incident(incident_id)
@@ -98,13 +98,13 @@ DROP TABLE IF EXISTS `user`;
 /*!40101 SET character_set_client = utf8 */;
 
 CREATE TABLE `user` (
-  `user_id` BIGINT(20) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  `user_id` VARCHAR(255) PRIMARY KEY NOT NULL,
   `display_name` VARCHAR(45) DEFAULT NULL,
   `email_address` VARCHAR(45) DEFAULT NULL,
   `account_created_date` DATE DEFAULT NULL,
   `team_id` BIGINT(20) DEFAULT NULL,
   `user_role` ENUM("securityAnalyst","securityEngineer","socManager","threatIntelligenceAnalyst","securityArchitect","automationEngineer","complianceAnalyst","userAndAccessManagementSpecialist","trainingAndAwarenessSpecialist","dataPrivacyOfficer","vendorManagementSpecialist","qualityAssuranceTester","projectManager","communicationsSpecialist") DEFAULT NULL,
-  `user_manager` BIGINT(20) DEFAULT NULL,
+  `user_manager` VARCHAR(255) DEFAULT NULL,
   FOREIGN KEY (team_id) REFERENCES team(team_id),
   FOREIGN KEY (user_manager) REFERENCES user(user_id)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
