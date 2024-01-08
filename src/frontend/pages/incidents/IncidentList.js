@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import "./IncidentList.css"
+import "./Incident.css"
 import { Link } from "react-router-dom"
 
 export default function IncidentList(props) {

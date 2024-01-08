@@ -1,7 +1,5 @@
-import { useState } from "react"
-
 export default function IncidentFilter(props) {
-    const filterList = ["Overview", "Progress", "Comments"]
+    const filterList = ["Overview", "Tasks", "Progress", "Comments"]
     const { currentTab, setCurrentTab } = props
 
     const handleClick = filter => {

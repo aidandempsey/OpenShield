@@ -5,6 +5,8 @@ import { useEffect, useState } from "react"
 import IncidentSummary from "./IncidentSummary"
 import IncidentComment from "./IncidentComment"
 import IncidentFilter from "./IncidentFilter"
+import IncidentTasks from "./IncidentTasks"
+import IncidentProgress from "./IncidentProgress"
 
 export default function Incident() {
     const { id } = useParams()
@@ -29,6 +31,8 @@ export default function Incident() {
         <div className="incident-details">
             <IncidentFilter currentTab={currentTab} setCurrentTab={setCurrentTab} />
             {currentTab === "overview" && (<IncidentSummary incident={incident} />)}
+            {currentTab === "tasks" && (<IncidentTasks incidentId={id} />)}
+            {currentTab === "progress" && (<IncidentProgress incident={incident} />)}
             {currentTab === "comments" && (<IncidentComment incidentId={id} />)}
         </div>
     )
