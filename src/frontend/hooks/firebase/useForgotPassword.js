@@ -6,7 +6,6 @@ export const useForgotPassword = () => {
     const [isCancelled, setIsCancelled] = useState(false)
     const [forgotPasswordError, setForgotPasswordError] = useState(null)
     const [isForgotPasswordPending, setIsForgotPasswordPending] = useState(false)
-    const { dispatch } = useAuthContext()
 
     const forgotPassword = async (email) => {
         setForgotPasswordError(null)
