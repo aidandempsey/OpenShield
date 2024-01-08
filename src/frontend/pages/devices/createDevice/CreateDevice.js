@@ -7,7 +7,7 @@ export default function CreateDevice() {
     const [httpError, setHttpError] = useState(null);
     const [pairingError, setPairingError] = useState(null);
     const [pairingCode, setPairingCode] = useState("");
-    const apiUrl = 'https://7f66-46-7-196-15.ngrok-free.app/api/data';
+    const apiUrl = 'https://1d78-46-7-196-15.ngrok-free.app/api/data';
 
     const fetchData = async () => {
         try {
