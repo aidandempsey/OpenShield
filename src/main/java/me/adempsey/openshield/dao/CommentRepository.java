@@ -9,6 +9,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface CommentRepository extends JpaRepository<Comment, Long> {
 
     // foreign keys
-    Page<Comment> findByCommentAuthor(@RequestParam("comment_author")Long commentAuthor, Pageable pageable);
+    Page<Comment> findByCommentAuthor(@RequestParam("comment_author")String commentAuthor, Pageable pageable);
     Page<Comment> findByIncidentId(@RequestParam("incident_id")Long incidentId, Pageable pageable);
 }

@@ -20,6 +20,6 @@ public interface IncidentRepository extends JpaRepository<Incident, Long> {
     @Enumerated(EnumType.STRING)
     Page<Incident> findByIncidentSeverity(@RequestParam("incident_severity")IncidentSeverity incidentSeverity, Pageable pageable);
 
-    Incident findIncidentByIncidentId(Long incidentId);
+    Incident findIncidentByIncidentId(@RequestParam("incident_id")Long incidentId);
 
 }

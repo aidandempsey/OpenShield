@@ -8,5 +8,5 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 public interface OrganizationRepository extends JpaRepository<Organization, Long> {
 
-    Page<Organization> findByOrganizationLeader(@RequestParam("organization_leader")Long organizationLeader, Pageable pageable);
+    Page<Organization> findByOrganizationLeader(@RequestParam("organization_leader")String organizationLeader, Pageable pageable);
 }

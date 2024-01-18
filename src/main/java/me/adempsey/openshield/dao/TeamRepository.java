@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.web.bind.annotation.RequestParam;
 
 public interface TeamRepository extends JpaRepository<Team, Long> {
-    Page<Team> findByTeamLeader(@RequestParam("team_leader")Long teamLeader, Pageable pageable);
+    Page<Team> findByTeamLeader(@RequestParam("team_leader")String teamLeader, Pageable pageable);
     Page<Team> findByOrganizationId(@RequestParam("organization_id")Long organizationId, Pageable pageable);
+
+    Team findTeamByTeamId(@RequestParam("team_id")Long teamId);
 }
