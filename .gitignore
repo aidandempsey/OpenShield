@@ -278,3 +278,6 @@ target/
 
 ### Okta ###
 **/src/lib/oktaConfig.js
+
+## firebase config
+**/firebase_config.json
