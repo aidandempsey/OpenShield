@@ -18,7 +18,7 @@ export default function Navbar() {
                 <li className="logo"><Link to="/"><img className="grow" src={Shield} alt="logo" /><span className="shield">OpenShield</span></Link></li>
 
                 {user && <>
-                    <li className="search"><Link to="/search"><img className="grow" src={Search} /></Link></li>
+                    <li className="search"><Link to="/search"><img alt="Search Icon" className="grow" src={Search} /></Link></li>
                     <div className="dropdown">
                         <button className="btn">Create</button>
                         <div className="dropdown-content">

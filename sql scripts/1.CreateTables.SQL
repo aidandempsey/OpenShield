@@ -52,8 +52,10 @@ CREATE TABLE `incident` (
   `incident_start_date` DATE DEFAULT NULL,
   `incident_closure_date` DATE DEFAULT NULL,
   `assigner_user_id` VARCHAR(255) DEFAULT NULL,
+  `created_by` VARCHAR(255) DEFAULT NULL,
   FOREIGN KEY (team_id) REFERENCES team(team_id),
-  FOREIGN KEY (assigner_user_id) REFERENCES user(user_id)
+  FOREIGN KEY (assigner_user_id) REFERENCES user(user_id),
+  FOREIGN KEY (created_by) REFERENCES user(user_id)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -71,10 +73,12 @@ CREATE TABLE `task` (
   `task_status` ENUM('open', 'inProgress', 'closed') NOT NULL,
   `assigner_user_id` VARCHAR(255) DEFAULT NULL,
   `assigned_user_id` VARCHAR(255) DEFAULT NULL,
+  `created_by` VARCHAR(255) DEFAULT NULL,
   `assign_date` DATE DEFAULT NULL,
   FOREIGN KEY (incident_id) REFERENCES incident(incident_id),
   FOREIGN KEY (assigner_user_id) REFERENCES user(user_id), 
-  FOREIGN KEY (assigned_user_id) REFERENCES user(user_id)
+  FOREIGN KEY (assigned_user_id) REFERENCES user(user_id),
+  FOREIGN KEY (created_by) REFERENCES user(user_id)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -85,7 +89,7 @@ DROP TABLE IF EXISTS `comment`;
 CREATE TABLE `comment` (
   `comment_id` BIGINT(20) PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `incident_id` BIGINT(20) DEFAULT NULL,
-  `comment` VARCHAR(45) DEFAULT NULL,
+  `comment_content` VARCHAR(45) DEFAULT NULL,
   `comment_author` VARCHAR(255) DEFAULT NULL,
   `comment_date` DATE DEFAULT NULL,
   FOREIGN KEY (comment_author) REFERENCES user(user_id), 

@@ -1,0 +1,68 @@
+/* incident comments */
+.comments {
+    border-radius: 10px;
+}
+
+.comments label {
+    margin-bottom: 0px;
+}
+
+.comments textarea {
+    min-height: 40px;
+    width: 100%;
+    font-size: 1.5em;
+    resize: none;
+}
+
+.comments .btn {
+    margin-top: 10px;
+}
+
+.comments .add-new-comment {
+    color: var(--secondary-text-color);
+}
+
+/* comment list */
+.comments h4 {
+    color: var(--text-color);
+}
+
+.comments li {
+    padding: 16px;
+    border-radius: 4px;
+    margin-top: 20px;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.05);
+    background: var(--dark-background-color);
+}
+
+.comment-author {
+    display: flex;
+    align-items: center;
+    color: var(--title-color);
+}
+
+.comment-author .avatar {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
+
+.comment-date {
+    color: var(--secondary-text-color);
+    font-size: 0.9em;
+    margin: 4px 0 10px;
+}
+
+.comment-content {
+    color: var(--text-color);
+    font-size: 0.9em;
+    margin: 15px 0px 10px;
+}
+
+.add-comment {
+    padding: 16px;
+    border-radius: 4px;
+    margin-top: 20px;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.05);
+    background: var(--dark-background-color);
+}

@@ -1,39 +1,33 @@
-import "./Incident.css"
-
 import { useState } from "react"
+import { usePost } from "../../../hooks/restful/usePost"
+import { useColourStyle } from "../../../hooks/style/useColourStyle"
+
 import Select from 'react-select'
 import ReactDatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.module.css"
-import { useEffect } from "react"
 
-export default function CreateIncident() {
+export default function CreateTask() {
     const [incidentName, setIncidentName] = useState("")
     const [incidentDescription, setIncidentDescription] = useState("")
     const [teamId, setTeamId] = useState(0)
     const [incidentSeverity, setIncidentSeverity] = useState("")
     const [incidentStartDate, setIncidentStartDate] = useState(new Date())
     const [assignerUserId, setAssignerUserId] = useState(0)
+    const { post, httpError, isLoading } = usePost()
+    const colourStyles = useColourStyle()
 
     const handleCreateIncident = e => {
         e.preventDefault()
-        console.log(e)
-    }
-
-    const colourStyles = {
-        control: (styles) => ({
-            ...styles,
-            backgroundColor: "#f3f3f3",
-            fontFamily: "Poppins",
-        }),
-
-        option: (styles, { isFocused }) => {
-            return {
-                ...styles,
-                backgroundColor: isFocused ? '#343541' : "#ececf1",
-                color: isFocused ? '#ececf1' : "#343541",
-                fontFamily: "Poppins"
-            }
+        let body = {
+            incidentName,
+            incidentDescription,
+            teamId,
+            incidentSeverity,
+            incidentStartDate,
+            assignerUserId
         }
+
+        const { data } = post("secure/incidents/createIncident", body)
     }
 
     const teams = [
@@ -81,6 +75,8 @@ export default function CreateIncident() {
                 <label>Incident Start Date<ReactDatePicker selected={incidentStartDate} onChange={e => { setIncidentStartDate(e) }} /></label>
                 <button className="btn">Create</button>
             </form>
+            {(httpError) && <div className="error">{httpError}</div>}
+            {isLoading && <div className="Loading">loading...</div>}
         </div>
     )
 }

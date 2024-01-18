@@ -44,9 +44,9 @@ public class DataRestConfig implements RepositoryRestConfigurer {
     private void disableHttpMethods(Class theClass, RepositoryRestConfiguration config, HttpMethod[] unsupportedActions){
         config.getExposureConfiguration()
                 .forDomainType(theClass)
-                .withItemExposure((metdata, httpMethods) ->
+                .withItemExposure((metadata, httpMethods) ->
                         httpMethods.disable(unsupportedActions))
-                .withCollectionExposure((metdata, httpMethods) ->
+                .withCollectionExposure((metadata, httpMethods) ->
                         httpMethods.disable(unsupportedActions));
     }
 }

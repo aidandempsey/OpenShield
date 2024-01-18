@@ -1,10 +1,10 @@
-import "./Incident.css"
+import "./Tasks.css"
 
 import { useState } from "react"
 import Select from 'react-select'
 import ReactDatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.module.css"
-import { useEffect } from "react"
+import { useColourStyle } from "../../../hooks/style/useColourStyle"
 
 export default function CreateIncidentTask(props) {
     const { setCreateTask } = props
@@ -22,22 +22,7 @@ export default function CreateIncidentTask(props) {
         e.preventDefault()
     }
 
-    const colourStyles = {
-        control: (styles) => ({
-            ...styles,
-            backgroundColor: "#f3f3f3",
-            fontFamily: "Poppins",
-        }),
-
-        option: (styles, { isFocused }) => {
-            return {
-                ...styles,
-                backgroundColor: isFocused ? '#343541' : "#ececf1",
-                color: isFocused ? '#ececf1' : "#343541",
-                fontFamily: "Poppins"
-            }
-        }
-    }
+    const colourStyles = useColourStyle()
 
     const statuses = [
         { value: "open", label: "Open" },

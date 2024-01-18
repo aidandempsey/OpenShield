@@ -1,0 +1,25 @@
+.tasks {
+    border-radius: 10px;
+}
+
+.tasks .btn {
+    margin-top: 10px;
+}
+
+.tasks h4 {
+    color: var(--text-color);
+}
+
+.tasks li {
+    padding: 16px;
+    border-radius: 4px;
+    margin-top: 20px;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.05);
+    background: var(--dark-background-color);
+}
+
+.task-assigned-date {
+    color: var(--secondary-text-color);
+    font-size: 0.9em;
+    margin: 4px 0 15px;
+}

@@ -1,44 +1,30 @@
 import { useEffect, useState } from "react"
 import "./Search.css"
-import SearchIncident from "./SearchIncident"
-import { useTable } from "../../hooks/restful/useTable"
-import IncidentList from "../incidents/IncidentList"
+import IncidentList from "../incidents/incidents/IncidentList"
+import { useGet } from "../../hooks/restful/useGet"
 
 export default function Search() {
     const [search, setSearch] = useState("")
     const [searchUrl, setSearchUrl] = useState("")
-    const [data, setData] = useState([])
 
-    const { tableData, tableHttpError, isTableLoading } = useTable(searchUrl)//, query)
+    const { data, httpError, isLoading } = useGet(searchUrl)
 
-    const handleSearch = e => {
-        e.preventDefault()
+    useEffect(() => {
         if (search === "") {
             setSearchUrl("")
         } else {
             setSearchUrl(`incidents/search/findByIncidentNameContaining?incidentName=${search}`)
         }
-    }
+    }, [search])
 
-    useEffect(() => {
-        if (tableData) {
-            setData(tableData.incidents || [])
-        }
 
-    }, [tableData])
-
-    if (isTableLoading) {
-        return (
-            <p>loading...</p>
-        )
-    }
 
     return (
         <div className="search">
-            <form onSubmit={e => { handleSearch(e) }}>
-                <input type="search" value={search} placeholder="Search Incidents" onChange={e => { setSearch(e.target.value) }} />
+            <form onSubmit={e => { e.preventDefault() }}>
+                <input type="search" value={search} placeholder="Search Incidents" onChange={e => { setSearch(e.target.value) }} autoFocus />
             </form>
-            <IncidentList incidents={data} httpError={tableHttpError} isLoading={isTableLoading} />
+            <IncidentList incidents={data?._embedded?.incidents ?? []} httpError={httpError} isLoading={isLoading} />
         </div>
     )
 }

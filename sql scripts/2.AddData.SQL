@@ -22,14 +22,14 @@ VALUES
 -- Fake Inserts for Task Table
 INSERT INTO `task` (`task_name`, `task_description`, `incident_id`, `task_status`, `assigner_user_id`, `assigned_user_id`, `assign_date`)
 VALUES 
-  ('Fix Authentication', 'Resolve login issues', 1, 'open', '10', '11', '2023-01-03'),
+  ('Fix Authentication', 'Resolve login issues', 1, 'open', '10', 'Jm5xMOMEnRO5p1zTBTNxZDkh8qG3', '2023-01-03'),
   ('Data Cleanup', 'Remove exposed data', 2, 'inProgress', '11', '12', '2023-02-05'),
   ('Code Review', 'Review and fix code', 3, 'closed', '12', '13', '2023-03-03'),
-  ('Demo task', 'Demp task description', 2, 'open', '10', '13', '2024-01-08');
+  ('Demo task', 'Demo task description', 2, 'closed', '10', '13', '2024-01-08');
 
 
 -- Fake Inserts for Comments Table
-INSERT INTO `comment` (`incident_id`, `comment`, `comment_author`, `comment_date`)
+INSERT INTO `comment` (`incident_id`, `comment_content`, `comment_author`, `comment_date`)
 VALUES 
   (1, 'Critical issue. Immediate action required.', '14', '2023-01-04'),
   (2, 'Investigating the source of the leak.', '15', '2023-02-07'),

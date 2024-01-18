@@ -1,8 +1,5 @@
 import { useState } from "react"
-import Select from 'react-select'
-import ReactDatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.module.css"
-import { useEffect } from "react"
 
 export default function CreateOrganization() {
     const [organizationName, setOrganizationName] = useState("")
@@ -12,23 +9,6 @@ export default function CreateOrganization() {
     const handleCreateOrganization = e => {
         e.preventDefault()
         console.log(e)
-    }
-
-    const colourStyles = {
-        control: (styles) => ({
-            ...styles,
-            backgroundColor: "#f3f3f3",
-            fontFamily: "Poppins",
-        }),
-
-        option: (styles, { isFocused }) => {
-            return {
-                ...styles,
-                backgroundColor: isFocused ? '#343541' : "#ececf1",
-                color: isFocused ? '#ececf1' : "#343541",
-                fontFamily: "Poppins"
-            }
-        }
     }
 
     const teams = [
