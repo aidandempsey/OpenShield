@@ -11,13 +11,14 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 public class Task {
-    public Task(String taskName, String taskDescription, Long incidentId, TaskStatus taskStatus, Long assignerUserId, Long assignedUserId, LocalDate assignDate){
+    public Task(String taskName, String taskDescription, Long incidentId, TaskStatus taskStatus, String assignerUserId, String assignedUserId, String createdBy, LocalDate assignDate){
         this.taskName = taskName;
         this.taskDescription = taskDescription;
         this.incidentId = incidentId;
         this.taskStatus = taskStatus;
         this.assignerUserId = assignerUserId;
         this.assignedUserId = assignedUserId;
+        this.createdBy = createdBy;
         this.assignDate = assignDate;
     }
 
@@ -40,10 +41,13 @@ public class Task {
     private TaskStatus taskStatus;
 
     @Column(name="assigner_user_id")
-    private Long assignerUserId;
+    private String assignerUserId;
 
     @Column(name="assigned_user_id")
-    private Long assignedUserId;
+    private String assignedUserId;
+
+    @Column(name="created_by")
+    private String createdBy;
 
     @Column(name="assign_date")
     private LocalDate assignDate;

@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class Organization {
-    public Organization(String organizationName, String organizationDescription, Long organizationLeader){
+    public Organization(String organizationName, String organizationDescription, String organizationLeader){
         this.organizationName = organizationName;
         this.organizationDescription = organizationDescription;
         this.organizationLeader = organizationLeader;
@@ -26,5 +26,5 @@ public class Organization {
     private String organizationDescription;
 
     @Column(name="organization_leader")
-    private Long organizationLeader;
+    private String organizationLeader;
 }

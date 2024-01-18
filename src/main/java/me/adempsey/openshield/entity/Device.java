@@ -2,11 +2,27 @@ package me.adempsey.openshield.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name="device")
 @Data
+@NoArgsConstructor
 public class Device {
+    public Device(String deviceName, String operatingSystem, Long cpuCores, Long cpuThreads, Long memoryTotal, Long memoryUsed, float memoryPercent, Long diskTotal, Long diskUsed, float diskPercent, Long organizationId){
+        this.deviceName = deviceName;
+        this.operatingSystem = operatingSystem;
+        this.cpuCores = cpuCores;
+        this.cpuThreads = cpuThreads;
+        this.memoryTotal = memoryTotal;
+        this.memoryUsed = memoryUsed;
+        this.memoryPercent = memoryPercent;
+        this.diskTotal = diskTotal;
+        this.diskUsed = diskUsed;
+        this.diskPercent = diskPercent;
+        this.organizationId = organizationId;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="device_id")
