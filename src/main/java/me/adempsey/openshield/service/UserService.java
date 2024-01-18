@@ -2,7 +2,7 @@ package me.adempsey.openshield.service;
 
 import me.adempsey.openshield.dao.UserRepository;
 import me.adempsey.openshield.entity.User;
-import me.adempsey.openshield.entity.enums.UserRole;
+import me.adempsey.openshield.requestmodels.UserRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,15 +19,36 @@ public class UserService {
         this.userRepository=userRepository;
     }
 
-    public User createUser(String userId, String displayName, String emailAddress, LocalDate accountCreatedDate, Long teamId, UserRole userRole, String userManager) throws Exception {
+    public User createUser(String userId, UserRequest userRequest) throws Exception {
         User validateUser = userRepository.findUserByUserId(userId);
 
         if(validateUser != null){
             throw new Exception("User has already been created" + " " + validateUser.getDisplayName());
         }
 
-        User user = new User(userId, displayName, emailAddress, accountCreatedDate, teamId, userRole, userManager);
+        User user = new User();
+        user.setUserId(userId);
+        user.setDisplayName(userRequest.getDisplayName());
+        user.setEmailAddress(userRequest.getEmailAddress());
+        user.setAccountCreatedDate(LocalDate.now());
+
+        if(userRequest.getTeamId() != null && userRequest.getTeamId().isPresent()){
+            user.setTeamId(userRequest.getTeamId().orElse(null));
+        }
+
+        if(userRequest.getUserRole() != null && userRequest.getUserRole().isPresent()){
+            user.setUserRole(userRequest.getUserRole().orElse(null));
+        }
+
+        if(userRequest.getUserManager() != null && userRequest.getUserManager().isPresent()){
+            user.setUserManager(userRequest.getUserManager().orElse(null));
+        }
+
         userRepository.save(user);
         return user;
+    }
+
+    public String getDisplayNameFromUserId(String userId){
+        return userRepository.findUserByUserId(userId).getDisplayName();
     }
 }

@@ -1,25 +1,72 @@
 package me.adempsey.openshield.service;
 
 import me.adempsey.openshield.dao.IncidentRepository;
+import me.adempsey.openshield.dao.TaskRepository;
 import me.adempsey.openshield.entity.Incident;
+import me.adempsey.openshield.entity.Task;
 import me.adempsey.openshield.entity.enums.IncidentSeverity;
+import me.adempsey.openshield.entity.enums.TaskStatus;
+import me.adempsey.openshield.requestmodels.IncidentRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Service
 @Transactional
 public class IncidentService {
     private final IncidentRepository incidentRepository;
+    private final TaskRepository taskRepository;
 
     @Autowired
-    public IncidentService(IncidentRepository incidentRepository){this.incidentRepository = incidentRepository;}
+    public IncidentService(IncidentRepository incidentRepository, TaskRepository taskRepository){
+        this.incidentRepository = incidentRepository;
+        this.taskRepository = taskRepository;
+    }
 
-    public Incident createIncident(String incidentName, String incidentDescription, Long teamId, IncidentSeverity incidentSeverity, LocalDate  incidentStartDate, LocalDate closureDate, Long assignerUserId) throws Exception{
-        Incident incident = new Incident(incidentName, incidentDescription, teamId, incidentSeverity,  incidentStartDate, closureDate, assignerUserId);
+    public Incident createIncident(String createdBy, IncidentRequest incidentRequest) throws Exception{
+        Incident incident = new Incident();
+        incident.setCreatedBy(createdBy);
+        incident.setIncidentName(incidentRequest.getIncidentName());
+
+        if(incidentRequest.getIncidentDescription() != null && incidentRequest.getIncidentDescription().isPresent()){
+            incident.setIncidentDescription(incidentRequest.getIncidentDescription().map(
+                    Object::toString
+            ).orElse(null));
+        }
+
+        if(incidentRequest.getTeamId() != null && incidentRequest.getTeamId().isPresent()){
+            incident.setTeamId(incidentRequest.getTeamId().orElse(null));
+        }
+
+        incident.setIncidentSeverity(incidentRequest.getIncidentSeverity());
+        incident.setIncidentStartDate(LocalDate.now());
+
+        if(incidentRequest.getClosureDate() != null && incidentRequest.getClosureDate().isPresent()){
+            incident.setClosureDate(incidentRequest.getClosureDate().orElse(null));
+        }
+
+        if(incidentRequest.getAssignerUserId() != null && incidentRequest.getAssignerUserId().isPresent()){
+            incident.setAssignerUserId(incidentRequest.getAssignerUserId().orElse(null));
+        }
+
         incidentRepository.save(incident);
         return incident;
     }
+
+    public float getIncidentProgress(Long incidentId) {
+        List<Task> tasks = taskRepository.findTasksByIncidentId(incidentId);
+
+        long completedTasks = tasks.stream()
+                .filter(task -> task.getTaskStatus() == TaskStatus.closed)
+                .count();
+
+        double totalTasks = tasks.size();
+
+        return (float) ((completedTasks / totalTasks) * 100);
+    }
+
 }
