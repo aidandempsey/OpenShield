@@ -1,15 +1,14 @@
 package me.adempsey.openshield.controller;
 
 import me.adempsey.openshield.entity.Task;
-import me.adempsey.openshield.entity.enums.TaskStatus;
+import me.adempsey.openshield.requestmodels.TaskRequest;
 import me.adempsey.openshield.service.TaskService;
+import me.adempsey.openshield.utils.GetUidFromJWT;
 import org.springframework.web.bind.annotation.*;
-
-import java.time.LocalDate;
 
 @CrossOrigin("http://localhost:3000")
 @RestController
-@RequestMapping("/api/tasks")
+@RequestMapping("/api/secure/tasks")
 public class TaskController {
 
     private final TaskService taskService;
@@ -17,15 +16,17 @@ public class TaskController {
     public TaskController(TaskService taskService){this.taskService = taskService;}
 
     @PostMapping("/createTask")
-    public Task createTask() throws Exception{
-        String taskName = "New task";
-        String taskDescription = "Description";
-        Long incidentId = 1L;
-        TaskStatus taskStatus = TaskStatus.open;
-        Long assignerUserId = 1L;
-        Long assignedUserId = 2L;
-        LocalDate assignDate = LocalDate.now();
+    public Task createTask(@RequestHeader(value = "Authorization")String token, @RequestBody TaskRequest taskRequest) throws Exception{
+        return taskService.createTask(GetUidFromJWT.validateToken(token),taskRequest);
+    }
 
-        return taskService.createTask(taskName,taskDescription,incidentId,taskStatus,assignerUserId,assignedUserId, assignDate);
+    @GetMapping("/isTaskAssigned")
+    public boolean isTaskAssigned(@RequestParam Long taskId){
+        return taskService.isTaskAssigned(taskId);
+    }
+
+    @GetMapping("/isTaskAssignedToUser")
+    public boolean isTaskAssignedToUser(@RequestParam String assignedUserId, @RequestParam Long taskId){
+        return taskService.isTaskAssignedToUser(assignedUserId,taskId);
     }
 }

@@ -1,22 +1,20 @@
 package me.adempsey.openshield.controller;
 import me.adempsey.openshield.entity.Organization;
+import me.adempsey.openshield.requestmodels.OrganizationRequest;
 import me.adempsey.openshield.service.OrganizationService;
+import me.adempsey.openshield.utils.GetUidFromJWT;
 import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin("http://localhost:3000")
 @RestController
-@RequestMapping("/api/organizations")
+@RequestMapping("/api/secure/organizations")
 public class OrganizationController {
     private final OrganizationService organizationService;
 
     public OrganizationController(OrganizationService organizationService){this.organizationService = organizationService;}
 
     @PostMapping("/createOrganization")
-    public Organization createUser() throws Exception {
-        String organizationName = "organization";
-        String organizationDescription = "description";
-        Long organizationLeader = 1L;
-
-        return organizationService.createOrganization(organizationName, organizationDescription, organizationLeader);
+    public Organization createOrganization(@RequestHeader(value = "Authorization")String token, @RequestBody OrganizationRequest organizationRequest) throws Exception {
+        return organizationService.createOrganization(GetUidFromJWT.validateToken(token),organizationRequest);
     }
 }
