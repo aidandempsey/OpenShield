@@ -1,17 +1,17 @@
 package me.adempsey.openshield.requestmodels;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import lombok.Data;
 import me.adempsey.openshield.entity.enums.UserRole;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 @Data
 public class UserRequest {
-    private Optional<String> displayName;
-    private Optional<String> emailAddress;
+    private String displayName;
+    private String emailAddress;
+    private LocalDate accountCreatedDate;
     private Optional<Long> teamId;
     private Optional<UserRole> userRole;
+    private Optional<String> userManager;
 }
