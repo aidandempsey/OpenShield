@@ -14,16 +14,17 @@ export default function TaskList(props) {
 
     return (
         <div className="tasks">
+            {!createTask && (
+                <button className="btn" onClick={() => { setCreateTask(true) }}>Create Task</button>
+            )}
+
             {!createTask && data?._embedded?.tasks.length > 0 && (
-                <>
-                    <button className="btn" onClick={() => { setCreateTask(true) }}>Create Task</button>
-                    <ul>
-                        {data?._embedded?.tasks.length > 0 && data._embedded.tasks.map(task => (
-                            <Task key={task.taskId} task={task} />
-                        ))
-                        }
-                    </ul >
-                </>
+                <ul>
+                    {data?._embedded?.tasks.length > 0 && data._embedded.tasks.map(task => (
+                        <Task key={task.taskId} task={task} />
+                    ))
+                    }
+                </ul >
             )}
             {data?._embedded?.tasks?.length === 0 && <p>No Tasks Yet!</p>}
             {createTask && <CreateTask setCreateTask={setCreateTask} />}

@@ -1,9 +1,11 @@
 import Alert from '@mui/material/Alert';
 import "./Incident.css"
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
+import { useGet } from '../../../hooks/restful/useGet';
 
 export default function IncidentSummary(props) {
     const { incident } = props
+    const { data, httpError, isLoading } = useGet(`secure/organizations/getOrganizationNameFromOrganizationId?organizationId=${incident.organizationId}`)
 
     const convertSeverity = severity => ({
         "low": "success",
@@ -12,6 +14,9 @@ export default function IncidentSummary(props) {
         "critical": "error"
     }[severity])
 
+    if (httpError) return <div className="error">{httpError}</div>
+    if (isLoading) return <div className="Loading">loading...</div>
+
     return (
         <div>
             <div className='incident-summary'>
@@ -19,6 +24,7 @@ export default function IncidentSummary(props) {
 
                 <p className='start-date'>Started {formatDistanceToNow(incident.incidentStartDate, { addSuffix: true })}</p>
                 <p className='details'>{incident.incidentDescription}</p>
+                <p className='details'>Assigned to {data}</p>
                 <Alert severity={convertSeverity(incident.incidentSeverity)}>{incident.incidentSeverity}</Alert>
             </div>
         </div>

@@ -6,6 +6,7 @@ import { useLogout } from "../../hooks/firebase/useLogout"
 import "./Navbar.css"
 import Shield from "../../images/shield.svg"
 import Search from "../../images/search.svg"
+import Settings from "../../images/settings.svg"
 
 export default function Navbar() {
     const { user } = useAuthContext()
@@ -14,7 +15,6 @@ export default function Navbar() {
     return (
         <div className="navbar">
             <ul>
-
                 <li className="logo"><Link to="/"><img className="grow" src={Shield} alt="logo" /><span className="shield">OpenShield</span></Link></li>
 
                 {user && <>
@@ -22,15 +22,16 @@ export default function Navbar() {
                     <div className="dropdown">
                         <button className="btn">Create</button>
                         <div className="dropdown-content">
+                            <Link to="/createOrganization">Organization</Link>
                             <Link to="/createIncident">Incident</Link>
                             <Link to="/createDevice">Device</Link>
-                            <Link to="/createOrganization">Organization</Link>
                         </div>
                     </div>
                     <li><Link to="#" onClick={() => { logout() }}>Logout</Link></li>
+                    <li className="settings"><Link to="/settings"><img className="grow" src={Settings} alt="logo" /></Link></li>
                 </>
                 }
             </ul>
-        </div>
+        </div >
     )
 }

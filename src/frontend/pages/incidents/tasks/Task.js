@@ -1,14 +1,14 @@
-import { useValue } from "../../../hooks/restful/useValue"
+import { useGet } from "../../../hooks/restful/useGet"
 import formatDistanceToNow from "date-fns/formatDistanceToNow"
 import { useAuthContext } from "../../../hooks/firebase/useAuthContext"
 
 export default function Task(props) {
     const { task } = props
     const { user } = useAuthContext()
-    const { value: assignedUserName, valueHttpError: assignedUserHttpError, isValueLoading: assignedUserIsLoading } = useValue(`secure/users/getDisplayNameFromUserId?userId=${task.assignedUserId}`)
-    const { value: assignerUserName, valueHttpError: assignerUserHttpError, isValueLoading: assignerUserIsLoading } = useValue(`secure/users/getDisplayNameFromUserId?userId=${task.assignerUserId}`)
-    const { value: taskAssigned, valueHttpError: taskAssignedHttpError, isValueLoading: taskAssignedIsLoading } = useValue(`secure/tasks/isTaskAssigned?taskId=${task.taskId}`)
-    const { value: taskAssignedToUser, valueHttpError: taskAssignedToUserHttpError, isValueLoading: taskAssignedToUserIsLoading } = useValue(`secure/tasks/isTaskAssignedToUser?assignedUserId=${user.uid}&taskId=${task.taskId}`) ?? false
+    const { data: assignedUserName, httpError: assignedUserHttpError, isLoading: assignedUserIsLoading } = useGet(`secure/users/getDisplayNameFromUserId?userId=${task.assignedUserId}`)
+    const { data: assignerUserName, httpError: assignerUserHttpError, isLoading: assignerUserIsLoading } = useGet(`secure/users/getDisplayNameFromUserId?userId=${task.assignerUserId}`)
+    const { data: taskAssigned, httpError: taskAssignedHttpError, isLoading: taskAssignedIsLoading } = useGet(`secure/tasks/isTaskAssigned?taskId=${task.taskId}`)
+    const { data: taskAssignedToUser, httpError: taskAssignedToUserHttpError, isLoading: taskAssignedToUserIsLoading } = useGet(`secure/tasks/isTaskAssignedToUser?assignedUserId=${user.uid}&taskId=${task.taskId}`) ?? false
 
     const convertStatus = status => ({
         "open": "Open",
@@ -28,8 +28,8 @@ export default function Task(props) {
                 <div className="task-assigned-user"><p>Assigned to {assignedUserName}</p></div>
                 <div className="task-assigner-user"><p>Assigned by {assignerUserName}</p></div>
                 <div className="task-status"><p>{convertStatus(task.taskStatus)}</p></div>
-                {(!taskAssigned == "true") && <button className="btn">Assign</button>}
-                {(taskAssignedToUser == "true") && <button className="btn">Unassign</button>}
+                {(!taskAssigned === "true") && <button className="btn">Assign</button>}
+                {(taskAssignedToUser === "true") && <button className="btn">Unassign</button>}
 
             </li>
         )

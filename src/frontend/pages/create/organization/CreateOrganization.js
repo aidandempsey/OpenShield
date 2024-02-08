@@ -1,36 +1,21 @@
 import { useState } from "react"
+import { usePost } from "../../../hooks/restful/usePost"
+import { useAuthContext } from "../../../hooks/firebase/useAuthContext"
+
 import "react-datepicker/dist/react-datepicker.module.css"
 
 export default function CreateOrganization() {
     const [organizationName, setOrganizationName] = useState("")
     const [organizationDescription, setOrganizationDescription] = useState("")
-    const [teamLeaderId, setTeamLeaderId] = useState(0)
+    const { user } = useAuthContext()
+    const { post, httpError, isLoading } = usePost()
 
     const handleCreateOrganization = e => {
         e.preventDefault()
-        console.log(e)
+        post("secure/organizations/createOrganization", { organizationName, organizationLeader: user.uid, organizationDescription })
+        setOrganizationName("")
+        setOrganizationDescription("")
     }
-
-    const teams = [
-        { value: "Team 1", label: "Team 1" },
-        { value: "Team 2", label: "Team 2" },
-        { value: "Team 3", label: "Team 3" },
-        { value: "Team 4", label: "Team 4" }
-    ]
-
-    const severities = [
-        { value: "Low", label: "Low" },
-        { value: "Medium", label: "Medium" },
-        { value: "High", label: "High" },
-        { value: "Critical", label: "Critical" }
-    ]
-
-    const users = [
-        { value: "1", label: "1" },
-        { value: "2", label: "2" },
-        { value: "3", label: "3" },
-        { value: "4", label: "4" }
-    ]
 
     return (
         <div className="form-container">
@@ -52,6 +37,8 @@ export default function CreateOrganization() {
                     onChange={e => { setOrganizationDescription(e.target.value) }} />
                 <button className="btn">Create</button>
             </form>
+            {httpError && <p className="error form-error">{httpError}</p>}
+            {isLoading && <div className="Loading">loading...</div>}
         </div>
     )
 }

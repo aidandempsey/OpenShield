@@ -12,6 +12,8 @@ import CreateDevice from "./pages/create/device/CreateDevice"
 import Incident from "./pages/incidents/incidents/Incident";
 import Search from "./pages/search/Search";
 import CreateOrganization from "./pages/create/organization/CreateOrganization";
+import Settings from "./pages/settings/Settings";
+import Organization from "./pages/organization/Organization";
 
 
 function App() {
@@ -27,13 +29,19 @@ function App() {
               <Route path='/' element={!user ? <Navigate to="/login" /> : <Dashboard />} />
               <Route path='/login' element={!user ? <Login /> : <Navigate to="/" />} />
 
+              <Route path='/organizations/:id' element={user ? <Organization /> : <Navigate to="/login" />} />
               <Route path='/incidents/:id' element={user ? <Incident /> : <Navigate to="/login" />} />
               <Route path='/search' element={user ? <Search /> : <Navigate to="/login" />} />
+              <Route path='/settings' element={user ? <Settings /> : <Navigate to="/login" />} />
+
 
               {/* Create */}
+              <Route path='/createOrganization' element={user ? <CreateOrganization /> : <Navigate to="/login" />} />
               <Route path='/createIncident' element={user ? <CreateIncident /> : <Navigate to="/login" />} />
               <Route path='/createDevice' element={user ? <CreateDevice /> : <Navigate to="/login" />} />
-              <Route path='/createOrganization' element={user ? <CreateOrganization /> : <Navigate to="/login" />} />
+
+              <Route path='*' element={user ? <Navigate to="/" /> : <Navigate to="/login" />} />
+
             </Routes>
           </div>
         </BrowserRouter>

@@ -4,9 +4,10 @@ import { useState } from "react"
 import { useLogin } from "../../hooks/firebase/useLogin"
 import { useSignup } from "../../hooks/firebase/useSignup"
 import { useForgotPassword } from "../../hooks/firebase/useForgotPassword"
+import { usePost } from "../../hooks/restful/usePost"
 
 export default function LoginModal() {
-    const [email, setEmail] = useState("")
+    const [emailAddress, setEmailAddress] = useState("")
     const [password, setPassword] = useState("")
     const [displayName, setDisplayName] = useState("")
     const [signingUp, setSigningUp] = useState(false)
@@ -19,23 +20,23 @@ export default function LoginModal() {
 
     const handleLogin = e => {
         e.preventDefault()
-        login(email, password)
-        setEmail("")
+        login(emailAddress, password)
+        setEmailAddress("")
         setPassword("")
     }
 
     const handleSignup = e => {
         e.preventDefault()
-        signup(email, password, displayName)
-        setEmail("")
-        setPassword("")
-        setDisplayName("")
+        signup(emailAddress, password, displayName)
+        // setEmailAddress("")
+        // setPassword("")
+        // setDisplayName("")
     }
 
     const handleForgotPassword = e => {
         e.preventDefault()
-        forgotPassword(email)
-        setForgotPasswordMessage(`Password reset link has been emailed to ${email}`)
+        forgotPassword(emailAddress)
+        setForgotPasswordMessage(`Password reset link has been emailed to ${emailAddress}`)
     }
 
     return (
@@ -43,7 +44,7 @@ export default function LoginModal() {
             {signingUp && !isForgotPassword && (
                 <form className="form" onSubmit={handleSignup}>
                     <h2>Sign up</h2>
-                    <input required type="email" value={email} placeholder="Email" onChange={e => { setEmail(e.target.value) }} />
+                    <input required type="emailAddress" value={emailAddress} placeholder="Email" onChange={e => { setEmailAddress(e.target.value) }} />
                     <input required type="password" value={password} placeholder="Password" onChange={e => { setPassword(e.target.value) }} />
                     <input required type="text" value={displayName} placeholder="First Name" onChange={e => { setDisplayName(e.target.value) }} />
 
@@ -55,7 +56,7 @@ export default function LoginModal() {
             {!signingUp && !isForgotPassword && (
                 <form className="form" onSubmit={handleLogin}>
                     <h2>Login</h2>
-                    <input required type="email" value={email} placeholder="Email" onChange={e => { setEmail(e.target.value) }} />
+                    <input required type="emailAddress" value={emailAddress} placeholder="Email" onChange={e => { setEmailAddress(e.target.value) }} />
                     <input required type="password" value={password} placeholder="Password" onChange={e => { setPassword(e.target.value) }} />
                     {!isLoginPending && <button className="btn login-btn">Login</button>}
                     {!isLoginPending && <p className="forgot-password" onClick={() => {
@@ -68,7 +69,7 @@ export default function LoginModal() {
             {isForgotPassword && (
                 <form className="form" onSubmit={handleForgotPassword}>
                     <h2 className="forgot-password">Forgot Password</h2>
-                    <input required type="email" value={email} placeholder="Email" onChange={e => { setEmail(e.target.value) }} />
+                    <input required type="emailAddress" value={emailAddress} placeholder="Email" onChange={e => { setEmailAddress(e.target.value) }} />
                     {!isForgotPasswordPending && <button className="btn login-btn">Submit</button>}
                     {isForgotPasswordPending && <button className="btn login-btn" disabled>Submitting...</button>}
                 </form>

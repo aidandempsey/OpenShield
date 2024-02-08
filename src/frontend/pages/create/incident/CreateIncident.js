@@ -10,7 +10,7 @@ export default function CreateTask() {
     const [incidentName, setIncidentName] = useState("")
     const [incidentDescription, setIncidentDescription] = useState("")
     const [teamId, setTeamId] = useState(0)
-    const [incidentSeverity, setIncidentSeverity] = useState("")
+    const [incidentSeverity, setIncidentSeverity] = useState("low")
     const [incidentStartDate, setIncidentStartDate] = useState(new Date())
     const [assignerUserId, setAssignerUserId] = useState(0)
     const { post, httpError, isLoading } = usePost()
@@ -21,10 +21,10 @@ export default function CreateTask() {
         let body = {
             incidentName,
             incidentDescription,
-            teamId,
+            organizationId: 1,
             incidentSeverity,
             incidentStartDate,
-            assignerUserId
+            assignerUserId: "LYt1ohqu4Ef4TNypIykYNkDUeDR2"
         }
 
         const { data } = post("secure/incidents/createIncident", body)
@@ -38,10 +38,10 @@ export default function CreateTask() {
     ]
 
     const severities = [
-        { value: "Low", label: "Low" },
-        { value: "Medium", label: "Medium" },
-        { value: "High", label: "High" },
-        { value: "Critical", label: "Critical" }
+        { value: "low", label: "Low" },
+        { value: "medium", label: "Medium" },
+        { value: "high", label: "High" },
+        { value: "critical", label: "Critical" }
     ]
 
     const users = [

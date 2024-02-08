@@ -49,7 +49,6 @@ export default function CreateDevice() {
     };
 
     const handleSaveDevice = () => {
-        console.log("saved")
     }
 
     return (

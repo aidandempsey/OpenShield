@@ -23,11 +23,14 @@
 }
 
 .navbar .logo img,
-.navbar .search img {
+.navbar .search img,
+.navbar .settings img {
     filter: invert(100%) sepia(75%) saturate(716%) hue-rotate(209deg) brightness(122%) contrast(91%);
     width: 36px;
-    margin-top: -8px;
-    top: 105px
+}
+
+.navbar .settings img {
+    margin-right: 10px;
 }
 
 .navbar a {

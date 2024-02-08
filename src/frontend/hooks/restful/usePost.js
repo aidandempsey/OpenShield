@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { useAuthToken } from "../firebase/useAuthToken"
 
 
@@ -6,9 +6,11 @@ export const usePost = () => {
     const [data, setData] = useState()
     const [httpError, setHttpError] = useState(null)
     const [isLoading, setIsLoading] = useState(false)
-    const { authToken } = useAuthToken()
+    const { authToken: defaultAuthToken } = useAuthToken()
 
-    const post = async (endpoint, body) => {
+    const post = async (endpoint, body, authorization = null) => {
+        const authToken = authorization || defaultAuthToken;
+
         if (authToken) {
             setIsLoading(true)
             try {
@@ -18,7 +20,7 @@ export const usePost = () => {
 
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': `bearer ${authToken}`,
+                        'Authorization': `Bearer ${authToken}`,
                     },
                     body: JSON.stringify(body)
                 });

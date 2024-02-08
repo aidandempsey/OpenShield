@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { useAuthToken } from "../firebase/useAuthToken"
 
 
-export const useGet = (endpoint, body) => {
+export const useGet = endpoint => {
     const [data, setData] = useState()
     const [httpError, setHttpError] = useState(null)
     const [isLoading, setIsLoading] = useState(true)
@@ -17,16 +17,21 @@ export const useGet = (endpoint, body) => {
 
                     const response = await fetch(apiUrl, {
                         method: "GET",
-
                         headers: {
                             'Content-Type': 'application/json',
-                            'Authorization': `bearer ${authToken}`,
+                            'Authorization': `Bearer ${authToken}`,
                         },
-                        body: JSON.stringify(body)
+
+                        body: null
                     });
 
-                    const responseJson = await response.json();
-                    setData(responseJson);
+                    const responseContent =
+                        ["application/hal+json", "application/json"]
+                            .includes(response.headers.get("content-type"))
+                            ? await response.json()
+                            : await response.text()
+
+                    setData(responseContent);
                 } catch (error) {
                     setHttpError(error.message);
                 }
@@ -36,7 +41,7 @@ export const useGet = (endpoint, body) => {
 
         get()
 
-    }, [endpoint, body, authToken])
+    }, [endpoint, authToken])
 
     return { data, httpError, isLoading }
 }

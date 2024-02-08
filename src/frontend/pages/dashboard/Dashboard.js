@@ -1,17 +1,14 @@
 import { useGet } from "../../hooks/restful/useGet";
-
-import IncidentList from "../incidents/incidents/IncidentList";
-import { useState } from "react";
-import IncidentFilter from "./IncidentFilter";
+import OrganizationsList from "../organization/OrganizationsList";
 
 export default function Dashboard() {
-    const [search, setSearch] = useState("incidents")
-    const { data, httpError, isLoading } = useGet(search)
+
+    const { data: organizations, httpError: organizationsHttpError, isLoading: isOrganizationsLoading } = useGet("organizations")
 
     return (
         <div>
-            <IncidentFilter setSearch={setSearch} />
-            <IncidentList incidents={data?._embedded?.incidents ?? []} httpError={httpError} isLoading={isLoading} />
+            <h3>Organizations</h3>
+            <OrganizationsList organizations={organizations?._embedded?.organizations ?? []} httpError={organizationsHttpError} isLoading={isOrganizationsLoading} />
         </div>
     );
 }
