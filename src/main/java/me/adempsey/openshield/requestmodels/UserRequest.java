@@ -11,7 +11,7 @@ public class UserRequest {
     private String displayName;
     private String emailAddress;
     private LocalDate accountCreatedDate;
-    private Optional<Long> teamId;
+    private Optional<Long> organizationId;
     private Optional<UserRole> userRole;
     private Optional<String> userManager;
 }

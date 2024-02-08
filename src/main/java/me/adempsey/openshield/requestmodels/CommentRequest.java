@@ -7,5 +7,4 @@ import java.time.LocalDate;
 public class CommentRequest {
     private Long incidentId;
     private String commentContent;
-    private String commentAuthor;
 }

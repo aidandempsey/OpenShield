@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name="comment")
@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @Data
 public class Comment {
 
-    public Comment(Long incidentId, String commentContent, String commentAuthor, LocalDate commentDate){
+    public Comment(Long incidentId, String commentContent, String commentAuthor, LocalDateTime commentDate){
         this.incidentId = incidentId;
         this.commentContent = commentContent;
         this.commentAuthor = commentAuthor;
@@ -34,5 +34,5 @@ public class Comment {
     private String commentAuthor;
 
     @Column(name="comment_date")
-    private LocalDate commentDate;
+    private LocalDateTime commentDate;
 }

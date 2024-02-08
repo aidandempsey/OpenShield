@@ -12,7 +12,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface IncidentRepository extends JpaRepository<Incident, Long> {
 
     // foreign keys
-    Page<Incident> findByTeamId(@RequestParam("team_id")Long teamId, Pageable pageable);
+    Page<Incident> findByOrganizationId(@RequestParam("organization_id")Long organizationId, Pageable pageable);
+    @Enumerated(EnumType.STRING)
+    Page<Incident> findByOrganizationIdAndIncidentSeverity(@RequestParam("organization_id")Long organizationId, @RequestParam("incident_severity")IncidentSeverity incidentSeverity, Pageable pageable);
+
     Page<Incident> findByAssignerUserId(@RequestParam("assigner_user_id")Long assignerUserId, Pageable pageable);
 
     // attributes

@@ -17,4 +17,9 @@ public class OrganizationController {
     public Organization createOrganization(@RequestHeader(value = "Authorization")String token, @RequestBody OrganizationRequest organizationRequest) throws Exception {
         return organizationService.createOrganization(GetUidFromJWT.validateToken(token),organizationRequest);
     }
+
+    @GetMapping("/getOrganizationNameFromOrganizationId")
+    public String getOrganizationNameFromOrganizationId(@RequestParam Long organizationId){
+        return organizationService.getOrganizationNameFromOrganizationId(organizationId);
+    }
 }

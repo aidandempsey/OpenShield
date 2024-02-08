@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+
 @Service
 @Transactional
 public class OrganizationService {
@@ -19,6 +22,7 @@ public class OrganizationService {
         Organization organization = new Organization();
         organization.setOrganizationLeader(organizationLeader);
         organization.setOrganizationName(organizationRequest.getOrganizationName());
+        organization.setOrganizationCreationDate(LocalDateTime.now(ZoneId.of("UTC")));
 
         if(organizationRequest.getOrganizationDescription() != null && organizationRequest.getOrganizationDescription().isPresent()){
             organization.setOrganizationDescription(organizationRequest.getOrganizationDescription().map(
@@ -29,5 +33,9 @@ public class OrganizationService {
         organizationRepository.save(organization);
         return organization;
 
+    }
+
+    public String getOrganizationNameFromOrganizationId(Long organizationId){
+        return organizationRepository.findOrganizationByOrganizationId(organizationId).getOrganizationName();
     }
 }

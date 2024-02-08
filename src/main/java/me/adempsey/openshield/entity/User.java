@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
 import me.adempsey.openshield.entity.enums.UserRole;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name="user")
@@ -26,10 +26,7 @@ public class User {
     private String emailAddress;
 
     @Column(name="account_created_date")
-    private LocalDate accountCreatedDate;
-
-    @Column(name="team_id")
-    private Long teamId;
+    private LocalDateTime accountCreatedDate;
 
     @Enumerated(EnumType.STRING)
     @Column(name="user_role")
@@ -37,4 +34,7 @@ public class User {
 
     @Column(name="user_manager")
     private String userManager;
+
+    @Column(name="organization_id")
+    private Long organizationId;
 }

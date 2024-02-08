@@ -7,7 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 @Service
 @Transactional
@@ -30,10 +31,10 @@ public class UserService {
         user.setUserId(userId);
         user.setDisplayName(userRequest.getDisplayName());
         user.setEmailAddress(userRequest.getEmailAddress());
-        user.setAccountCreatedDate(LocalDate.now());
+        user.setAccountCreatedDate(LocalDateTime.now(ZoneId.of("UTC")));
 
-        if(userRequest.getTeamId() != null && userRequest.getTeamId().isPresent()){
-            user.setTeamId(userRequest.getTeamId().orElse(null));
+        if(userRequest.getOrganizationId() != null && userRequest.getOrganizationId().isPresent()){
+            user.setOrganizationId(userRequest.getOrganizationId().orElse(null));
         }
 
         if(userRequest.getUserRole() != null && userRequest.getUserRole().isPresent()){

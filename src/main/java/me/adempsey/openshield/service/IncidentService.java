@@ -4,15 +4,14 @@ import me.adempsey.openshield.dao.IncidentRepository;
 import me.adempsey.openshield.dao.TaskRepository;
 import me.adempsey.openshield.entity.Incident;
 import me.adempsey.openshield.entity.Task;
-import me.adempsey.openshield.entity.enums.IncidentSeverity;
 import me.adempsey.openshield.entity.enums.TaskStatus;
 import me.adempsey.openshield.requestmodels.IncidentRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 
 @Service
@@ -38,12 +37,12 @@ public class IncidentService {
             ).orElse(null));
         }
 
-        if(incidentRequest.getTeamId() != null && incidentRequest.getTeamId().isPresent()){
-            incident.setTeamId(incidentRequest.getTeamId().orElse(null));
+        if(incidentRequest.getOrganizationId() != null && incidentRequest.getOrganizationId().isPresent()){
+            incident.setOrganizationId(incidentRequest.getOrganizationId().orElse(null));
         }
 
         incident.setIncidentSeverity(incidentRequest.getIncidentSeverity());
-        incident.setIncidentStartDate(LocalDate.now());
+        incident.setIncidentStartDate(LocalDateTime.now(ZoneId.of("UTC")));
 
         if(incidentRequest.getClosureDate() != null && incidentRequest.getClosureDate().isPresent()){
             incident.setClosureDate(incidentRequest.getClosureDate().orElse(null));
@@ -57,7 +56,7 @@ public class IncidentService {
         return incident;
     }
 
-    public float getIncidentProgress(Long incidentId) {
+    public int getIncidentProgress(Long incidentId) {
         List<Task> tasks = taskRepository.findTasksByIncidentId(incidentId);
 
         long completedTasks = tasks.stream()
@@ -66,7 +65,7 @@ public class IncidentService {
 
         double totalTasks = tasks.size();
 
-        return (float) ((completedTasks / totalTasks) * 100);
+        return (int) ((completedTasks / totalTasks) * 100);
     }
 
 }
