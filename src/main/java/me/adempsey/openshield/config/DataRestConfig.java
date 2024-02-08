@@ -23,7 +23,6 @@ public class DataRestConfig implements RepositoryRestConfigurer {
         config.exposeIdsFor(Comment.class);
         config.exposeIdsFor(Organization.class);
         config.exposeIdsFor(Task.class);
-        config.exposeIdsFor(Team.class);
         config.exposeIdsFor(User.class);
         config.exposeIdsFor(Device.class);
 
@@ -31,7 +30,6 @@ public class DataRestConfig implements RepositoryRestConfigurer {
         disableHttpMethods(Comment.class, config, unsupportedActions);
         disableHttpMethods(Organization.class, config, unsupportedActions);
         disableHttpMethods(Task.class, config, unsupportedActions);
-        disableHttpMethods(Team.class, config, unsupportedActions);
         disableHttpMethods(User.class, config, unsupportedActions);
         disableHttpMethods(Device.class, config, unsupportedActions);
 
