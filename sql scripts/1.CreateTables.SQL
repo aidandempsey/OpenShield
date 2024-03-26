@@ -37,10 +37,8 @@ CREATE TABLE `incident` (
   `incident_severity` ENUM('low', 'medium', 'high', 'critical') DEFAULT NULL,
   `incident_start_date` DATETIME  DEFAULT NULL,
   `incident_closure_date` DATETIME  DEFAULT NULL,
-  `assigner_user_id` VARCHAR(255) DEFAULT NULL,
   `created_by` VARCHAR(255) DEFAULT NULL,
   FOREIGN KEY (organization_id) REFERENCES organization(organization_id),
-  FOREIGN KEY (assigner_user_id) REFERENCES user(user_id),
   FOREIGN KEY (created_by) REFERENCES user(user_id)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -53,8 +51,8 @@ DROP TABLE IF EXISTS `task`;
 
 CREATE TABLE `task` (
   `task_id` BIGINT(20) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  `task_name` VARCHAR(45) DEFAULT NULL,
-  `task_description` varchar(45) DEFAULT NULL,
+  `task_name` VARCHAR(60) DEFAULT NULL,
+  `task_description` varchar(350) DEFAULT NULL,
   `incident_id` BIGINT(20) NOT NULL,
   `task_status` ENUM('open', 'inProgress', 'closed') NOT NULL,
   `assigner_user_id` VARCHAR(255) DEFAULT NULL,
@@ -93,28 +91,6 @@ CREATE TABLE `user` (
   `email_address` VARCHAR(45) DEFAULT NULL,
   `account_created_date` DATETIME  DEFAULT NULL,
   `user_role` ENUM("securityAnalyst","securityEngineer","socManager","threatIntelligenceAnalyst","securityArchitect","automationEngineer","complianceAnalyst","userAndAccessManagementSpecialist","trainingAndAwarenessSpecialist","dataPrivacyOfficer","vendorManagementSpecialist","qualityAssuranceTester","projectManager","communicationsSpecialist") DEFAULT NULL,
-  `user_manager` VARCHAR(255) DEFAULT NULL,
-  `organization_id` BIGINT(20) DEFAULT NULL,
-  FOREIGN KEY (user_manager) REFERENCES user(user_id),
-  FOREIGN KEY (organization_id) REFERENCES organization(organization_id)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
-DROP TABLE IF EXISTS `device`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `device` (
-  `device_id` BIGINT(20) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  `device_name` VARCHAR(45) DEFAULT NULL,
-  `operating_system` VARCHAR(45) DEFAULT NULL,
-  `cpu_cores` BIGINT(20) NOT NULL,
-  `cpu_threads` BIGINT(20) NOT NULL,
-  `memory_total` BIGINT(20) NOT NULL,
-  `memory_used` BIGINT(20) NOT NULL,
-  `memory_percent` DECIMAL(4, 1) NOT NULL,
-  `disk_total` BIGINT(20) NOT NULL,
-  `disk_used` BIGINT(20) NOT NULL,
-  `disk_percent` DECIMAL(4, 1) NOT NULL,
   `organization_id` BIGINT(20) DEFAULT NULL,
   FOREIGN KEY (organization_id) REFERENCES organization(organization_id)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;

@@ -1,62 +1,49 @@
 -- Fake Inserts for Organization Table
 INSERT INTO `organization` (`organization_name`, `organization_description`, `organization_leader`, `organization_creation_date`)
 VALUES 
-  ('Tech Solutions', 'IT Services Company', 'LYt1ohqu4Ef4TNypIykYNkDUeDR2', '2023-01-01'),
-  ('Security Experts', 'Cybersecurity Firm', 'LYt1ohqu4Ef4TNypIykYNkDUeDR2', '2023-01-01'),
-  ('Data Innovators', 'Big Data Solutions', 'LYt1ohqu4Ef4TNypIykYNkDUeDR2', '2023-01-01');
+  ('Tech Solutions', 'IT Services Company', 'nYh9pVokzuYlFboCvfWOpSj2or53', '2023-01-01'),
+  ('Security Experts', 'Cybersecurity Firm', '2idqwEcnsoOC9wuTaE6s9wYNfHX2', '2023-01-01'),
+  ('Data Innovators', 'Big Data Solutions', 'E7aPLqp3EGOR3t9Pg0QyKlj3pDJ3', '2023-01-01');
 
 -- Fake Inserts for Incident Table
-INSERT INTO `incident` (`incident_name`, `incident_description`, `organization_id`, `incident_severity`, `incident_start_date`, `incident_closure_date`, `assigner_user_id`)
+INSERT INTO `incident` (`incident_name`, `incident_description`, `organization_id`, `incident_severity`, `incident_start_date`, `incident_closure_date`, `created_by`)
 VALUES 
-  ('Security Breach', 'Unauthorized Access', 1, 'critical', '2023-01-01','2023-01-05', 'LYt1ohqu4Ef4TNypIykYNkDUeDR2'),
-  ('Data Leak', 'Confidential Data Exposure', 2, 'high', '2023-02-01', '2023-02-10', 'LYt1ohqu4Ef4TNypIykYNkDUeDR2'),
-  ('Software Bug', 'Critical Bug in System', 3, 'medium', '2023-03-01', '2023-03-07', 'LYt1ohqu4Ef4TNypIykYNkDUeDR2');
+  ('Security Breach', 'Unauthorized Access', 1, 'critical', '2023-01-01','2023-01-05', 'nYh9pVokzuYlFboCvfWOpSj2or53'),
+  ('Data Leak', 'Confidential Data Exposure', 2, 'high', '2023-02-01', '2023-02-10', '2idqwEcnsoOC9wuTaE6s9wYNfHX2'),
+  ('Software Bug', 'Critical Bug in System', 3, 'medium', '2023-03-01', '2023-03-07', 'E7aPLqp3EGOR3t9Pg0QyKlj3pDJ3');
   
 -- Fake Inserts for Task Table
 INSERT INTO `task` (`task_name`, `task_description`, `incident_id`, `task_status`, `assigner_user_id`, `assigned_user_id`, `assign_date`)
 VALUES 
-  ('Fix Authentication', 'Resolve login issues', 1, 'open', 'LYt1ohqu4Ef4TNypIykYNkDUeDR2', 'LYt1ohqu4Ef4TNypIykYNkDUeDR2', '2023-01-03'),
-  ('Data Cleanup', 'Remove exposed data', 2, 'inProgress', 'LYt1ohqu4Ef4TNypIykYNkDUeDR2', 'LYt1ohqu4Ef4TNypIykYNkDUeDR2', '2023-02-05'),
-  ('Code Review', 'Review and fix code', 3, 'closed', 'LYt1ohqu4Ef4TNypIykYNkDUeDR2', 'LYt1ohqu4Ef4TNypIykYNkDUeDR2', '2023-03-03'),
-  ('Demo task', 'Demo task description', 2, 'closed', 'LYt1ohqu4Ef4TNypIykYNkDUeDR2', 'LYt1ohqu4Ef4TNypIykYNkDUeDR2', '2024-01-08');
+  ('Fix Authentication', 'Resolve login issues', 1, 'open', 'nYh9pVokzuYlFboCvfWOpSj2or53', 'PAhSDU6EcpatliKeqLNlTmfl5Hp1', '2023-01-03'),
+  ('Data Cleanup', 'Remove exposed data', 2, 'closed', '2idqwEcnsoOC9wuTaE6s9wYNfHX2', 'jGGNow03o7OAJ1gCPSbpWbtjDw93', '2023-02-05'),
+  ('Code Review', 'Review and fix code', 3, 'closed', 'RiNBaSBgvwWmSKaxYdmrZBv7vN13', 'pzYRBTKQp4Y4hJYUqr73AiaA5kF3', '2023-03-03'),
+  ('Demo task', 'Demo task description', 2, 'open', 'LYt1ohqu4Ef4TNypIykYNkDUeDR2', 'pWbQIRa8qqSswH4h9PYao8DOyAL2', '2024-01-08');
 
 
 -- Fake Inserts for Comments Table
 INSERT INTO `comment` (`incident_id`, `comment_content`, `comment_author`, `comment_date`)
 VALUES 
-  (1, 'Critical issue. Immediate action required.', 'LYt1ohqu4Ef4TNypIykYNkDUeDR2', '2023-01-04'),
-  (2, 'Investigating the source of the leak.', 'LYt1ohqu4Ef4TNypIykYNkDUeDR2', '2023-02-07'),
-  (3, 'Code fix implemented successfully.', 'LYt1ohqu4Ef4TNypIykYNkDUeDR2', '2023-03-04');
+  (1, 'Critical issue. Immediate action required.', 'Xn8m2mGWJcVKOAQu2K73IHuCnfT2', '2023-01-04'),
+  (2, 'Investigating the source of the leak.', 'WkfErdSQI9OgB1k9VvdG6Yt2i3f2', '2023-02-07'),
+  (3, 'Code fix implemented successfully.', 'E7aPLqp3EGOR3t9Pg0QyKlj3pDJ3', '2023-03-04');
 
 -- Fake Inserts for User Table
-INSERT INTO `user` (`user_id`, `display_name`, `email_address`, `account_created_date`, `organization_id`, `user_role`, `user_manager`)
+INSERT INTO `user` (`user_id`, `display_name`, `email_address`, `account_created_date`, `organization_id`, `user_role`)
 VALUES 
-  ('LYt1ohqu4Ef4TNypIykYNkDUeDR2', 'Aidan Dempsey', 'john.developer@example.com', '2023-01-01', 1, 'securityAnalyst', 4);
-  -- ('2', 'Alice Security', 'alice.security@example.com', '2023-01-02', 2, 'securityEngineer', 5),
-  -- ('3', 'Bob Data Scientist', 'bob.data@example.com', '2023-01-03', 3, 'dataPrivacyOfficer', 6),
-  -- ('4', 'Charlie Manager', 'charlie.manager@example.com', '2023-01-04', 1, 'socManager', 1),
-  -- ('5', 'Eve Security Lead', 'eve.security@example.com', '2023-01-05', 2, 'securityArchitect', 5),
-  -- ('6', 'Grace Data Analyst', 'grace.data@example.com', '2023-01-06', 3, 'threatIntelligenceAnalyst', 6),
-  -- ('7', 'Dave Task Assigner', 'dave.task@example.com', '2023-01-07', 1, 'projectManager', 4),
-  -- ('8', 'Frank Comment Author', 'frank.comment@example.com', '2023-01-08', 2, 'communicationsSpecialist', 5),
-  -- ('9', 'Helen Team Leader', 'helen.team@example.com', '2023-01-09', 3, 'automationEngineer', 6),
-  -- ('10', 'Isaac Quality Tester', 'isaac.quality@example.com', '2023-01-10', 1, 'qualityAssuranceTester', 4),
-  -- ('11', 'Jill Access Specialist', 'jill.access@example.com', '2023-01-11', 2, 'userAndAccessManagementSpecialist', 5),
-  -- ('12', 'Kevin Training Specialist', 'kevin.training@example.com', '2023-01-12', 3, 'trainingAndAwarenessSpecialist', 6),
-  -- ('13', 'Mia Compliance Analyst', 'mia.compliance@example.com', '2023-01-13', 1, 'complianceAnalyst', 4),
-  -- ('14', 'Oscar Vendor Manager', 'oscar.vendor@example.com', '2023-01-14', 2, 'vendorManagementSpecialist', 5),
-  -- ('15', 'Pam Data Officer', 'pam.data@example.com', '2023-01-15', 3, 'dataPrivacyOfficer', 6),
-  -- ('16', 'Quinn Project Manager', 'quinn.project@example.com', '2023-01-16', 1, 'projectManager', 4);
-
--- Fake Inserts for Device Table
-INSERT INTO `device` 
-  (`device_name`, `operating_system`, `cpu_cores`, `cpu_threads`, 
-   `memory_total`, `memory_used`, `memory_percent`, 
-   `disk_total`, `disk_used`, `disk_percent`, `organization_id`) 
-VALUES 
-  ('Laptop1', 'Windows 10', 4, 8, 8192, 4096, 50.0, 51200, 20480, 40.0, 1),
-  ('Server2', 'Linux', 8, 16, 16384, 8192, 50.0, 102400, 51200, 50.0, 1),
-  ('Desktop3', 'MacOS', 6, 12, 12288, 6144, 50.0, 76800, 30720, 60.0, 2),
-  ('Mobile4', 'Android', 2, 4, 2048, 1024, 50.0, 20480, 10240, 50.0, 2),
-  ('Server5', 'Ubuntu', 16, 32, 32768, 16384, 50.0, 204800, 102400, 70.0, 3);
-
+  ('LYt1ohqu4Ef4TNypIykYNkDUeDR2', 'Alice Security', 'aidandempsey13@gmail.com', '2023-01-02 00:00:00', 2, 'securityEngineer'),
+  ('pWbQIRa8qqSswH4h9PYao8DOyAL2', 'Aidan', 'aidandempsey2019@gmail.com', '2024-02-08 13:49:37', 2, 'securityAnalyst'),
+  ('RiNBaSBgvwWmSKaxYdmrZBv7vN13', 'Bob Data Scientist', 'bob.data@example.com', '2024-03-26 01:04:19', 3, 'dataPrivacyOfficer'),
+  ('PAhSDU6EcpatliKeqLNlTmfl5Hp1', 'Charlie Manager', 'charlie.manager@example.com', '2024-03-26 01:07:47', 1, 'socManager'),
+ ('WkfErdSQI9OgB1k9VvdG6Yt2i3f2', 'Eve Security Lead', 'eve.security@example.com', '2024-03-26 01:08:50', 2, 'securityArchitect'),
+   ('E7aPLqp3EGOR3t9Pg0QyKlj3pDJ3', 'Grace Data Analyst', 'grace.data@example.com', '2024-03-26 01:09:34', 3, 'threatIntelligenceAnalyst'),
+   ('Xn8m2mGWJcVKOAQu2K73IHuCnfT2', 'Dave Task Assigner', 'dave.task@example.com', '2024-03-26 01:14:09', 1, 'projectManager'),
+  ('2idqwEcnsoOC9wuTaE6s9wYNfHX2', 'Frank Comment Author', 'frank.comment@example.com', '2024-03-26 01:15:34', 2, 'communicationsSpecialist'),
+   ('pzYRBTKQp4Y4hJYUqr73AiaA5kF3', 'Helen Team Leader', 'helen.team@example.com', '2024-03-26 01:16:22', 3, 'automationEngineer'),
+   ('Xd2p3q7cOOPkrAltlkSVRSVi9tP2', 'Isaac Quality Tester', 'isaac.quality@example.com', '2024-03-26 01:16:59', 1, 'qualityAssuranceTester'),
+   ('jGGNow03o7OAJ1gCPSbpWbtjDw93', 'Jill Access Specialist', 'jill.access@example.com', '2024-03-26 01:17:56', 2, 'userAndAccessManagementSpecialist'),
+   ('n6qxLqVJzuaW5n2pkLsqJjZDrW63', 'Kevin Training Specialist', 'kevin.training@example.com', '2024-03-26 01:18:46', 3, 'trainingAndAwarenessSpecialist'),
+   ('TRA1bQQ0CuQXONGTo5w61Qmu52A3', 'Mia Compliance Analyst', 'mia.compliance@example.com', '2024-03-26 01:19:41', 1, 'complianceAnalyst'),
+   ('qT2b8Fe0jAWeZ8LaF9Bje03wHoX2', 'Oscar Vendor Manager', 'oscar.vendor@example.com', '2024-03-26 01:20:28', 2, 'vendorManagementSpecialist'),
+   ('H7i8pUS00sbC5DDmAhAycp2p4RR2', 'Pam Data Officer', 'pam.data@example.com', '2024-03-26 01:21:03', 3, 'dataPrivacyOfficer'),
+   ('nYh9pVokzuYlFboCvfWOpSj2or53', 'Quinn Project Manager', 'quinn.project@example.com', '2024-03-26 01:22:01', 1, 'projectManager');
