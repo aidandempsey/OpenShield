@@ -1,11 +1,13 @@
 package me.adempsey.openshield.service;
 
 import me.adempsey.openshield.dao.OrganizationRepository;
+import me.adempsey.openshield.dao.UserRepository;
 import me.adempsey.openshield.entity.Organization;
 import me.adempsey.openshield.requestmodels.OrganizationRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -14,9 +16,13 @@ import java.time.ZoneId;
 @Transactional
 public class OrganizationService {
     private final OrganizationRepository organizationRepository;
+    private final UserRepository userRepository;
 
     @Autowired
-    public OrganizationService(OrganizationRepository organizationRepos){this.organizationRepository = organizationRepos; }
+    public OrganizationService(OrganizationRepository organizationRepository, UserRepository userRepository){
+        this.organizationRepository = organizationRepository;
+        this.userRepository = userRepository;
+    }
 
     public Organization createOrganization(String organizationLeader, OrganizationRequest organizationRequest) throws Exception{
         Organization organization = new Organization();
@@ -37,5 +43,9 @@ public class OrganizationService {
 
     public String getOrganizationNameFromOrganizationId(Long organizationId){
         return organizationRepository.findOrganizationByOrganizationId(organizationId).getOrganizationName();
+    }
+
+    public Long getOrganizationIdFromUserId(@RequestParam String userId){
+        return userRepository.findUserByUserId(userId).getOrganizationId();
     }
 }

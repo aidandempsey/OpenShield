@@ -13,5 +13,4 @@ public class IncidentRequest {
     private Optional<Long> organizationId;
     private IncidentSeverity incidentSeverity;
     private Optional<LocalDateTime> closureDate;
-    private Optional<String> assignerUserId;
 }

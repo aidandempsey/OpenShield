@@ -41,10 +41,6 @@ public class UserService {
             user.setUserRole(userRequest.getUserRole().orElse(null));
         }
 
-        if(userRequest.getUserManager() != null && userRequest.getUserManager().isPresent()){
-            user.setUserManager(userRequest.getUserManager().orElse(null));
-        }
-
         userRepository.save(user);
         return user;
     }

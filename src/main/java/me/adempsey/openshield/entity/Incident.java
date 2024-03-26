@@ -13,14 +13,13 @@ import java.time.LocalDateTime;
 @Data
 public class Incident {
 
-    public Incident(String incidentName, String incidentDescription, Long organizationId, IncidentSeverity incidentSeverity, LocalDateTime  incidentStartDate, LocalDateTime closureDate, String assignerUserId, String createdBy){
+    public Incident(String incidentName, String incidentDescription, Long organizationId, IncidentSeverity incidentSeverity, LocalDateTime  incidentStartDate, LocalDateTime closureDate, String createdBy){
         this.incidentName = incidentName;
         this.incidentDescription = incidentDescription;
         this.organizationId = organizationId;
         this.incidentSeverity = incidentSeverity;
         this.incidentStartDate = incidentStartDate;
         this.closureDate = closureDate;
-        this.assignerUserId = assignerUserId;
         this.createdBy = createdBy;
     }
 
@@ -47,9 +46,6 @@ public class Incident {
 
     @Column(name="incident_closure_date")
     private LocalDateTime closureDate;
-
-    @Column(name="assigner_user_id")
-    private String assignerUserId;
 
     @Column(name="created_by")
     private String createdBy;

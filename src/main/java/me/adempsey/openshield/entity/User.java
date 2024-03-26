@@ -32,9 +32,6 @@ public class User {
     @Column(name="user_role")
     private UserRole userRole;
 
-    @Column(name="user_manager")
-    private String userManager;
-
     @Column(name="organization_id")
     private Long organizationId;
 }

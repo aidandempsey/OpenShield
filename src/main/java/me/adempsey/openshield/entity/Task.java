@@ -5,13 +5,14 @@ import lombok.NoArgsConstructor;
 import me.adempsey.openshield.entity.enums.TaskStatus;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name="task")
 @Data
 @NoArgsConstructor
 public class Task {
-    public Task(String taskName, String taskDescription, Long incidentId, TaskStatus taskStatus, String assignerUserId, String assignedUserId, String createdBy, LocalDate assignDate){
+    public Task(String taskName, String taskDescription, Long incidentId, TaskStatus taskStatus, String assignerUserId, String assignedUserId, String createdBy, LocalDateTime assignDate){
         this.taskName = taskName;
         this.taskDescription = taskDescription;
         this.incidentId = incidentId;
@@ -50,5 +51,5 @@ public class Task {
     private String createdBy;
 
     @Column(name="assign_date")
-    private LocalDate assignDate;
+    private LocalDateTime assignDate;
 }

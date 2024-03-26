@@ -24,14 +24,12 @@ public class DataRestConfig implements RepositoryRestConfigurer {
         config.exposeIdsFor(Organization.class);
         config.exposeIdsFor(Task.class);
         config.exposeIdsFor(User.class);
-        config.exposeIdsFor(Device.class);
 
         disableHttpMethods(Incident.class, config, unsupportedActions);
         disableHttpMethods(Comment.class, config, unsupportedActions);
         disableHttpMethods(Organization.class, config, unsupportedActions);
         disableHttpMethods(Task.class, config, unsupportedActions);
         disableHttpMethods(User.class, config, unsupportedActions);
-        disableHttpMethods(Device.class, config, unsupportedActions);
 
         /* Configure CORS Mapping*/
         String allowedOrigins = "http://localhost:3000";

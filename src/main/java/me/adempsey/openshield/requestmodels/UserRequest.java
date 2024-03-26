@@ -13,5 +13,4 @@ public class UserRequest {
     private LocalDate accountCreatedDate;
     private Optional<Long> organizationId;
     private Optional<UserRole> userRole;
-    private Optional<String> userManager;
 }

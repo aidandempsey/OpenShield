@@ -22,4 +22,9 @@ public class OrganizationController {
     public String getOrganizationNameFromOrganizationId(@RequestParam Long organizationId){
         return organizationService.getOrganizationNameFromOrganizationId(organizationId);
     }
+
+    @GetMapping("/getOrganizationIdFromUserId")
+    public Long getOrganizationIdFromUserId(@RequestParam String userId){
+        return organizationService.getOrganizationIdFromUserId(userId);
+    }
 }

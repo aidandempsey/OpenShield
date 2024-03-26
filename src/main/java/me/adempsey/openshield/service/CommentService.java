@@ -24,7 +24,6 @@ public class CommentService {
         comment.setIncidentId(commentRequest.getIncidentId());
         comment.setCommentContent(commentRequest.getCommentContent());
         comment.setCommentDate(LocalDateTime.now(ZoneId.of("UTC")));
-        LocalDateTime currentDateTime = LocalDateTime.now();
 
         commentRepository.save(comment);
         return comment;

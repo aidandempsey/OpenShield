@@ -10,7 +10,5 @@ public class TaskRequest {
     private String taskName;
     private Optional<String> taskDescription;
     private Long incidentId;
-    private Optional<String> assignerUserId;
     private Optional<String> assignedUserId;
-    private Optional<LocalDate> assignDate;
 }

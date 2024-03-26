@@ -8,15 +8,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Optional;
 
 @Service
 @Transactional
 public class TaskService {
     private final TaskRepository taskRepository;
-
     @Autowired
-    public TaskService(TaskRepository taskRepository){this.taskRepository = taskRepository;}
+    public TaskService(TaskRepository taskRepository){
+        this.taskRepository = taskRepository;}
 
     public Task createTask(String createdBy, TaskRequest taskRequest){
         Task task = new Task();
@@ -30,32 +32,52 @@ public class TaskService {
 
         task.setIncidentId(taskRequest.getIncidentId());
         task.setTaskStatus(TaskStatus.open);
-
-        if(taskRequest.getAssignerUserId() != null && taskRequest.getAssignerUserId().isPresent()){
-            task.setAssignerUserId(taskRequest.getAssignerUserId().orElse(null));
-        }
+        task.setAssignerUserId(createdBy);
 
         if(taskRequest.getAssignedUserId() != null && taskRequest.getAssignedUserId().isPresent()){
             task.setAssignedUserId(taskRequest.getAssignedUserId().orElse(null));
         }
 
         task.setCreatedBy(createdBy);
-
-        if(taskRequest.getAssignDate() != null && taskRequest.getAssignDate().isPresent()){
-            task.setAssignDate(taskRequest.getAssignDate().orElse(null));
-        }
+        task.setAssignDate(LocalDateTime.now(ZoneId.of("UTC")));
 
         taskRepository.save(task);
         return task;
     }
 
     public boolean isTaskAssigned(Long taskId){
-        Task task = taskRepository.findTaskByTaskId(taskId);
+        Task task = taskRepository.findByTaskId(taskId);
         return task != null && task.getAssignedUserId() != null;
     }
 
     public boolean isTaskAssignedToUser(String assignedUserId, Long taskId) {
-        Task task = taskRepository.findTaskByTaskId(taskId);
+        Task task = taskRepository.findByTaskId(taskId);
         return task != null && assignedUserId.equals(task.getAssignedUserId());
+    }
+
+    public boolean isTaskOpen(Long taskId){
+        Task task = taskRepository.findByTaskId(taskId);
+        return task != null && task.getTaskStatus().equals(TaskStatus.open);
+    }
+
+    public void changeAssignedUserId(Long taskId, String assignedUserId, String assignerUserId) throws Exception {
+        Optional<Task> task = Optional.ofNullable(taskRepository.findByTaskId(taskId));
+        if(task.isEmpty()){
+            throw new Exception("Task not found");
+        }
+
+        task.get().setAssignedUserId(assignedUserId);
+        task.get().setAssignerUserId(assignerUserId);
+        taskRepository.save(task.get());
+    }
+
+    public void changeStatus(Long taskId, TaskStatus taskStatus) throws Exception {
+        Optional<Task> task = Optional.ofNullable(taskRepository.findByTaskId(taskId));
+        if(task.isEmpty()){
+            throw new Exception("Task not found");
+        }
+
+        task.get().setTaskStatus(taskStatus);
+        taskRepository.save(task.get());
     }
 }

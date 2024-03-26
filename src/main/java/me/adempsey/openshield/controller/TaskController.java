@@ -1,6 +1,8 @@
 package me.adempsey.openshield.controller;
 
+import com.google.firebase.auth.FirebaseAuthException;
 import me.adempsey.openshield.entity.Task;
+import me.adempsey.openshield.entity.enums.TaskStatus;
 import me.adempsey.openshield.requestmodels.TaskRequest;
 import me.adempsey.openshield.service.TaskService;
 import me.adempsey.openshield.utils.GetUidFromJWT;
@@ -28,5 +30,20 @@ public class TaskController {
     @GetMapping("/isTaskAssignedToUser")
     public boolean isTaskAssignedToUser(@RequestParam String assignedUserId, @RequestParam Long taskId){
         return taskService.isTaskAssignedToUser(assignedUserId,taskId);
+    }
+
+    @GetMapping("/isTaskOpen")
+    public boolean isTaskOpen(@RequestParam Long taskId){
+        return taskService.isTaskOpen(taskId);
+    }
+
+    @PutMapping("/updateAssignedUser")
+    public void updateAssignedUser(@RequestHeader(value = "Authorization")String token, @RequestParam Long taskId, @RequestParam String assignedUserId) throws Exception {
+        taskService.changeAssignedUserId(taskId, assignedUserId, GetUidFromJWT.validateToken(token));
+    }
+
+    @PutMapping("/changeStatus")
+    public void changeStatus(@RequestParam Long taskId, @RequestParam TaskStatus taskStatus) throws Exception {
+        taskService.changeStatus(taskId, taskStatus);
     }
 }
