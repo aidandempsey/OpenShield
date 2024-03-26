@@ -103,11 +103,25 @@ ul {
 }
 
 /* button */
-.btn {
+.btn,
+.disabled-btn {
   padding: 10px;
   color: var(--dark-background-color);
   background-color: var(--primary-color);
   border: 1px solid var(--primary-color);
+  border-radius: 10px;
+  font-size: 1em;
+}
+
+.disabled-btn:hover {
+  cursor: not-allowed;
+}
+
+.inverted-btn {
+  padding: 10px;
+  color: red;
+  background-color: pink;
+  border: 1px solid pink;
   border-radius: 10px;
   font-size: 1em;
 }
@@ -117,6 +131,13 @@ ul {
   background-color: var(--dark-background-color);
   color: var(--primary-color);
 }
+
+.inverted-btn:hover {
+  cursor: pointer;
+  background-color: red;
+  color: pink;
+}
+
 
 .loading {
   color: var(--secondary-text-color);

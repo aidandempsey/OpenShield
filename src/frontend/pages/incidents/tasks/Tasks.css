@@ -18,8 +18,28 @@
     background: var(--dark-background-color);
 }
 
+.tasks li.closed {
+    border: 1px solid var(--primary-color);
+}
+
+.tasks li.open {
+    border: 1px solid var(--secondary-color);
+}
+
 .task-assigned-date {
     color: var(--secondary-text-color);
     font-size: 0.9em;
     margin: 4px 0 15px;
+}
+
+.task-status-open {
+    color: var(--secondary-color)
+}
+
+.task-status-closed {
+    color: var(--primary-color)
+}
+
+.assigned-user-selector {
+    display: inline-block;
 }
