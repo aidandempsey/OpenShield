@@ -1,4 +1,6 @@
 import { useGet } from "../../../hooks/restful/useGet"
+import CircularProgressWithLabel from '@mui/material/CircularProgress';
+
 
 export default function IncidentProgress(props) {
     const { incidentId } = props
@@ -8,6 +10,10 @@ export default function IncidentProgress(props) {
     if (isLoading) return <div className="Loading">loading...</div>
 
     return (
-        <div>{data}% complete</div>
+        <div>
+            <div className="percentage">{data}%</div>
+            <CircularProgressWithLabel variant="determinate" value={data} color="success" size={300} />
+
+        </div>
     )
 }

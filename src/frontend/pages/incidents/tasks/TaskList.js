@@ -1,16 +1,38 @@
 import { useState } from "react"
 import { useGet } from "../../../hooks/restful/useGet"
-
+import { useAuthContext } from "../../../hooks/firebase/useAuthContext"
+import { useEffect } from "react"
 import CreateTask from "./CreateTask"
 import Task from "./Task"
 import "./Tasks.css"
 
 export default function TaskList(props) {
-    const { data, httpError, isLoading } = useGet(`tasks/search/findByIncidentId?incidentId=${props.incidentId}`)
+    const [usersList, setUsersList] = useState([])
+
+    const { user } = useAuthContext()
+    const { data: organizationId, httpError: organizationIdHttpError, isOrganizationIdLoading } = useGet(`secure/organizations/getOrganizationIdFromUserId?userId=${user.uid}`);
+    const [search, setSearch] = useState(`users/search/findByOrganizationId?organizationId=${organizationId}`)
+    const { data: users, httpError: usersHttpError, isLoading: isUsersLoading } = useGet(search)
+
+    const { data: tasks, httpError: tasksHttpError, isLoading: isTaskLoading } = useGet(`tasks/search/findByIncidentId?incidentId=${props.incidentId}`)
     const [createTask, setCreateTask] = useState(false)
 
-    if (httpError) return <div className="error">{httpError}</div>
-    if (isLoading) return <div className="Loading">loading...</div>
+    useEffect(() => { if (organizationId) { setSearch(`users/search/findByOrganizationId?organizationId=${organizationId}`) } }, [organizationId])
+
+    useEffect(() => {
+        if (users?._embedded?.users) {
+            users?._embedded?.users.forEach(user => {
+                setUsersList(prevUsers => {
+                    return [...prevUsers, { value: user.userId, label: user.displayName }]
+                })
+            });
+        }
+
+    }, [users])
+
+
+    if (tasksHttpError) return <div className="error">{tasksHttpError}</div>
+    if (isTaskLoading) return <div className="Loading">loading...</div>
 
     return (
         <div className="tasks">
@@ -18,16 +40,16 @@ export default function TaskList(props) {
                 <button className="btn" onClick={() => { setCreateTask(true) }}>Create Task</button>
             )}
 
-            {!createTask && data?._embedded?.tasks.length > 0 && (
+            {!createTask && tasks?._embedded?.tasks.length > 0 && (
                 <ul>
-                    {data?._embedded?.tasks.length > 0 && data._embedded.tasks.map(task => (
-                        <Task key={task.taskId} task={task} />
+                    {tasks?._embedded?.tasks.length > 0 && tasks._embedded.tasks.map(task => (
+                        <Task key={task.taskId} task={task} usersList={usersList} />
                     ))
                     }
                 </ul >
             )}
-            {data?._embedded?.tasks?.length === 0 && <p>No Tasks Yet!</p>}
-            {createTask && <CreateTask setCreateTask={setCreateTask} />}
+            {tasks?._embedded?.tasks?.length === 0 && <p>No Tasks Yet!</p>}
+            {createTask && <CreateTask setCreateTask={setCreateTask} incidentId={props.incidentId} usersList={usersList} />}
         </div>
     )
 }

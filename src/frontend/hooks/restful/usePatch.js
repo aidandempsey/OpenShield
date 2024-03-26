@@ -2,13 +2,13 @@ import { useState } from "react"
 import { useAuthToken } from "../firebase/useAuthToken"
 
 
-export const usePost = () => {
+export const usePatch = () => {
     const [data, setData] = useState()
     const [httpError, setHttpError] = useState(null)
     const [isLoading, setIsLoading] = useState(false)
     const { authToken: defaultAuthToken } = useAuthToken()
 
-    const post = async (endpoint, body, authorization = null) => {
+    const patch = async (endpoint, authorization = null) => {
         const authToken = authorization || defaultAuthToken;
 
         if (authToken) {
@@ -17,17 +17,18 @@ export const usePost = () => {
             try {
                 const apiUrl = `http://localhost:8080/api/${endpoint}`;
                 const response = await fetch(apiUrl, {
-                    method: "POST",
+                    method: "PUT",
 
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': `Bearer ${authToken}`,
                     },
-                    body: JSON.stringify(body)
+                    body: JSON.stringify(null)
+
                 });
 
-                const responseJson = await response.json();
-                setData(responseJson);
+                // const responseJson = await response.json();
+                // setData(responseJson);
             } catch (error) {
                 setHttpError(error.message);
             }
@@ -36,5 +37,5 @@ export const usePost = () => {
         return { data }
     };
 
-    return { post, httpError, isLoading }
+    return { patch, httpError, isLoading }
 }

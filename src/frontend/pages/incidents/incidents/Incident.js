@@ -8,8 +8,6 @@ import IncidentFilter from "./IncidentFilter"
 import TaskList from "../tasks/TaskList"
 import IncidentProgress from "./IncidentProgress"
 
-import { useEffect } from "react"
-
 export default function Incident() {
     const { id } = useParams()
     const { data, httpError, isLoading } = useGet(`incidents/${id}`)

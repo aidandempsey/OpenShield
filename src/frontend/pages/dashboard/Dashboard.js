@@ -1,14 +1,20 @@
 import { useGet } from "../../hooks/restful/useGet";
-import OrganizationsList from "../organization/OrganizationsList";
+import IncidentList from "../incidents/incidents/IncidentList";
+import { useEffect, useState } from "react";
+import SeverityFilter from "./SeverityFilter"
 
-export default function Dashboard() {
+export default function Dashboard(props) {
+    const { uid } = props
+    const { data: organizationId, httpError: organizationIdHttpError, isOrganizationIdLoading } = useGet(`secure/organizations/getOrganizationIdFromUserId?userId=${uid}`);
+    const [search, setSearch] = useState(`incidents/search/findByOrganizationId?organizationId=${organizationId}`)
+    const { data: incidents, httpError: incidentsHttpError, isLoading: isIncidentsLoading } = useGet(search)
 
-    const { data: organizations, httpError: organizationsHttpError, isLoading: isOrganizationsLoading } = useGet("organizations")
+    useEffect(() => { if (organizationId) { setSearch(`incidents/search/findByOrganizationId?organizationId=${organizationId}`) } }, [organizationId])
 
     return (
         <div>
-            <h3>Organizations</h3>
-            <OrganizationsList organizations={organizations?._embedded?.organizations ?? []} httpError={organizationsHttpError} isLoading={isOrganizationsLoading} />
+            <SeverityFilter setSearch={setSearch} organizationId={organizationId} />
+            <IncidentList incidents={incidents?._embedded?.incidents ?? []} httpError={incidentsHttpError || organizationIdHttpError} isLoading={isIncidentsLoading || isOrganizationIdLoading} />
         </div>
     );
 }

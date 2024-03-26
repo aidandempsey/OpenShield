@@ -1,4 +1,3 @@
-import { useEffect } from "react"
 import { useGet } from "../../../hooks/restful/useGet"
 import formatDistanceToNow from "date-fns/formatDistanceToNow"
 
