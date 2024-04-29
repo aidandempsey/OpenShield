@@ -8,7 +8,6 @@ export default function IncidentSummary(props) {
     const { data: organizationName, httpError: organizationNameHttpError, isOrganizationNameLoading } = useGet(`secure/organizations/getOrganizationNameFromOrganizationId?organizationId=${incident.organizationId}`)
     const { data: incidentCreatedBy, httpError: incidentCreatedByHttpError, isIncidentCreatedByLoading } = useGet(`secure/users/getDisplayNameFromUserId?userId=${incident.createdBy}`)
 
-
     const convertSeverity = severity => ({
         "low": "success",
         "medium": "info",
@@ -17,7 +16,7 @@ export default function IncidentSummary(props) {
     }[severity])
 
     if (organizationNameHttpError || incidentCreatedByHttpError) return <div className="error">{organizationNameHttpError || incidentCreatedByHttpError}</div>
-    if (isOrganizationNameLoading || isIncidentCreatedByLoading) return <div className="Loading">loading...</div>
+    if (isOrganizationNameLoading || isIncidentCreatedByLoading) return <div className="loading">loading...</div>
 
     return (
         <div>

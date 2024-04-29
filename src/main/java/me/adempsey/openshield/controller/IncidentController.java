@@ -1,7 +1,6 @@
 package me.adempsey.openshield.controller;
 
 import me.adempsey.openshield.entity.Incident;
-import me.adempsey.openshield.entity.enums.IncidentSeverity;
 import me.adempsey.openshield.requestmodels.IncidentRequest;
 import me.adempsey.openshield.service.IncidentService;
 import me.adempsey.openshield.utils.GetUidFromJWT;

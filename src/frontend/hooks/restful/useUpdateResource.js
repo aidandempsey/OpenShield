@@ -1,34 +1,40 @@
 import { useState } from "react"
 import { useAuthToken } from "../firebase/useAuthToken"
 
-
-export const usePost = () => {
+export const useUpdateResource = (method) => {
     const [data, setData] = useState()
     const [httpError, setHttpError] = useState(null)
     const [isLoading, setIsLoading] = useState(false)
     const { authToken: defaultAuthToken } = useAuthToken()
 
-    const post = async (endpoint, body, authorization = null) => {
+    const updateResource = async (endpoint, body = null, authorization = null) => {
         const authToken = authorization || defaultAuthToken;
 
         if (authToken) {
             setIsLoading(true)
-            console.log(authToken)
             try {
                 const apiUrl = `http://localhost:8080/api/${endpoint}`;
                 const response = await fetch(apiUrl, {
-                    method: "POST",
+                    method: method,
 
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': `Bearer ${authToken}`,
                     },
                     body: JSON.stringify(body)
+
                 });
 
-                const responseJson = await response.json();
-                setData(responseJson);
+                console.log(response)
+
+                const responseContent =
+                    ["application/hal+json", "application/json"]
+                        .includes(response.headers.get("content-type"))
+                        ? await response.json()
+                        : await response.text()
+                setData(responseContent);
             } catch (error) {
+                console.log(error)
                 setHttpError(error.message);
             }
             setIsLoading(false)
@@ -36,5 +42,5 @@ export const usePost = () => {
         return { data }
     };
 
-    return { post, httpError, isLoading }
+    return { updateResource, httpError, isLoading }
 }

@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 import { useAuthToken } from "../firebase/useAuthToken"
 
-
 export const useGet = endpoint => {
     const [data, setData] = useState()
     const [httpError, setHttpError] = useState(null)
@@ -39,8 +38,10 @@ export const useGet = endpoint => {
             }
         };
 
-        get()
 
+        if (!endpoint.endsWith("undefined")) {
+            get()
+        }
     }, [endpoint, authToken])
 
     return { data, httpError, isLoading }

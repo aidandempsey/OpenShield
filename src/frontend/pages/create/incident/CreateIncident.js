@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { usePost } from "../../../hooks/restful/usePost"
+import { useUpdateResource } from "../../../hooks/restful/useUpdateResource"
 import { useColourStyle } from "../../../hooks/style/useColourStyle"
 
 import Select from 'react-select'
@@ -9,7 +9,7 @@ export default function CreateTask() {
     const [incidentName, setIncidentName] = useState("")
     const [incidentDescription, setIncidentDescription] = useState("")
     const [incidentSeverity, setIncidentSeverity] = useState("low")
-    const { post, httpError, isLoading } = usePost()
+    const { updateResource: post, httpError, isLoading } = useUpdateResource("POST")
     const colourStyles = useColourStyle()
 
     const handleCreateIncident = e => {
@@ -20,7 +20,7 @@ export default function CreateTask() {
             incidentSeverity,
         }
 
-        const { data } = post("secure/incidents/createIncident", body)
+        post("secure/incidents/createIncident", body)
     }
 
     const severities = [
@@ -52,7 +52,7 @@ export default function CreateTask() {
                 <button className="btn">Create</button>
             </form>
             {(httpError) && <div className="error">{httpError}</div>}
-            {(isLoading) && <div className="Loading">loading...</div>}
+            {(isLoading) && <div className="loading">loading...</div>}
         </div>
     )
 }

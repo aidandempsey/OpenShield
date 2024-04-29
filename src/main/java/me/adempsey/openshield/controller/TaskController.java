@@ -28,8 +28,8 @@ public class TaskController {
     }
 
     @GetMapping("/isTaskAssignedToUser")
-    public boolean isTaskAssignedToUser(@RequestParam String assignedUserId, @RequestParam Long taskId){
-        return taskService.isTaskAssignedToUser(assignedUserId,taskId);
+    public boolean isTaskAssignedToUser(@RequestHeader(value = "Authorization")String token, @RequestParam Long taskId) throws FirebaseAuthException {
+        return taskService.isTaskAssignedToUser(GetUidFromJWT.validateToken(token),taskId);
     }
 
     @GetMapping("/isTaskOpen")
@@ -37,12 +37,12 @@ public class TaskController {
         return taskService.isTaskOpen(taskId);
     }
 
-    @PutMapping("/updateAssignedUser")
+    @PatchMapping("/updateAssignedUser")
     public void updateAssignedUser(@RequestHeader(value = "Authorization")String token, @RequestParam Long taskId, @RequestParam String assignedUserId) throws Exception {
         taskService.changeAssignedUserId(taskId, assignedUserId, GetUidFromJWT.validateToken(token));
     }
 
-    @PutMapping("/changeStatus")
+    @PatchMapping("/changeStatus")
     public void changeStatus(@RequestParam Long taskId, @RequestParam TaskStatus taskStatus) throws Exception {
         taskService.changeStatus(taskId, taskStatus);
     }

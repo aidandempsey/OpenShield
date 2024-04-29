@@ -1,5 +1,3 @@
-import { useEffect } from "react"
-
 export default function IncidentFilter(props) {
     const filterList = ["Overview", "Tasks", "Progress", "Comments"]
     const { currentTab, setCurrentTab } = props

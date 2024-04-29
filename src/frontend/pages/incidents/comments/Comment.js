@@ -6,7 +6,7 @@ export default function IncidentComment(props) {
     const { data, httpError, isLoading } = useGet(`secure/users/getDisplayNameFromUserId?userId=${comment.commentAuthor}`)
 
     if (httpError) return <div className="error">{httpError}</div>
-    if (isLoading) return <div className="Loading">loading...</div>
+    if (isLoading) return <div className="loading">loading...</div>
 
     return (
         <li >

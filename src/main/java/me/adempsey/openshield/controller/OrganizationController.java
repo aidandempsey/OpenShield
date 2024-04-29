@@ -1,4 +1,5 @@
 package me.adempsey.openshield.controller;
+import com.google.firebase.auth.FirebaseAuthException;
 import me.adempsey.openshield.entity.Organization;
 import me.adempsey.openshield.requestmodels.OrganizationRequest;
 import me.adempsey.openshield.service.OrganizationService;
@@ -24,7 +25,7 @@ public class OrganizationController {
     }
 
     @GetMapping("/getOrganizationIdFromUserId")
-    public Long getOrganizationIdFromUserId(@RequestParam String userId){
-        return organizationService.getOrganizationIdFromUserId(userId);
+    public Long getOrganizationIdFromUserId(@RequestHeader(value = "Authorization")String token) throws FirebaseAuthException {
+        return organizationService.getOrganizationIdFromUserId(GetUidFromJWT.validateToken(token));
     }
 }

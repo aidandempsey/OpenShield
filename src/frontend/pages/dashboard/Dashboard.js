@@ -3,12 +3,10 @@ import IncidentList from "../incidents/incidents/IncidentList";
 import { useEffect, useState } from "react";
 import SeverityFilter from "./SeverityFilter"
 
-export default function Dashboard(props) {
-    const { uid } = props
-    const { data: organizationId, httpError: organizationIdHttpError, isOrganizationIdLoading } = useGet(`secure/organizations/getOrganizationIdFromUserId?userId=${uid}`);
+export default function Dashboard() {
+    const { data: organizationId, httpError: organizationIdHttpError, isOrganizationIdLoading } = useGet("secure/organizations/getOrganizationIdFromUserId");
     const [search, setSearch] = useState(`incidents/search/findByOrganizationId?organizationId=${organizationId}`)
     const { data: incidents, httpError: incidentsHttpError, isLoading: isIncidentsLoading } = useGet(search)
-
     useEffect(() => { if (organizationId) { setSearch(`incidents/search/findByOrganizationId?organizationId=${organizationId}`) } }, [organizationId])
 
     return (

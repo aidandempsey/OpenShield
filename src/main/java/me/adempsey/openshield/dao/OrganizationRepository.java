@@ -1,7 +1,6 @@
 package me.adempsey.openshield.dao;
 
 import me.adempsey.openshield.entity.Organization;
-import me.adempsey.openshield.service.OrganizationService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,4 +12,5 @@ public interface OrganizationRepository extends JpaRepository<Organization, Long
 
     Organization findOrganizationByOrganizationId(@RequestParam("organization_id")Long organizationId);
 
+    Page<Organization> findByOrganizationNameContaining(@RequestParam("organization_name") String organizationName, Pageable pageable);
 }

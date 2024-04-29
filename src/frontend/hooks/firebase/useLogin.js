@@ -15,7 +15,6 @@ export const useLogin = () => {
     try {
       // login
       const res = await projectAuth.signInWithEmailAndPassword(email, password)
-      const token = await res.user.getIdToken();
 
       // dispatch login action
       dispatch({ type: 'LOGIN', payload: res.user })

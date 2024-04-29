@@ -4,7 +4,6 @@ import { useState } from "react"
 import { useLogin } from "../../hooks/firebase/useLogin"
 import { useSignup } from "../../hooks/firebase/useSignup"
 import { useForgotPassword } from "../../hooks/firebase/useForgotPassword"
-import { usePost } from "../../hooks/restful/usePost"
 
 export default function LoginModal() {
     const [emailAddress, setEmailAddress] = useState("")

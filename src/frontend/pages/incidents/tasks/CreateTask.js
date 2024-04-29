@@ -3,9 +3,7 @@ import "./Tasks.css"
 import { useState } from "react"
 import Select from 'react-select'
 import { useColourStyle } from "../../../hooks/style/useColourStyle"
-import { useGet } from "../../../hooks/restful/useGet"
-import { usePost } from "../../../hooks/restful/usePost"
-import { useEffect } from "react"
+import { useUpdateResource } from "../../../hooks/restful/useUpdateResource"
 
 export default function CreateIncidentTask(props) {
     const { usersList } = props
@@ -14,7 +12,7 @@ export default function CreateIncidentTask(props) {
     const [taskName, setTaskName] = useState("")
     const [taskDescription, setTaskDescription] = useState("")
     const [assignedUserId, setAssignedUserId] = useState(0)
-    const { post, httpError, isLoading } = usePost()
+    const { updateResource: post, httpError, isLoading } = useUpdateResource("POST")
 
     const handleCreateIncident = e => {
         e.preventDefault()

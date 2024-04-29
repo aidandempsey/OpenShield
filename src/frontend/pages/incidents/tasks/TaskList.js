@@ -1,6 +1,5 @@
 import { useState } from "react"
 import { useGet } from "../../../hooks/restful/useGet"
-import { useAuthContext } from "../../../hooks/firebase/useAuthContext"
 import { useEffect } from "react"
 import CreateTask from "./CreateTask"
 import Task from "./Task"
@@ -9,8 +8,7 @@ import "./Tasks.css"
 export default function TaskList(props) {
     const [usersList, setUsersList] = useState([])
 
-    const { user } = useAuthContext()
-    const { data: organizationId, httpError: organizationIdHttpError, isOrganizationIdLoading } = useGet(`secure/organizations/getOrganizationIdFromUserId?userId=${user.uid}`);
+    const { data: organizationId, httpError: organizationIdHttpError, isOrganizationIdLoading } = useGet(`secure/organizations/getOrganizationIdFromUserId`);
     const [search, setSearch] = useState(`users/search/findByOrganizationId?organizationId=${organizationId}`)
     const { data: users, httpError: usersHttpError, isLoading: isUsersLoading } = useGet(search)
 
@@ -30,9 +28,8 @@ export default function TaskList(props) {
 
     }, [users])
 
-
     if (tasksHttpError) return <div className="error">{tasksHttpError}</div>
-    if (isTaskLoading) return <div className="Loading">loading...</div>
+    if (isTaskLoading) return <div className="loading">loading...</div>
 
     return (
         <div className="tasks">

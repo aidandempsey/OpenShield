@@ -3,21 +3,21 @@ import "./Search.css"
 import IncidentList from "../incidents/incidents/IncidentList"
 import { useGet } from "../../hooks/restful/useGet"
 
-export default function Search() {
+export default function SearchIncidents() {
     const [search, setSearch] = useState("")
     const [searchUrl, setSearchUrl] = useState("")
 
     const { data, httpError, isLoading } = useGet(searchUrl)
+    const { data: userOrganization, httpError: userOrganizationHttpError, isLoading: isUserOrganizationLoading } = useGet(`secure/users/getOrganizationIdFromUserId`)
+
 
     useEffect(() => {
         if (search === "") {
             setSearchUrl("")
         } else {
-            setSearchUrl(`incidents/search/findByIncidentNameContaining?incidentName=${search}`)
+            setSearchUrl(`incidents/search/findByOrganizationIdAndIncidentNameContaining?organizationId=${userOrganization}&incidentName=${search}`)
         }
     }, [search])
-
-
 
     return (
         <div className="search">

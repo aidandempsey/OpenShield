@@ -1,6 +1,8 @@
 package me.adempsey.openshield.controller;
 
+import com.google.firebase.auth.FirebaseAuthException;
 import me.adempsey.openshield.entity.User;
+import me.adempsey.openshield.entity.enums.UserRole;
 import me.adempsey.openshield.requestmodels.UserRequest;
 import me.adempsey.openshield.service.UserService;
 import me.adempsey.openshield.utils.GetUidFromJWT;
@@ -25,5 +27,19 @@ public class UserController {
     @GetMapping("/getDisplayNameFromUserId")
     public String getDisplayNameFromUserId(@RequestParam String userId) {
         return userService.getDisplayNameFromUserId(userId);
+    }
+
+    @GetMapping("/getOrganizationIdFromUserId")
+    public Long getOrganizationIdFromUserId(@RequestHeader(value = "Authorization") String token) throws FirebaseAuthException {
+        return userService.getOrganizationIdFromUserId(GetUidFromJWT.validateToken(token));
+    }
+    @GetMapping("/userHasOrganization")
+    public boolean userHasOrganization(@RequestHeader(value = "Authorization") String token) throws FirebaseAuthException {
+        return userService.userHasOrganization(GetUidFromJWT.validateToken(token));
+    }
+
+    @PatchMapping("/changeOrganizationAndRole")
+    public void changeOrganizationAndRole(@RequestHeader(value = "Authorization") String token, @RequestParam Long organizationId, @RequestParam UserRole userRole) throws Exception {
+        userService.changeOrganizationAndRole(GetUidFromJWT.validateToken(token), organizationId, userRole);
     }
 }

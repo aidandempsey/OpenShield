@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useGet } from "../../../hooks/restful/useGet";
-import { usePost } from "../../../hooks/restful/usePost"
+import { useUpdateResource } from "../../../hooks/restful/useUpdateResource";
 
 import Comment from "./Comment"
 import "./Comments.css"
@@ -9,7 +9,7 @@ export default function CommentList(props) {
     const { incidentId } = props
     const [commentContent, setCommentContent] = useState("")
     const { data, httpError, isLoading } = useGet(`comments/search/findByIncidentId?incidentId=${incidentId}`);
-    const { post, httpError: postHttpError, isLoading: postIsLoading } = usePost()
+    const { updateResource: post, httpError: postHttpError, isLoading: postIsLoading } = useUpdateResource("POST")
 
     const handleSubmit = async e => {
         e.preventDefault()
@@ -18,7 +18,7 @@ export default function CommentList(props) {
     }
 
     if (httpError || postHttpError) return <div className="error">{httpError || postHttpError}</div>
-    if (isLoading || postIsLoading) return <div className="Loading">loading...</div>
+    if (isLoading || postIsLoading) return <div className="loading">loading...</div>
 
     return (
         <div className="comments">

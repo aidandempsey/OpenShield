@@ -1,23 +1,21 @@
 import { useGet } from "../../../hooks/restful/useGet"
 import formatDistanceToNow from "date-fns/formatDistanceToNow"
-import { useAuthContext } from "../../../hooks/firebase/useAuthContext"
-import { usePatch } from "../../../hooks/restful/usePatch"
+import { useUpdateResource } from "../../../hooks/restful/useUpdateResource"
 import { useColourStyle } from "../../../hooks/style/useColourStyle"
 import Select from 'react-select'
 import { useState } from "react"
 
 export default function Task(props) {
     const { task, usersList } = props
-    const { user } = useAuthContext()
     const [newAssignedUser, setNewAssignedUser] = useState(null)
     const { data: assignedUserName, httpError: assignedUserHttpError, isLoading: assignedUserIsLoading } = useGet(`secure/users/getDisplayNameFromUserId?userId=${task.assignedUserId}`)
     const { data: assignerUserName, httpError: assignerUserHttpError, isLoading: assignerUserIsLoading } = useGet(`secure/users/getDisplayNameFromUserId?userId=${task.assignerUserId}`)
     const { data: taskAssigned, httpError: taskAssignedHttpError, isLoading: taskAssignedIsLoading } = useGet(`secure/tasks/isTaskAssigned?taskId=${task.taskId}`)
-    const { data: taskAssignedToUser, httpError: taskAssignedToUserHttpError, isLoading: taskAssignedToUserIsLoading } = useGet(`secure/tasks/isTaskAssignedToUser?assignedUserId=${user.uid}&taskId=${task.taskId}`) ?? false
+    const { data: taskAssignedToUser, httpError: taskAssignedToUserHttpError, isLoading: taskAssignedToUserIsLoading } = useGet(`secure/tasks/isTaskAssignedToUser?taskId=${task.taskId}`) ?? false
     const { data: taskOpen, httpError: taskOpenHttpError, isLoading: taskOpenIsLoading } = useGet(`secure/tasks/isTaskOpen?taskId=${task.taskId}`)
 
-    const { patch: patchAssignedUser, httpError: patchAssignedUserHttpError, isLoading: isPatchAssignedUserLoading } = usePatch()
-    const { patch: patchStatus, httpError: patchStatusHttpError, isLoading: isPatchStatusLoading } = usePatch()
+    const { updateResource: patchAssignedUser, httpError: patchAssignedUserHttpError, isLoading: isPatchAssignedUserLoading } = useUpdateResource("PATCH")
+    const { updateResource: patchStatus, httpError: patchStatusHttpError, isLoading: isPatchStatusLoading } = useUpdateResource("PATCH")
 
 
     const convertStatus = status => ({
@@ -34,11 +32,10 @@ export default function Task(props) {
 
     const close = id => {
         const { data } = patchStatus(`secure/tasks/changeStatus?taskId=${id}&taskStatus=closed`);
-
     }
 
     if (assignedUserHttpError || assignerUserHttpError || taskAssignedHttpError || taskAssignedToUserHttpError || patchAssignedUserHttpError || patchStatusHttpError || taskOpenHttpError) return <div className="error">{assignedUserHttpError || assignerUserHttpError || taskAssignedHttpError || taskAssignedToUserHttpError || patchAssignedUserHttpError || patchStatusHttpError || taskOpenHttpError}</div>
-    if (assignedUserIsLoading || assignerUserIsLoading || taskAssignedIsLoading || taskAssignedToUserIsLoading || isPatchAssignedUserLoading || isPatchStatusLoading || taskOpenIsLoading) return <div className="Loading">loading...</div>
+    if (assignedUserIsLoading || assignerUserIsLoading || taskAssignedIsLoading || taskAssignedToUserIsLoading || isPatchAssignedUserLoading || isPatchStatusLoading || taskOpenIsLoading) return <div className="loading">loading...</div>
 
     if (task) {
         return (

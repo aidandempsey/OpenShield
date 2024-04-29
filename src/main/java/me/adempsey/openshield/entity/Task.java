@@ -3,8 +3,6 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import me.adempsey.openshield.entity.enums.TaskStatus;
-
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
