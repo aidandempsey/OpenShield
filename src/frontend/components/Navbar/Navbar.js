@@ -8,7 +8,8 @@ import Shield from "../../images/shield.svg"
 import Search from "../../images/search.svg"
 import Settings from "../../images/settings.svg"
 
-export default function Navbar() {
+export default function Navbar(props) {
+    const { userHasOrganization } = props
     const { user } = useAuthContext()
     const { logout } = useLogout()
 
@@ -17,7 +18,7 @@ export default function Navbar() {
             <ul>
                 <li className="logo"><Link to="/"><img className="grow" src={Shield} alt="logo" /><span className="shield">OpenShield</span></Link></li>
 
-                {user && <>
+                {(user && userHasOrganization) && <>
                     <li className="search"><Link to="/searchIncidents"><img alt="Search Icon" className="grow" src={Search} /></Link></li>
                     <div className="dropdown">
                         <button className="btn">Create</button>

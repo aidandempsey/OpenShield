@@ -25,7 +25,7 @@ function App() {
     <div className="App">
       {authIsReady && (
         <BrowserRouter>
-          <Navbar />
+          <Navbar userHasOrganization={userHasOrganization} />
           <div className="container">
             <Routes>
               <Route path='/' element={user ? (!userHasOrganization ? <JoinOrganization /> : <Dashboard />) : <Navigate to="/login" />} />
