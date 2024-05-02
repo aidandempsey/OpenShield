@@ -25,8 +25,6 @@ export const useUpdateResource = (method) => {
 
                 });
 
-                console.log(response)
-
                 const responseContent =
                     ["application/hal+json", "application/json"]
                         .includes(response.headers.get("content-type"))
@@ -34,7 +32,6 @@ export const useUpdateResource = (method) => {
                         : await response.text()
                 setData(responseContent);
             } catch (error) {
-                console.log(error)
                 setHttpError(error.message);
             }
             setIsLoading(false)

@@ -45,7 +45,7 @@ export default function LoginModal() {
                     <h2>Sign up</h2>
                     <input required type="emailAddress" value={emailAddress} placeholder="Email" onChange={e => { setEmailAddress(e.target.value) }} />
                     <input required type="password" value={password} placeholder="Password" onChange={e => { setPassword(e.target.value) }} />
-                    <input required type="text" value={displayName} placeholder="First Name" onChange={e => { setDisplayName(e.target.value) }} />
+                    <input required type="text" value={displayName} placeholder="Name" onChange={e => { setDisplayName(e.target.value) }} />
 
                     {!isSignupPending && <button className="btn login-btn">Sign up</button>}
                     {isSignupPending && <button className="btn login-btn" disabled>Signing up...</button>}

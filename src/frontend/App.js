@@ -13,6 +13,7 @@ import Incident from "./pages/incidents/incidents/Incident";
 import SearchIncidents from "./pages/search/SearchIncidents";
 import Settings from "./pages/settings/Settings";
 import JoinOrganization from "./pages/organization/JoinOrganization"
+import { useEffect } from "react"
 
 function App() {
   const { authIsReady, user } = useAuthContext()

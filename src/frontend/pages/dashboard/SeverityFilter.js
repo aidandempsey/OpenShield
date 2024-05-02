@@ -3,14 +3,14 @@ import { useState } from "react"
 export default function IncidentFilter(props) {
     const filterList = ["All", "Low", "Medium", "High", "Critical"]
     const [currentFilter, setCurrentFilter] = useState("all")
-    const { setSearch, organizationId } = props
+    const { setSearch } = props
 
     const handleClick = filter => {
         const lowerFilter = filter.toLowerCase()
         setCurrentFilter(lowerFilter)
-        let query = `incidents/search/findByOrganizationId?organizationId=${organizationId}`
+        let query = "secure/incidents/findIncidentsByUser"
         if (lowerFilter !== "all") {
-            query = `incidents/search/findByOrganizationIdAndIncidentSeverity?organizationId=${organizationId}&incidentSeverity=${lowerFilter}`
+            query = `secure/incidents/findIncidentsByUserAndSeverity?incidentSeverity=${lowerFilter}`
         }
         setSearch(query)
     }

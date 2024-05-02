@@ -3,11 +3,14 @@ package me.adempsey.openshield.dao;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import me.adempsey.openshield.entity.Incident;
+import me.adempsey.openshield.entity.Task;
 import me.adempsey.openshield.entity.enums.IncidentSeverity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 public interface IncidentRepository extends JpaRepository<Incident, Long> {
 
@@ -26,4 +29,7 @@ public interface IncidentRepository extends JpaRepository<Incident, Long> {
 
     Incident findIncidentByIncidentId(@RequestParam("incident_id") Long incidentId);
 
+    List<Incident> findIncidentsByOrganizationId(@RequestParam Long organizationId);
+
+    List<Incident> findIncidentsByOrganizationIdAndIncidentSeverity(Long organizationId, IncidentSeverity incidentSeverity);
 }

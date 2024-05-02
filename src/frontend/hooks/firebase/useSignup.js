@@ -25,7 +25,7 @@ export const useSignup = () => {
       const token = await res.user.getIdToken();
 
       // update the database before the dispatch
-      post("secure/users/createUser", { displayName, emailAddress }, token)
+      await post("secure/users/createUser", { displayName, emailAddress }, token)
 
       if (!res) {
         throw new Error('Could not complete signup')

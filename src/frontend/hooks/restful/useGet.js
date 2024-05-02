@@ -13,7 +13,6 @@ export const useGet = endpoint => {
                 setIsLoading(true)
                 try {
                     const apiUrl = `http://localhost:8080/api/${endpoint}`;
-
                     const response = await fetch(apiUrl, {
                         method: "GET",
                         headers: {
@@ -37,11 +36,7 @@ export const useGet = endpoint => {
                 setIsLoading(false)
             }
         };
-
-
-        if (!endpoint.endsWith("undefined")) {
-            get()
-        }
+        get()
     }, [endpoint, authToken])
 
     return { data, httpError, isLoading }

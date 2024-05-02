@@ -1,10 +1,13 @@
 package me.adempsey.openshield.controller;
 import com.google.firebase.auth.FirebaseAuthException;
+import me.adempsey.openshield.entity.Incident;
 import me.adempsey.openshield.entity.Organization;
 import me.adempsey.openshield.requestmodels.OrganizationRequest;
 import me.adempsey.openshield.service.OrganizationService;
 import me.adempsey.openshield.utils.GetUidFromJWT;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @CrossOrigin("http://localhost:3000")
 @RestController

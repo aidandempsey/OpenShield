@@ -4,7 +4,7 @@ import { useUpdateResource } from "../../hooks/restful/useUpdateResource"
 import { useState } from "react"
 
 export default function OrganizationList(props) {
-    const { organizations, httpError, isLoading, userRole } = props
+    const { organizations, httpError, isLoading, userRole, setCreateOrganization } = props
     const { updateResource: patchOrganization, httpError: patchOrganizationHttpError, isLoading: isPatchOrganizationLoading } = useUpdateResource("PATCH")
 
     const joinOrganization = (organizationId) => {
@@ -16,6 +16,7 @@ export default function OrganizationList(props) {
 
     return (
         <div className="organization-list">
+            <button className="btn" onClick={() => { setCreateOrganization(true) }}>Create Organization</button>
             {organizations.length === 0 && <p>No Organizations Yet!</p>}
             {organizations.length > 0 && organizations.map(organization => (
                 <div className="organization" key={organization.organizationId}>

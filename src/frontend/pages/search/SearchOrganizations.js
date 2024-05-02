@@ -4,13 +4,15 @@ import { useGet } from "../../hooks/restful/useGet"
 import OrganizationList from "../organization/OrganizationList"
 import Select from 'react-select'
 import { useColourStyle } from "../../hooks/style/useColourStyle"
+import CreateOrganization from "../organization/CreateOrganization"
 
 export default function SearchOrganizations() {
     const [search, setSearch] = useState("")
-    const [searchUrl, setSearchUrl] = useState("organizations")
+    const [searchUrl, setSearchUrl] = useState()
     const [userRole, setUserRole] = useState()
+    const [createOrganization, setCreateOrganization] = useState(false)
 
-    const { data, httpError, isLoading } = useGet(searchUrl)
+    const { data, httpError, isLoading } = useGet(searchUrl || "organizations")
 
     const colourStyles = useColourStyle()
 
@@ -45,7 +47,9 @@ export default function SearchOrganizations() {
                 <input type="search" value={search} placeholder="Search Organizations" onChange={e => { setSearch(e.target.value) }} autoFocus />
             </form>
             {data?._embedded?.organizations.length > 0 && (<Select placeholder="Select User Role" options={roles} onChange={(option) => { setUserRole(option.value) }} styles={colourStyles} className="selector" />)}
-            <OrganizationList organizations={data?._embedded?.organizations ?? []} httpError={httpError} isLoading={isLoading} userRole={userRole} />
+            {!createOrganization && <OrganizationList organizations={data?._embedded?.organizations ?? []} httpError={httpError} isLoading={isLoading} userRole={userRole} setCreateOrganization={setCreateOrganization} />}
+            {createOrganization && <CreateOrganization setCreateOrganization={setCreateOrganization} />}
+
         </div>
     )
 }
