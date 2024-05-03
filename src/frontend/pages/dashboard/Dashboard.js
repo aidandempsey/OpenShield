@@ -4,6 +4,7 @@ import { useState } from "react";
 import SeverityFilter from "./SeverityFilter"
 
 export default function Dashboard() {
+    const [currentFilter, setCurrentFilter] = useState("all")
     const [search, setSearch] = useState(`secure/incidents/findIncidentsByUser`)
     const { data: incidents, httpError: incidentsHttpError, isLoading: isIncidentsLoading } = useGet(search)
 
@@ -12,7 +13,7 @@ export default function Dashboard() {
 
     return (
         <div>
-            <SeverityFilter setSearch={setSearch} />
+            <SeverityFilter setSearch={setSearch} currentFilter={currentFilter} setCurrentFilter={setCurrentFilter} />
             <IncidentList incidents={incidents ?? []} />
         </div>
     );
