@@ -8,18 +8,13 @@ import "./Tasks.css"
 export default function TaskList(props) {
     const [usersList, setUsersList] = useState([])
 
-    const { data: organizationId, httpError: organizationIdHttpError, isOrganizationIdLoading } = useGet(`secure/organizations/getOrganizationIdFromUserId`);
-    const [search, setSearch] = useState(`users/search/findByOrganizationId?organizationId=${organizationId}`)
-    const { data: users, httpError: usersHttpError, isLoading: isUsersLoading } = useGet(search)
-
+    const { data: users, httpError: usersHttpError, isLoading: isUsersLoading } = useGet("secure/users/findByOrganizationId")
     const { data: tasks, httpError: tasksHttpError, isLoading: isTaskLoading } = useGet(`tasks/search/findByIncidentId?incidentId=${props.incidentId}`)
     const [createTask, setCreateTask] = useState(false)
 
-    useEffect(() => { if (organizationId) { setSearch(`users/search/findByOrganizationId?organizationId=${organizationId}`) } }, [organizationId])
-
     useEffect(() => {
-        if (users?._embedded?.users) {
-            users?._embedded?.users.forEach(user => {
+        if (users) {
+            users.forEach(user => {
                 setUsersList(prevUsers => {
                     return [...prevUsers, { value: user.userId, label: user.displayName }]
                 })
@@ -28,8 +23,8 @@ export default function TaskList(props) {
 
     }, [users])
 
-    if (tasksHttpError) return <div className="error">{tasksHttpError}</div>
-    if (isTaskLoading) return <div className="loading">loading...</div>
+    if (tasksHttpError || usersHttpError) return <div className="error">{tasksHttpError || usersHttpError}</div>
+    if (isTaskLoading || isUsersLoading) return <div className="loading">loading...</div>
 
     return (
         <div className="tasks">

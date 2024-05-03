@@ -1,5 +1,6 @@
 package me.adempsey.openshield.service;
 
+import com.google.firebase.auth.FirebaseAuthException;
 import me.adempsey.openshield.dao.UserRepository;
 import me.adempsey.openshield.entity.User;
 import me.adempsey.openshield.entity.enums.UserRole;
@@ -10,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -68,5 +70,10 @@ public class UserService {
         user.get().setOrganizationId(organizationId);
         user.get().setUserRole(userRole);
         userRepository.save(user.get());
+    }
+
+    public List<User> findByOrganizationId(String userId) throws FirebaseAuthException {
+        User user = userRepository.findUserByUserId(userId);
+        return userRepository.findUsersByOrganizationId(user.getOrganizationId());
     }
 }

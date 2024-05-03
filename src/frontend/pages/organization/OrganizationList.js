@@ -1,14 +1,13 @@
 import "./Organization.css"
 import formatDistanceToNow from "date-fns/formatDistanceToNow"
 import { useUpdateResource } from "../../hooks/restful/useUpdateResource"
-import { useState } from "react"
 
 export default function OrganizationList(props) {
     const { organizations, httpError, isLoading, userRole, setCreateOrganization } = props
     const { updateResource: patchOrganization, httpError: patchOrganizationHttpError, isLoading: isPatchOrganizationLoading } = useUpdateResource("PATCH")
 
     const joinOrganization = (organizationId) => {
-        const { data } = patchOrganization(`secure/users/changeOrganizationAndRole?organizationId=${organizationId}&userRole=${userRole}`);
+        patchOrganization(`secure/users/changeOrganizationAndRole?organizationId=${organizationId}&userRole=${userRole}`);
     }
 
     if (httpError || patchOrganizationHttpError) return <p className="error">{httpError || patchOrganizationHttpError}</p>

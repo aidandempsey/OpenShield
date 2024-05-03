@@ -143,3 +143,9 @@ ul {
   color: var(--secondary-text-color);
   font-size: 0.9em;
 }
+
+.search input {
+  display: inline-block;
+  margin: 5px 0px 5px 0px;
+  font-size: 1.25em;
+}

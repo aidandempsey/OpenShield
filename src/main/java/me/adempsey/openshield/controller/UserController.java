@@ -8,6 +8,8 @@ import me.adempsey.openshield.service.UserService;
 import me.adempsey.openshield.utils.GetUidFromJWT;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @CrossOrigin("http://localhost:3000")
 @RestController
 @RequestMapping("/api/secure/users")
@@ -41,5 +43,10 @@ public class UserController {
     @PatchMapping("/changeOrganizationAndRole")
     public void changeOrganizationAndRole(@RequestHeader(value = "Authorization") String token, @RequestParam Long organizationId, @RequestParam UserRole userRole) throws Exception {
         userService.changeOrganizationAndRole(GetUidFromJWT.validateToken(token), organizationId, userRole);
+    }
+
+    @GetMapping("/findByOrganizationId")
+    public List<User> findByOrganizationId(@RequestHeader(value = "Authorization") String token) throws FirebaseAuthException {
+        return userService.findByOrganizationId(GetUidFromJWT.validateToken(token));
     }
 }

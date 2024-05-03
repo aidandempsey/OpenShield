@@ -8,9 +8,9 @@ import "./App.css"
 import Dashboard from "./pages/dashboard/Dashboard"
 import Navbar from "./components/navbar/Navbar";
 import Login from "./pages/login/Login";
-import CreateIncident from "./pages/create/incident/CreateIncident";
+import CreateIncident from "./pages/incidents/incidents/CreateIncident"
 import Incident from "./pages/incidents/incidents/Incident";
-import SearchIncidents from "./pages/search/SearchIncidents";
+import SearchIncidents from "./pages/incidents/incidents/SearchIncidents";
 import Settings from "./pages/settings/Settings";
 import JoinOrganization from "./pages/organization/JoinOrganization"
 import { useEffect } from "react"

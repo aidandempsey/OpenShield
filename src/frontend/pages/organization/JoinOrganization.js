@@ -1,4 +1,4 @@
-import SearchOrganizations from "../search/SearchOrganizations";
+import SearchOrganizations from "./SearchOrganizations";
 
 export default function JoinOrganization() {
     return (

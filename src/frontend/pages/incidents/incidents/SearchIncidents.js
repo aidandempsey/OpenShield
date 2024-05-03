@@ -1,15 +1,13 @@
 import { useEffect, useState } from "react"
-import "./Search.css"
-import IncidentList from "../incidents/incidents/IncidentList"
-import { useGet } from "../../hooks/restful/useGet"
+import IncidentList from "./IncidentList"
+import { useGet } from "../../../hooks/restful/useGet"
 
 export default function SearchIncidents() {
-    const [search, setSearch] = useState("")
+    const [search, setSearch] = useState()
     const [searchUrl, setSearchUrl] = useState("")
 
-    const { data, httpError, isLoading } = useGet(searchUrl)
+    const { data, httpError, isLoading } = useGet(searchUrl || "incidents")
     const { data: userOrganization, httpError: userOrganizationHttpError, isLoading: isUserOrganizationLoading } = useGet(`secure/users/getOrganizationIdFromUserId`)
-
 
     useEffect(() => {
         if (search === "") {

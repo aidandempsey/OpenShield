@@ -1,8 +1,6 @@
 package me.adempsey.openshield.controller;
 
 import com.google.firebase.auth.FirebaseAuthException;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import me.adempsey.openshield.entity.Incident;
 import me.adempsey.openshield.entity.enums.IncidentSeverity;
 import me.adempsey.openshield.requestmodels.IncidentRequest;
@@ -10,7 +8,6 @@ import me.adempsey.openshield.service.IncidentService;
 import me.adempsey.openshield.utils.GetUidFromJWT;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @CrossOrigin("http://localhost:3000")

@@ -23,7 +23,6 @@ export default function Navbar(props) {
                     <div className="dropdown">
                         <button className="btn">Create</button>
                         <div className="dropdown-content">
-                            <Link to="/createOrganization">Organization</Link>
                             <Link to="/createIncident">Incident</Link>
                         </div>
                     </div>

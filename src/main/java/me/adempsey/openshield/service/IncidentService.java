@@ -1,6 +1,5 @@
 package me.adempsey.openshield.service;
 
-import com.google.firebase.auth.FirebaseAuthException;
 import me.adempsey.openshield.dao.IncidentRepository;
 import me.adempsey.openshield.dao.TaskRepository;
 import me.adempsey.openshield.dao.UserRepository;
@@ -10,17 +9,12 @@ import me.adempsey.openshield.entity.User;
 import me.adempsey.openshield.entity.enums.IncidentSeverity;
 import me.adempsey.openshield.entity.enums.TaskStatus;
 import me.adempsey.openshield.requestmodels.IncidentRequest;
-import me.adempsey.openshield.utils.GetUidFromJWT;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service

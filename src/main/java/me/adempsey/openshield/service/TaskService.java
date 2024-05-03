@@ -68,6 +68,7 @@ public class TaskService {
 
         task.get().setAssignedUserId(assignedUserId);
         task.get().setAssignerUserId(assignerUserId);
+        task.get().setAssignDate(LocalDateTime.now(ZoneId.of("UTC")));
         taskRepository.save(task.get());
     }
 
