@@ -9,7 +9,6 @@ import me.adempsey.openshield.requestmodels.OrganizationRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -30,7 +29,7 @@ public class OrganizationService {
         Organization organization = new Organization();
         organization.setOrganizationLeader(organizationLeader);
         organization.setOrganizationName(organizationRequest.getOrganizationName());
-        organization.setOrganizationCreationDate(LocalDateTime.now(ZoneId.of("UTC")));
+        organization.setOrganizationCreationDate(LocalDateTime.now(ZoneId.of("GMT+1")));
 
         if(organizationRequest.getOrganizationDescription() != null && organizationRequest.getOrganizationDescription().isPresent()){
             organization.setOrganizationDescription(organizationRequest.getOrganizationDescription().map(
@@ -52,7 +51,7 @@ public class OrganizationService {
         return organizationRepository.findOrganizationByOrganizationId(organizationId).getOrganizationName();
     }
 
-    public Long getOrganizationIdFromUserId(@RequestParam String userId){
+    public Long getOrganizationIdFromUserId(String userId){
         return userRepository.findUserByUserId(userId).getOrganizationId();
     }
 }

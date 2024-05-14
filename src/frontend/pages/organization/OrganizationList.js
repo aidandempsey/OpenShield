@@ -7,7 +7,7 @@ export default function OrganizationList(props) {
     const { updateResource: patchOrganization, httpError: patchOrganizationHttpError, isLoading: isPatchOrganizationLoading } = useUpdateResource("PATCH")
 
     const joinOrganization = (organizationId) => {
-        patchOrganization(`secure/users/changeOrganizationAndRole?organizationId=${organizationId}&userRole=${userRole}`);
+        patchOrganization(`users/changeOrganizationAndRole?organizationId=${organizationId}&userRole=${userRole}`);
     }
 
     if (httpError || patchOrganizationHttpError) return <p className="error">{httpError || patchOrganizationHttpError}</p>

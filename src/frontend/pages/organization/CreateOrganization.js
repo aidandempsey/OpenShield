@@ -17,7 +17,7 @@ export default function CreateOrganization(props) {
             organizationDescription
         }
 
-        post("secure/organizations/createOrganization", body)
+        post("organizations/createOrganization", body)
         setCreateOrganization(false)
     }
 

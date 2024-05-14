@@ -65,11 +65,19 @@ def create_tasks():
     "Disable password logins for SSH access. Open the SSH configuration file with \"sudo nano /etc/ssh/sshd_config\", set ChallengeResponseAuthentication, PasswordAuthentication, and UsePAM to no, save the file, and restart the SSH service with \"sudo service ssh restart\".",
     "Ensure successful SSH login using the configured settings. Use SSH to log in with \"ssh -i /home/pi/mypi.pem -p 8123 pi@192.168.99.1\" (password: pwnme!)."]
     
+    assignedUserIds = [
+    "LYt1ohqu4Ef4TNypIykYNkDUeDR2",
+    "pWbQIRa8qqSswH4h9PYao8DOyAL2",
+    "pzYRBTKQp4Y4hJYUqr73AiaA5kF3",
+    "LYt1ohqu4Ef4TNypIykYNkDUeDR2",
+    "WkfErdSQI9OgB1k9VvdG6Yt2i3f2",
+    "Xd2p3q7cOOPkrAltlkSVRSVi9tP2"]
+
     for i in range(6):
         data = {
             "taskName": task_names[i],
             "taskDescription": task_descriptions[i],
-            "incidentId": incident_id,
+            "incidentId": assignedUserIds[i],
             "assignedUserId": "LYt1ohqu4Ef4TNypIykYNkDUeDR2"
         }
 

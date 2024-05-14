@@ -12,7 +12,7 @@ export const useGet = endpoint => {
             if (authToken) {
                 setIsLoading(true)
                 try {
-                    const apiUrl = `http://localhost:8080/api/${endpoint}`;
+                    const apiUrl = `http://localhost:8080/api/secure/${endpoint}`;
                     const response = await fetch(apiUrl, {
                         method: "GET",
                         headers: {

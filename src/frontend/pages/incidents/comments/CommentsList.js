@@ -13,7 +13,7 @@ export default function CommentList(props) {
 
     const handleSubmit = async e => {
         e.preventDefault()
-        post("secure/comments/createComment", { incidentId, commentContent })
+        post("comments/createComment", { incidentId, commentContent })
         setCommentContent("")
     }
 

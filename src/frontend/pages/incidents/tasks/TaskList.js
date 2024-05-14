@@ -8,7 +8,7 @@ import "./Tasks.css"
 export default function TaskList(props) {
     const [usersList, setUsersList] = useState([])
 
-    const { data: users, httpError: usersHttpError, isLoading: isUsersLoading } = useGet("secure/users/findByOrganizationId")
+    const { data: users, httpError: usersHttpError, isLoading: isUsersLoading } = useGet("users/findByOrganizationId")
     const { data: tasks, httpError: tasksHttpError, isLoading: isTaskLoading } = useGet(`tasks/search/findByIncidentId?incidentId=${props.incidentId}`)
     const [createTask, setCreateTask] = useState(false)
 
@@ -34,7 +34,7 @@ export default function TaskList(props) {
 
             {!createTask && tasks?._embedded?.tasks.length > 0 && (
                 <ul>
-                    {tasks?._embedded?.tasks.length > 0 && tasks._embedded.tasks.map(task => (
+                    {tasks._embedded.tasks.map(task => (
                         <Task key={task.taskId} task={task} usersList={usersList} />
                     ))
                     }

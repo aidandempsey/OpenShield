@@ -35,7 +35,7 @@ public class UserService {
         user.setUserId(userId);
         user.setDisplayName(userRequest.getDisplayName());
         user.setEmailAddress(userRequest.getEmailAddress());
-        user.setAccountCreatedDate(LocalDateTime.now(ZoneId.of("UTC")));
+        user.setAccountCreatedDate(LocalDateTime.now(ZoneId.of("GMT+1")));
 
         if(userRequest.getOrganizationId() != null && userRequest.getOrganizationId().isPresent()){
             user.setOrganizationId(userRequest.getOrganizationId().orElse(null));
@@ -51,6 +51,11 @@ public class UserService {
 
     public String getDisplayNameFromUserId(String userId){
         return userRepository.findUserByUserId(userId).getDisplayName();
+    }
+
+    public void deleteUser(String userId){
+        User user = userRepository.findUserByUserId(userId);
+        userRepository.delete(user);
     }
 
     public boolean userHasOrganization(String userId) {
@@ -75,5 +80,18 @@ public class UserService {
     public List<User> findByOrganizationId(String userId) throws FirebaseAuthException {
         User user = userRepository.findUserByUserId(userId);
         return userRepository.findUsersByOrganizationId(user.getOrganizationId());
+    }
+
+    public User getUserByUser(String userId){
+        return userRepository.findUserByUserId(userId);
+    }
+
+    public User updateUser(String userId, String displayName, Long organizationId, UserRole userRole) {
+        User user = userRepository.findUserByUserId(userId);
+        user.setDisplayName(displayName);
+        user.setOrganizationId(organizationId);
+        user.setUserRole(userRole);
+
+        return userRepository.save(user);
     }
 }

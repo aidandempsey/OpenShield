@@ -5,8 +5,8 @@ import { useGet } from '../../../hooks/restful/useGet';
 
 export default function IncidentSummary(props) {
     const { incident } = props
-    const { data: organizationName, httpError: organizationNameHttpError, isOrganizationNameLoading } = useGet(`secure/organizations/getOrganizationNameFromOrganizationId?organizationId=${incident.organizationId}`)
-    const { data: incidentCreatedBy, httpError: incidentCreatedByHttpError, isIncidentCreatedByLoading } = useGet(`secure/users/getDisplayNameFromUserId?userId=${incident.createdBy}`)
+    const { data: organizationName, httpError: organizationNameHttpError, isOrganizationNameLoading } = useGet(`organizations/getOrganizationNameFromOrganizationId?organizationId=${incident.organizationId}`)
+    const { data: incidentCreatedBy, httpError: incidentCreatedByHttpError, isIncidentCreatedByLoading } = useGet(`users/getDisplayNameFromUserId?userId=${incident.createdBy}`)
 
     const convertSeverity = severity => ({
         "low": "success",
@@ -24,7 +24,15 @@ export default function IncidentSummary(props) {
                 <h2 className='page-title'>{incident.incidentName}</h2>
 
                 <p className='start-date'>Started {formatDistanceToNow(incident.incidentStartDate, { addSuffix: true })} by {incidentCreatedBy} ({organizationName})</p>
-                <p className='details'>{incident.incidentDescription}</p>
+                {incident.incidentDescription.split("\n").map((line, lineIndex) => (
+                    <p className='details' key={lineIndex}>
+                        {lineIndex === 0 ? line : line.split(":").map((part, i) => (
+                            <span className={i === 0 ? "properties" : ""} key={i}>
+                                {part}{i === 0 && ":"}
+                            </span>
+                        ))}
+                    </p>
+                ))}
                 <Alert severity={convertSeverity(incident.incidentSeverity)}>{incident.incidentSeverity}</Alert>
             </div>
         </div>

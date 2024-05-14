@@ -18,17 +18,24 @@ export default function Navbar(props) {
             <ul>
                 <li className="logo"><Link to="/"><img className="grow" src={Shield} alt="logo" /><span className="shield">OpenShield</span></Link></li>
 
-                {(user && userHasOrganization) && <>
-                    <li className="search"><Link to="/searchIncidents"><img alt="Search Icon" className="grow" src={Search} /></Link></li>
-                    <div className="dropdown">
-                        <button className="btn">Create</button>
-                        <div className="dropdown-content">
-                            <Link to="/createIncident">Incident</Link>
-                        </div>
-                    </div>
-                    <li><Link to="#" onClick={() => { logout() }}>Logout</Link></li>
-                    <li className="settings"><Link to="/settings"><img className="grow" src={Settings} alt="logo" /></Link></li>
-                </>
+                {(user) &&
+                    <>
+                        {userHasOrganization && (
+                            <>
+                                <li className="search"><Link to="/searchIncidents"><img alt="Search Icon" className="grow" src={Search} /></Link></li>
+                                <div className="dropdown">
+                                    <button className="btn">Create</button>
+                                    <div className="dropdown-content">
+                                        <Link to="/createIncident">Incident</Link>
+                                    </div>
+                                </div>
+                                <li className="settings"><Link to="/settings"><img className="grow" src={Settings} alt="logo" /></Link></li>
+                            </>
+                        )
+                        }
+
+                        <li><Link to="#" onClick={() => { logout() }}>Logout</Link></li>
+                    </>
                 }
             </ul>
         </div >

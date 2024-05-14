@@ -4,6 +4,7 @@ import com.google.firebase.auth.FirebaseAuthException;
 import me.adempsey.openshield.entity.Incident;
 import me.adempsey.openshield.entity.enums.IncidentSeverity;
 import me.adempsey.openshield.requestmodels.IncidentRequest;
+import me.adempsey.openshield.requestmodels.IncidentTemplates.SshBruteforceRequest;
 import me.adempsey.openshield.service.IncidentService;
 import me.adempsey.openshield.utils.GetUidFromJWT;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +22,21 @@ public class IncidentController {
     @PostMapping("/createIncident")
     public Incident createIncident(@RequestHeader(value = "Authorization")String token, @RequestBody IncidentRequest incidentRequest) throws Exception{
         return incidentService.createIncident(GetUidFromJWT.validateToken(token), incidentRequest);
+    }
+
+    @PostMapping("/createIncidentFromTemplate")
+    public Incident createIncidentFromTemplate(@RequestHeader(value = "Authorization")String token, @RequestParam String template, @RequestBody SshBruteforceRequest SshBruteforceRequest) throws Exception{
+        Incident incident;
+
+        switch(template) {
+            case "sshBruteForce":
+                incident = incidentService.createSshBruteforceIncident(GetUidFromJWT.validateToken(token), SshBruteforceRequest);
+           break;
+            default:
+                throw new IllegalArgumentException("Invalid template: " + template);
+        }
+
+        return incident;
     }
 
     @GetMapping("/getIncidentProgress")

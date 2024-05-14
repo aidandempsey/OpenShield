@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 public class Task {
-    public Task(String taskName, String taskDescription, Long incidentId, TaskStatus taskStatus, String assignerUserId, String assignedUserId, String createdBy, LocalDateTime assignDate){
+    public Task(String taskName, String taskDescription, Long incidentId, TaskStatus taskStatus, String assignerUserId, String assignedUserId, String createdBy, LocalDateTime assignDate, Long orderNumber){
         this.taskName = taskName;
         this.taskDescription = taskDescription;
         this.incidentId = incidentId;
@@ -19,6 +19,7 @@ public class Task {
         this.assignedUserId = assignedUserId;
         this.createdBy = createdBy;
         this.assignDate = assignDate;
+        this.orderNumber = orderNumber;
     }
 
     @Id
@@ -50,4 +51,7 @@ public class Task {
 
     @Column(name="assign_date")
     private LocalDateTime assignDate;
+
+    @Column(name="order_number")
+    private Long orderNumber;
 }

@@ -10,6 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -34,12 +36,15 @@ public class TaskService {
         task.setTaskStatus(TaskStatus.open);
         task.setAssignerUserId(createdBy);
 
+        ArrayList<Task> tasks = taskRepository.findTasksByIncidentId(taskRequest.getIncidentId());
+        task.setOrderNumber(calculateTaskOrderNumber(tasks));
+
         if(taskRequest.getAssignedUserId() != null && taskRequest.getAssignedUserId().isPresent()){
             task.setAssignedUserId(taskRequest.getAssignedUserId().orElse(null));
         }
 
         task.setCreatedBy(createdBy);
-        task.setAssignDate(LocalDateTime.now(ZoneId.of("UTC")));
+        task.setAssignDate(LocalDateTime.now(ZoneId.of("GMT+1")));
 
         taskRepository.save(task);
         return task;
@@ -68,7 +73,7 @@ public class TaskService {
 
         task.get().setAssignedUserId(assignedUserId);
         task.get().setAssignerUserId(assignerUserId);
-        task.get().setAssignDate(LocalDateTime.now(ZoneId.of("UTC")));
+        task.get().setAssignDate(LocalDateTime.now(ZoneId.of("GMT+1")));
         taskRepository.save(task.get());
     }
 
@@ -81,4 +86,9 @@ public class TaskService {
         task.get().setTaskStatus(taskStatus);
         taskRepository.save(task.get());
     }
+
+    public Long calculateTaskOrderNumber(ArrayList<Task> tasks){
+        return (long) (tasks.size() + 1);
+    }
+
 }

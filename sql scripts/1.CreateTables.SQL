@@ -59,6 +59,7 @@ CREATE TABLE `task` (
   `assigned_user_id` VARCHAR(255) DEFAULT NULL,
   `created_by` VARCHAR(255) DEFAULT NULL,
   `assign_date` DATETIME  DEFAULT NULL,
+  `order_number` BIGINT(20) NOT NULL,
   FOREIGN KEY (incident_id) REFERENCES incident(incident_id),
   FOREIGN KEY (assigner_user_id) REFERENCES user(user_id), 
   FOREIGN KEY (assigned_user_id) REFERENCES user(user_id),

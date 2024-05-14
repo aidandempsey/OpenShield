@@ -7,7 +7,7 @@ export default function SearchIncidents() {
     const [searchUrl, setSearchUrl] = useState("")
 
     const { data, httpError, isLoading } = useGet(searchUrl || "incidents")
-    const { data: userOrganization, httpError: userOrganizationHttpError, isLoading: isUserOrganizationLoading } = useGet(`secure/users/getOrganizationIdFromUserId`)
+    const { data: userOrganization, httpError: userOrganizationHttpError, isLoading: isUserOrganizationLoading } = useGet(`users/getOrganizationIdFromUserId`)
 
     useEffect(() => {
         if (search === "") {

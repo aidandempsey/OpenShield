@@ -23,7 +23,7 @@ public class CommentService {
         comment.setCommentAuthor(commentAuthor);
         comment.setIncidentId(commentRequest.getIncidentId());
         comment.setCommentContent(commentRequest.getCommentContent());
-        comment.setCommentDate(LocalDateTime.now(ZoneId.of("UTC")));
+        comment.setCommentDate(LocalDateTime.now(ZoneId.of("GMT+1")));
 
         commentRepository.save(comment);
         return comment;

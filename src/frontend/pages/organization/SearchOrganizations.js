@@ -2,8 +2,9 @@ import { useEffect, useState } from "react"
 import { useGet } from "../../hooks/restful/useGet"
 import OrganizationList from "./OrganizationList"
 import Select from 'react-select'
-import { useColourStyle } from "../../hooks/style/useColourStyle"
+import { useColourStyle } from "../../hooks/utils/useColourStyle"
 import CreateOrganization from "./CreateOrganization"
+import { useRoles } from "../../hooks/utils/useRoles"
 
 export default function SearchOrganizations() {
     const [search, setSearch] = useState("")
@@ -15,22 +16,7 @@ export default function SearchOrganizations() {
 
     const colourStyles = useColourStyle()
 
-    const roles = [
-        { value: "securityAnalyst", label: "Security Analyst" },
-        { value: "securityEngineer", label: "security Engineer" },
-        { value: "socManager", label: "SOC Manager" },
-        { value: "threatIntelligenceAnalyst", label: "Threat Intelligence Analyst" },
-        { value: "securityArchitect", label: "Security Architect" },
-        { value: "automationEngineer", label: "Automation Engineer " },
-        { value: "complianceAnalyst", label: "Compliance Analyst" },
-        { value: "userAndAccessManagementSpecialist", label: "User And Access Management Specialist" },
-        { value: "trainingAndAwarenessSpecialist", label: "Training And Awareness Specialist" },
-        { value: "dataPrivacyOfficer", label: "Data Privacy Officer" },
-        { value: "vendorManagementSpecialist", label: "Vendor Management Specialist" },
-        { value: "qualityAssuranceTester", label: "Quality Assurance Tester" },
-        { value: "projectManager", label: "Project Manager" },
-        { value: "communicationsSpecialist", label: "Communications Specialist" }
-    ]
+    const roles = useRoles()
 
     useEffect(() => {
         if (search === "") {

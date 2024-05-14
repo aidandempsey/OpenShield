@@ -26,6 +26,16 @@ public class UserController {
         return userService.createUser(GetUidFromJWT.validateToken(token), userRequest);
     }
 
+    @DeleteMapping("/deleteUser")
+    public void deleteUser(@RequestHeader(value = "Authorization") String token) throws Exception {
+        userService.deleteUser(GetUidFromJWT.validateToken(token));
+    }
+
+    @GetMapping("/getUserByUser")
+    public User getUserByUser(@RequestHeader(value = "Authorization") String token) throws FirebaseAuthException {
+        return userService.getUserByUser(GetUidFromJWT.validateToken(token));
+    }
+
     @GetMapping("/getDisplayNameFromUserId")
     public String getDisplayNameFromUserId(@RequestParam String userId) {
         return userService.getDisplayNameFromUserId(userId);
@@ -48,5 +58,10 @@ public class UserController {
     @GetMapping("/findByOrganizationId")
     public List<User> findByOrganizationId(@RequestHeader(value = "Authorization") String token) throws FirebaseAuthException {
         return userService.findByOrganizationId(GetUidFromJWT.validateToken(token));
+    }
+
+    @PatchMapping("/updateUser")
+    public User updateUser(@RequestHeader(value = "Authorization") String token, @RequestParam String displayName, @RequestParam Long organizationId,  @RequestParam UserRole userRole) throws Exception {
+        return userService.updateUser(GetUidFromJWT.validateToken(token), displayName, organizationId, userRole);
     }
 }

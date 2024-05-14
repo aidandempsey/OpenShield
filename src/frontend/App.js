@@ -17,9 +17,8 @@ import { useEffect } from "react"
 
 function App() {
   const { authIsReady, user } = useAuthContext()
-  const { data: userHasOrganization, httpError: userHasOrganizationHttpError, isLoading: isUserHasOrganizationLoading } = useGet(`secure/users/userHasOrganization`)
+  const { data: userHasOrganization, httpError: userHasOrganizationHttpError, isLoading: isUserHasOrganizationLoading } = useGet(`users/userHasOrganization`)
 
-  if (userHasOrganizationHttpError) return <div className="error">{userHasOrganizationHttpError}</div>
   if ((user && isUserHasOrganizationLoading)) return <div className="loading">loading...</div>
 
   return (
@@ -43,6 +42,8 @@ function App() {
               <Route path='*' element={user ? <Navigate to="/" /> : <Navigate to="/login" />} />
 
             </Routes>
+            {userHasOrganizationHttpError && <div className="error">{userHasOrganizationHttpError}</div>}
+
           </div>
         </BrowserRouter>
       )}

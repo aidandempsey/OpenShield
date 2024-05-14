@@ -21,11 +21,11 @@ export const useSignup = () => {
       // signup
       const res = await projectAuth.createUserWithEmailAndPassword(emailAddress, password)
 
-      await projectAuth.currentUser.sendEmailVerification()
+      // await projectAuth.currentUser.sendEmailVerification()
       const token = await res.user.getIdToken();
 
       // update the database before the dispatch
-      await post("secure/users/createUser", { displayName, emailAddress }, token)
+      await post("users/createUser", { displayName, emailAddress }, token)
 
       if (!res) {
         throw new Error('Could not complete signup')

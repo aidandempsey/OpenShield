@@ -7,9 +7,9 @@ export default function IncidentFilter(props) {
     const handleClick = filter => {
         const lowerFilter = filter.toLowerCase()
         setCurrentFilter(lowerFilter)
-        let query = "secure/incidents/findIncidentsByUser"
+        let query = "incidents/findIncidentsByUser"
         if (lowerFilter !== "all") {
-            query = `secure/incidents/findIncidentsByUserAndSeverity?incidentSeverity=${lowerFilter}`
+            query = `incidents/findIncidentsByUserAndSeverity?incidentSeverity=${lowerFilter}`
         }
         setSearch(query)
     }

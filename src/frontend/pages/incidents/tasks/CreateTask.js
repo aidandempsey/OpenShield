@@ -2,7 +2,7 @@ import "./Tasks.css"
 
 import { useState } from "react"
 import Select from 'react-select'
-import { useColourStyle } from "../../../hooks/style/useColourStyle"
+import { useColourStyle } from "../../../hooks/utils/useColourStyle"
 import { useUpdateResource } from "../../../hooks/restful/useUpdateResource"
 
 export default function CreateIncidentTask(props) {
@@ -23,7 +23,7 @@ export default function CreateIncidentTask(props) {
             assignedUserId,
         }
 
-        const { data } = post("secure/tasks/createTask", body)
+        const { data } = post("tasks/createTask", body)
     }
 
     const colourStyles = useColourStyle()

@@ -27,9 +27,9 @@ export default function LoginModal() {
     const handleSignup = e => {
         e.preventDefault()
         signup(emailAddress, password, displayName)
-        // setEmailAddress("")
-        // setPassword("")
-        // setDisplayName("")
+        setEmailAddress("")
+        setPassword("")
+        setDisplayName("")
     }
 
     const handleForgotPassword = e => {

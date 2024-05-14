@@ -3,7 +3,7 @@ import formatDistanceToNow from "date-fns/formatDistanceToNow"
 
 export default function IncidentComment(props) {
     const { comment } = props
-    const { data, httpError, isLoading } = useGet(`secure/users/getDisplayNameFromUserId?userId=${comment.commentAuthor}`)
+    const { data, httpError, isLoading } = useGet(`users/getDisplayNameFromUserId?userId=${comment.commentAuthor}`)
 
     if (httpError) return <div className="error">{httpError}</div>
     if (isLoading) return <div className="loading">loading...</div>
