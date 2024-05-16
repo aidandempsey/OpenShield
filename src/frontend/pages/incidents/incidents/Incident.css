@@ -1,4 +1,4 @@
-/* incident filter */
+/* incident filter
 .incident-filter {
     margin-bottom: 40px;
 }
@@ -32,7 +32,7 @@
 
 .incident-filter button.active {
     color: var(--secondary-color);
-}
+} */
 
 .incident-details {
     display: grid;
@@ -45,6 +45,7 @@
 .incident-summary {
     background-color: var(--dark-background-color);
     padding: 30px;
+    margin-top: 20px;
     border-radius: 10px;
 }
 
@@ -63,10 +64,6 @@
 
 .incident-summary .details .properties {
     color: var(--secondary-text-color);
-}
-
-.incident-summary .btn {
-    margin-top: 20px;
 }
 
 /* incident list */
@@ -99,4 +96,5 @@
 
 .percentage {
     font-size: 2em;
+    margin-top: 20px;
 }

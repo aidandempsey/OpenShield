@@ -1,9 +1,17 @@
+// styles & images
 import "./Tasks.css"
 
+// hooks
 import { useState } from "react"
-import Select from 'react-select'
 import { useColourStyle } from "../../../hooks/utils/useColourStyle"
 import { useUpdateResource } from "../../../hooks/restful/useUpdateResource"
+
+// components
+import Select from 'react-select'
+
+// material
+import MuiButton from "../../../components/material/buttons/MuiButton"
+import MuiCancelButton from "../../../components/material/buttons/MuiCancelButton"
 
 export default function CreateIncidentTask(props) {
     const { usersList } = props
@@ -47,8 +55,8 @@ export default function CreateIncidentTask(props) {
                     placeholder="Task Description"
                     onChange={e => { setTaskDescription(e.target.value) }} />
                 {usersList.length > 0 && <Select placeholder="Assigned User" options={usersList} onChange={(option) => { setAssignedUserId(option.value) }} styles={colourStyles} className="selector" />}
-                <button className="btn" onClick={() => { setCreateTask(false) }}>Cancel</button>
-                <button className="btn">Create</button>
+                <MuiCancelButton text="Cancel" handler={() => { setCreateTask(false) }} />
+                <MuiButton text="Create" type="submit" />
             </form>
         </div>
     )

@@ -1,6 +1,15 @@
+// material
 import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
+import MuiLoading from "../../../components/material/loading/MuiLoading"
+
+// styles & images
 import "./Incident.css"
+
+// utisl
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
+
+// hooks
 import { useGet } from '../../../hooks/restful/useGet';
 
 export default function IncidentSummary(props) {
@@ -16,7 +25,7 @@ export default function IncidentSummary(props) {
     }[severity])
 
     if (organizationNameHttpError || incidentCreatedByHttpError) return <div className="error">{organizationNameHttpError || incidentCreatedByHttpError}</div>
-    if (isOrganizationNameLoading || isIncidentCreatedByLoading) return <div className="loading">loading...</div>
+    if (isOrganizationNameLoading || isIncidentCreatedByLoading) return <MuiLoading />
 
     return (
         <div>
@@ -33,7 +42,10 @@ export default function IncidentSummary(props) {
                         ))}
                     </p>
                 ))}
-                <Alert severity={convertSeverity(incident.incidentSeverity)}>{incident.incidentSeverity}</Alert>
+                <Alert severity={convertSeverity(incident.incidentSeverity)}>
+                    <AlertTitle>{incident.incidentSeverity.charAt(0).toUpperCase() + incident.incidentSeverity.slice(1)}</AlertTitle>
+                    This incident has been marked with a severity of {incident.incidentSeverity}
+                </Alert>
             </div>
         </div>
     )

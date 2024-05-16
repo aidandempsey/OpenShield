@@ -1,6 +1,9 @@
+// hooks
 import { useEffect, useState } from "react"
-import IncidentList from "./IncidentList"
 import { useGet } from "../../../hooks/restful/useGet"
+
+// components
+import IncidentList from "./IncidentList"
 
 export default function SearchIncidents() {
     const [search, setSearch] = useState()

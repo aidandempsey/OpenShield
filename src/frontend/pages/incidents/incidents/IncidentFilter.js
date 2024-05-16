@@ -1,3 +1,8 @@
+// material
+import MuiFilterButton from "../../../components/material/buttons/filterButtons/MuiFilterButton";
+import MuiActiveFilterButton from "../../../components/material/buttons/filterButtons/MuiActiveFilterButton";
+import ButtonGroup from '@mui/material/ButtonGroup';
+
 export default function IncidentFilter(props) {
     const filterList = ["Overview", "Tasks", "Progress", "Comments"]
     const { currentTab, setCurrentTab } = props
@@ -9,16 +14,24 @@ export default function IncidentFilter(props) {
     return (
         <div className="incident-filter">
             <nav>
-                <ul>
+                <ButtonGroup color='inherit' variant="text" aria-label="Basic button group">
+
                     {filterList.map(filter => (
-                        <button
-                            key={filter}
-                            onClick={() => { handleClick(filter) }}
-                            className={currentTab === filter.toLowerCase() ? "active" : ""}>
-                            {filter}
-                        </button>
+                        currentTab !== filter.toLowerCase() ? (
+                            <MuiFilterButton
+                                key={filter}
+                                handler={() => { handleClick(filter) }}
+                                text={filter}
+                            />
+                        ) : (
+                            <MuiActiveFilterButton
+                                key={filter}
+                                handler={() => { handleClick(filter) }}
+                                text={filter}
+                            />
+                        )
                     ))}
-                </ul>
+                </ButtonGroup>
             </nav>
         </div>
     )

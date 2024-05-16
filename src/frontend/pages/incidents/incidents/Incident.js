@@ -1,12 +1,20 @@
+// styles & images
 import "./Incident.css"
+
+// hooks
 import { useParams } from "react-router-dom"
 import { useGet } from "../../../hooks/restful/useGet"
 import { useState } from "react"
+
+// components
 import IncidentOverview from "./IncidentOverview"
 import CommentList from "../comments/CommentsList"
 import IncidentFilter from "./IncidentFilter"
 import TaskList from "../tasks/TaskList"
 import IncidentProgress from "./IncidentProgress"
+
+// material
+import MuiLoading from "../../../components/material/loading/MuiLoading"
 
 export default function Incident() {
     const { id } = useParams()
@@ -14,7 +22,7 @@ export default function Incident() {
     const [currentTab, setCurrentTab] = useState("overview")
 
     if (httpError) return <div className="error">{httpError}</div>
-    if (isLoading) return <div className="loading">loading...</div>
+    if (isLoading) return <MuiLoading />
 
     return (
         <div className="incident-details">

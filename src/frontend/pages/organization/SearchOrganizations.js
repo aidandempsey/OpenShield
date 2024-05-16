@@ -1,10 +1,13 @@
+// hooks
 import { useEffect, useState } from "react"
 import { useGet } from "../../hooks/restful/useGet"
+import { useColourStyle } from "../../hooks/utils/useColourStyle"
+import { useRoles } from "../../hooks/utils/useRoles"
+
+// components
 import OrganizationList from "./OrganizationList"
 import Select from 'react-select'
-import { useColourStyle } from "../../hooks/utils/useColourStyle"
 import CreateOrganization from "./CreateOrganization"
-import { useRoles } from "../../hooks/utils/useRoles"
 
 export default function SearchOrganizations() {
     const [search, setSearch] = useState("")

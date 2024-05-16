@@ -1,6 +1,16 @@
+// styles & images
 import "./Organization.css"
+
+// utils
 import formatDistanceToNow from "date-fns/formatDistanceToNow"
+
+// hooks
 import { useUpdateResource } from "../../hooks/restful/useUpdateResource"
+
+// material
+import MuiButton from "../../components/material/buttons/MuiButton"
+import MuiDisabledButton from "../../components/material/buttons/MuiDisabledButton"
+import MuiLoading from "../../components/material/loading/MuiLoading"
 
 export default function OrganizationList(props) {
     const { organizations, httpError, isLoading, userRole, setCreateOrganization } = props
@@ -11,19 +21,20 @@ export default function OrganizationList(props) {
     }
 
     if (httpError || patchOrganizationHttpError) return <p className="error">{httpError || patchOrganizationHttpError}</p>
-    if (isLoading || isPatchOrganizationLoading) return <p className="loading">loading...</p>
+    if (isLoading || isPatchOrganizationLoading) return <MuiLoading />
 
     return (
         <div className="organization-list">
-            <button className="btn" onClick={() => { setCreateOrganization(true) }}>Create Organization</button>
+            <MuiButton text="Create Organization" handler={() => { setCreateOrganization(true) }} />
+
             {organizations.length === 0 && <p>No Organizations Yet!</p>}
             {organizations.length > 0 && organizations.map(organization => (
                 <div className="organization" key={organization.organizationId}>
                     <h4>{organization.organizationName}</h4>
                     <p>Created {formatDistanceToNow(organization.organizationCreationDate, { addSuffix: true })}</p>
 
-                    {!userRole && <button className="disabled-btn" type="button" disabled>Join</button>}
-                    {userRole && <button className="btn" onClick={() => { joinOrganization(organization.organizationId) }}>Join</button>}
+                    {!userRole && <MuiDisabledButton text="Join" />}
+                    {userRole && <MuiButton text="Join" handler={() => { joinOrganization(organization.organizationId) }} />}
                 </div>
             ))}
         </div>

@@ -1,9 +1,18 @@
+// hooks
 import { useState } from "react"
 import { useGet } from "../../../hooks/restful/useGet"
 import { useEffect } from "react"
+
+// components
 import CreateTask from "./CreateTask"
 import Task from "./Task"
+
+// styles & images
 import "./Tasks.css"
+
+// material
+import MuiButton from "../../../components/material/buttons/MuiButton"
+import MuiLoading from "../../../components/material/loading/MuiLoading"
 
 export default function TaskList(props) {
     const [usersList, setUsersList] = useState([])
@@ -24,12 +33,12 @@ export default function TaskList(props) {
     }, [users])
 
     if (tasksHttpError || usersHttpError) return <div className="error">{tasksHttpError || usersHttpError}</div>
-    if (isTaskLoading || isUsersLoading) return <div className="loading">loading...</div>
+    if (isTaskLoading || isUsersLoading) return <MuiLoading />
 
     return (
         <div className="tasks">
             {!createTask && (
-                <button className="btn" onClick={() => { setCreateTask(true) }}>Create Task</button>
+                <MuiButton text="Create Task" handler={() => { setCreateTask(true) }} />
             )}
 
             {!createTask && tasks?._embedded?.tasks.length > 0 && (

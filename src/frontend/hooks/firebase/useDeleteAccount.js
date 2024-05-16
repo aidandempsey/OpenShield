@@ -1,13 +1,14 @@
+// hooks
 import { useState, useEffect } from 'react'
-import { projectAuth } from "../../firebase/config"
-import { useAuthContext } from './useAuthContext'
 import { useUpdateResource } from '../restful/useUpdateResource'
+
+// firebase
+import { projectAuth } from "../../firebase/config"
 
 export const useDeleteAccount = () => {
     const [isCancelled, setIsCancelled] = useState(false)
     const [deleteAccountError, setDeleteAccountError] = useState(null)
     const [isDeleteAccountPending, setIsDeleteAccountPending] = useState(false)
-    const { dispatch, user } = useAuthContext()
     const { updateResource: deleteUser, httpError: deleteUserHttpError, isLoading: isdeleteUserLoading } = useUpdateResource("DELETE")
 
     useEffect(() => { if (isdeleteUserLoading) { setIsDeleteAccountPending(isdeleteUserLoading) } }, [isdeleteUserLoading])

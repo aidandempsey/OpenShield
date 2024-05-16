@@ -1,10 +1,17 @@
+// hooks
 import { useState } from "react"
 import { useUpdateResource } from "../../../hooks/restful/useUpdateResource"
 import { useColourStyle } from "../../../hooks/utils/useColourStyle"
 import { useSeverities } from "../../../hooks/utils/useSeverities"
 
+// components
 import Select from 'react-select'
 import SshBruteforce from "./templates/SshBruteforce"
+
+// material
+import MuiButton from "../../../components/material/buttons/MuiButton"
+import MuiDisabledButton from "../../../components/material/buttons/MuiDisabledButton"
+import MuiLoading from "../../../components/material/loading/MuiLoading"
 
 export default function CreateTask() {
     const [incidentName, setIncidentName] = useState("")
@@ -104,7 +111,7 @@ export default function CreateTask() {
                         placeholder="Incident Description"
                         onChange={e => { setIncidentDescription(e.target.value) }} />
                     <Select placeholder="Select Incident Severity" options={severities} onChange={(option) => { setIncidentSeverity(option.value) }} styles={colourStyles} className="selector" />
-                    <button className="btn">Create</button>
+                    <MuiButton text="Create" type="submit" />
                     <p className="forgot-password" onClick={() => {
                         setUsingTemplate(true)
                     }}>Use Template</p>
@@ -113,7 +120,7 @@ export default function CreateTask() {
             )}
 
             {(httpError) && <div className="error">{httpError}</div>}
-            {(isLoading) && <div className="loading">loading...</div>}
+            {(isLoading) && <MuiLoading />}
             {usingTemplate && (<form
                 className="form"
                 onSubmit={handleCreateIncidentFromTemplate}>
@@ -127,8 +134,8 @@ export default function CreateTask() {
                     setDevice={setDevice} opensshVersions={opensshVersions} setSshVersion={setSshVersion} devices={devices}
                 />}
 
-                {template && <button className="btn">Create</button>}
-                {!template && <button className="disabled-btn" disabled>Create</button>}
+                {template && <MuiButton text="Create" type="submit" />}
+                {!template && <MuiDisabledButton text="Create" />}
 
                 <p className="forgot-password" onClick={() => {
                     setUsingTemplate(false)

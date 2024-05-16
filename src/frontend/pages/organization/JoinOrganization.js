@@ -1,3 +1,4 @@
+// components
 import SearchOrganizations from "./SearchOrganizations";
 
 export default function JoinOrganization() {

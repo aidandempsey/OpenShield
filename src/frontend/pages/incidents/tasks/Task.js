@@ -1,16 +1,25 @@
+// hooks
 import { useGet } from "../../../hooks/restful/useGet"
-import formatDistanceToNow from "date-fns/formatDistanceToNow"
 import { useUpdateResource } from "../../../hooks/restful/useUpdateResource"
 import { useColourStyle } from "../../../hooks/utils/useColourStyle"
-import Select from 'react-select'
 import { useState } from "react"
+
+// utils
+import formatDistanceToNow from "date-fns/formatDistanceToNow"
+
+// components
+import Select from 'react-select'
+
+// material
+import MuiButton from "../../../components/material/buttons/MuiButton"
+import MuiDisabledButton from "../../../components/material/buttons/MuiDisabledButton"
+import MuiLoading from "../../../components/material/loading/MuiLoading"
 
 export default function Task(props) {
     const { task, usersList } = props
     const [newAssignedUser, setNewAssignedUser] = useState(null)
     const { data: assignedUserName, httpError: assignedUserHttpError, isLoading: assignedUserIsLoading } = useGet(`users/getDisplayNameFromUserId?userId=${task.assignedUserId}`)
     const { data: assignerUserName, httpError: assignerUserHttpError, isLoading: assignerUserIsLoading } = useGet(`users/getDisplayNameFromUserId?userId=${task.assignerUserId}`)
-    const { data: taskAssigned, httpError: taskAssignedHttpError, isLoading: taskAssignedIsLoading } = useGet(`tasks/isTaskAssigned?taskId=${task.taskId}`)
     const { data: taskAssignedToUser, httpError: taskAssignedToUserHttpError, isLoading: taskAssignedToUserIsLoading } = useGet(`tasks/isTaskAssignedToUser?taskId=${task.taskId}`) ?? false
     const { data: taskOpen, httpError: taskOpenHttpError, isLoading: taskOpenIsLoading } = useGet(`tasks/isTaskOpen?taskId=${task.taskId}`)
 
@@ -33,8 +42,8 @@ export default function Task(props) {
         const { data } = patchStatus(`tasks/changeStatus?taskId=${id}&taskStatus=closed`);
     }
 
-    if (assignedUserHttpError || assignerUserHttpError || taskAssignedHttpError || taskAssignedToUserHttpError || patchAssignedUserHttpError || patchStatusHttpError || taskOpenHttpError) return <div className="error">{assignedUserHttpError || assignerUserHttpError || taskAssignedHttpError || taskAssignedToUserHttpError || patchAssignedUserHttpError || patchStatusHttpError || taskOpenHttpError}</div>
-    if (assignedUserIsLoading || assignerUserIsLoading || taskAssignedIsLoading || taskAssignedToUserIsLoading || isPatchAssignedUserLoading || isPatchStatusLoading || taskOpenIsLoading) return <div className="loading">loading...</div>
+    if (assignedUserHttpError || assignerUserHttpError || taskAssignedToUserHttpError || patchAssignedUserHttpError || patchStatusHttpError || taskOpenHttpError) return <div className="error">{assignedUserHttpError || assignerUserHttpError || taskAssignedToUserHttpError || patchAssignedUserHttpError || patchStatusHttpError || taskOpenHttpError}</div>
+    if (assignedUserIsLoading || assignerUserIsLoading || taskAssignedToUserIsLoading || isPatchAssignedUserLoading || isPatchStatusLoading || taskOpenIsLoading) return <MuiLoading />
 
     if (task) {
         return (
@@ -43,12 +52,12 @@ export default function Task(props) {
                 <div className="task-assigned-date"><p>Assigned to {assignedUserName} by {assignerUserName} {formatDistanceToNow(task.assignDate, { addSuffix: true })}</p></div>
                 <div className="task-description"><p>{task.taskDescription}</p></div>
                 <div className={`task-status-${task.taskStatus}`}><p>{convertStatus(task.taskStatus)}</p></div>
-                {(!taskAssigned) && <button className="btn">Assign</button>}
                 {(taskAssignedToUser && taskOpen) && (
                     <>
-                        {taskOpen && <button className="inverted-btn" onClick={() => { close(task.taskId) }}>Close</button>}
-                        {newAssignedUser === null && <button className="disabled-btn" type="button" disabled>Change</button>}
-                        {newAssignedUser && <button className="btn" onClick={() => { unassign(task.taskId) }}>Change</button>}
+                        {taskOpen && <MuiButton text="Close" handler={() => { close(task.taskId) }} />}
+
+                        {newAssignedUser === null && <MuiDisabledButton text="Change" />}
+                        {newAssignedUser && <MuiButton text="Change" handler={() => { unassign(task.taskId) }} />}
                         {usersList.length > 0 && <Select placeholder="Assigned User" options={usersList} onChange={(option) => { setNewAssignedUser(option.value) }} styles={colourStyles} className="selector assigned-user-selector" />}
                     </>)}
             </ li >

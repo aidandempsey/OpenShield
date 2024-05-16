@@ -1,8 +1,16 @@
+// hooks
 import { useState } from "react";
 import { useGet } from "../../../hooks/restful/useGet";
 import { useUpdateResource } from "../../../hooks/restful/useUpdateResource";
 
+// material
+import MuiButton from "../../../components/material/buttons/MuiButton";
+import MuiLoading from "../../../components/material/loading/MuiLoading"
+
+// components
 import Comment from "./Comment"
+
+// styles & images
 import "./Comments.css"
 
 export default function CommentList(props) {
@@ -18,7 +26,7 @@ export default function CommentList(props) {
     }
 
     if (httpError || postHttpError) return <div className="error">{httpError || postHttpError}</div>
-    if (isLoading || postIsLoading) return <div className="loading">loading...</div>
+    if (isLoading || postIsLoading) return <MuiLoading />
 
     return (
         <div className="comments">
@@ -28,7 +36,7 @@ export default function CommentList(props) {
                     <span className="add-new-comment">Add new comment</span>
                     <textarea required onChange={(e) => setCommentContent(e.target.value)} value={commentContent}></textarea>
                 </label>
-                <button className="btn">Add Comment</button>
+                <MuiButton type="submit" text="Add Comment" />
             </form>
             <ul>
                 {data?._embedded?.comments.length === 0 && <p>No Comments Yet!</p>}

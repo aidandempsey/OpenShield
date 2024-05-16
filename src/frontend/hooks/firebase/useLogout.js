@@ -1,6 +1,9 @@
+// hooks
 import { useEffect, useState } from 'react'
-import { projectAuth } from "../../firebase/config"
 import { useAuthContext } from './useAuthContext'
+
+// firebase
+import { projectAuth } from "../../firebase/config"
 
 export const useLogout = () => {
   const [isCancelled, setIsCancelled] = useState(false)

@@ -1,7 +1,13 @@
+// styles & images
 import "./Organization.css"
 
+// hooks
 import { useState } from "react"
 import { useUpdateResource } from "../../hooks/restful/useUpdateResource"
+import MuiButton from "../../components/material/buttons/MuiButton"
+
+// material
+import MuiCancelButton from "../../components/material/buttons/MuiCancelButton"
 
 export default function CreateOrganization(props) {
     const { setCreateOrganization } = props
@@ -39,8 +45,8 @@ export default function CreateOrganization(props) {
                     value={organizationDescription}
                     placeholder="Organization Description"
                     onChange={e => { setOrganizationDescription(e.target.value) }} />
-                <button className="btn" onClick={() => { setCreateOrganization(false) }}>Cancel</button>
-                <button className="btn">Create</button>
+                <MuiCancelButton text="Cancel" handler={() => { setCreateOrganization(false) }} />
+                <MuiButton text="Create" type="submit" />
             </form>
         </div>
     )

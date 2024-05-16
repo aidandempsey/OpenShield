@@ -1,11 +1,21 @@
+// hooks
 import { useEffect, useState } from "react"
 import { useGet } from "../../hooks/restful/useGet"
-import "./Settings.css"
 import { useColourStyle } from "../../hooks/utils/useColourStyle"
-import Select from 'react-select'
 import { useRoles } from "../../hooks/utils/useRoles"
 import { useUpdateResource } from "../../hooks/restful/useUpdateResource"
 import { useDeleteAccount } from "../../hooks/firebase/useDeleteAccount"
+
+// styles & images
+import "./Settings.css"
+
+// components
+import Select from 'react-select'
+
+// material
+import MuiButton from "../../components/material/buttons/MuiButton"
+import MuiCancelButton from "../../components/material/buttons/MuiCancelButton"
+import MuiLoading from "../../components/material/loading/MuiLoading"
 
 export default function Settings() {
     const { data: user, httpError: userHttpError, isLoading: isUserLoading } = useGet("users/getUserByUser")
@@ -45,7 +55,7 @@ export default function Settings() {
     }, [organizations])
 
     if (userHttpError || organizationHttpError || patchUserHttpError || deleteAccountError) return <div className="error">{userHttpError || organizationHttpError || patchUserHttpError || deleteAccountError}</div>
-    if (isUserLoading || isOrganizationsLoading || isPatchUserLoading || isDeleteAccountPending) return <div className="loading">loading...</div>
+    if (isUserLoading || isOrganizationsLoading || isPatchUserLoading || isDeleteAccountPending) return <MuiLoading />
 
     return (
         <div className="settings">
@@ -62,10 +72,9 @@ export default function Settings() {
                         onChange={e => { setDisplayName(e.target.value) }} />
                     <Select placeholder="Role" options={roles} onChange={(option) => { setUserRole(option.value) }} styles={colourStyles} className="selector" defaultValue={roles.find(userRole => userRole.value === user.userRole)} />
                     {organizationNames && <Select placeholder="Organization" options={organizationNames} onChange={(option) => { setOrganizationId(option.value) }} styles={colourStyles} className="selector" defaultValue={organizationNames.find(org => org.value === user.organizationId)} />}
-                    <button className="btn">Update Profile</button>
+                    <MuiButton text="Update Profile" type="submit" />
                 </form>
-                <button className="inverted-btn" onClick={() => { deleteAccount() }}>Delete Account</button>
-
+                <MuiCancelButton text="Delete Account" handler={() => { deleteAccount() }} />
             </div>
         </div>
     )

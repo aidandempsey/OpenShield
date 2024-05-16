@@ -1,5 +1,9 @@
+// hooks
 import { useState, useEffect } from 'react'
+
+// firebase
 import { projectAuth } from "../../firebase/config"
+
 export const useForgotPassword = () => {
     const [isCancelled, setIsCancelled] = useState(false)
     const [forgotPasswordError, setForgotPasswordError] = useState(null)

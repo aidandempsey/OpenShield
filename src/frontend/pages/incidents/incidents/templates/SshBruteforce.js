@@ -1,4 +1,7 @@
+// hooks
 import { useColourStyle } from "../../../../hooks/utils/useColourStyle"
+
+// components
 import Select from 'react-select'
 
 export default function SshBruteforce(props) {

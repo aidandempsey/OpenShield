@@ -1,10 +1,14 @@
+// react router dom
 import { Routes, Route, BrowserRouter, Navigate } from "react-router-dom"
+
+// hookes
 import { useAuthContext } from "./hooks/firebase/useAuthContext"
 import { useGet } from "./hooks/restful/useGet"
-// styles
+
+// styles & images
 import "./App.css"
 
-// pages and components
+// components
 import Dashboard from "./pages/dashboard/Dashboard"
 import Navbar from "./components/navbar/Navbar";
 import Login from "./pages/login/Login";
@@ -13,13 +17,13 @@ import Incident from "./pages/incidents/incidents/Incident";
 import SearchIncidents from "./pages/incidents/incidents/SearchIncidents";
 import Settings from "./pages/settings/Settings";
 import JoinOrganization from "./pages/organization/JoinOrganization"
-import { useEffect } from "react"
+import MuiLoading from "./components/material/loading/MuiLoading"
 
 function App() {
   const { authIsReady, user } = useAuthContext()
   const { data: userHasOrganization, httpError: userHasOrganizationHttpError, isLoading: isUserHasOrganizationLoading } = useGet(`users/userHasOrganization`)
 
-  if ((user && isUserHasOrganizationLoading)) return <div className="loading">loading...</div>
+  if ((user && isUserHasOrganizationLoading)) return <MuiLoading />
 
   return (
     <div className="App">

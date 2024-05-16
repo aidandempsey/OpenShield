@@ -35,7 +35,7 @@ admin avocent
 root linux
 sconsole 12345
 root 5up
-cirros cubswin
+cirros cubswin )
 root uClinux
 root alpine
 root dottie
@@ -112,7 +112,7 @@ admin symbol
 admin Symbol
 admin superuser
 admin admin123
-root D13HH
+root D13HH[
 root blackarch
 root dasdec1
 root 7ujMko0admin
